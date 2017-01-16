@@ -1,0 +1,268 @@
+/*
+ * Start Bootstrap - Full Slider (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+html, body
+{
+    height: 100%;
+    background-color: rgb(238, 238, 238);
+}
+
+@media screen and (max-width: 768px)
+{
+    .colCenterText
+    {
+      text-align: center;
+    }
+
+    p.centerDesc
+    {
+        margin-left: 50%;
+    }
+
+}
+
+#welcome{
+  border-top: 5px solid rgb(91, 91, 91);
+  padding-top: 10px;
+}
+.profile-img{
+  margin-top: 10px;
+}
+.img{
+  max-width: 100%;
+  width: auto\9;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+}
+.profile-header.page-header{
+  border-bottom: none;
+}
+
+.raceInfo
+{
+    padding-left: 30px;
+}
+#seeMoreBtn
+{
+    width: 100px;
+    height: 100px;
+}
+
+#site-footer
+{
+    background-color: #000000;
+    margin-top: 300px;
+}
+
+#btnAddEvent
+{
+  position: relative;
+  padding-bottom: 10%;
+  padding-left: 5%;
+/* top: -80px; */
+}
+
+.container #calander
+{
+  /*background-color: rgba(255, 0, 0, 0.29);*/
+  margin-left: 50px;
+}
+
+#priceTextBox
+{
+    display: none;
+}
+
+#map
+{
+    padding: 20px 20px 20px 0;
+    width:400px;
+    height:400px;
+}
+
+.page-header
+{
+    border-color: #8e8e8e;
+}
+
+p.eventDesc
+{
+    font-size: 20px;
+    margin-top: 8%;
+}
+.regBtn
+{
+  width: 298px;
+  height: 70px;
+  color: #fff;
+  background: transparent;
+  border: 2px solid #fff;
+  font-size: 26px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 200;
+  line-height: 66px;
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 45px;
+}
+
+.regBtn:hover
+{
+    text-decoration: none;
+    color: #ababab
+}
+.carousel, .item, .active
+{
+    height: 100%;
+}
+
+.carousel-inner
+{
+    height: 80%;
+}
+
+.full-width
+{
+   /*margin-top: 50px;*/
+   width: 100%;
+}
+.carousel-caption
+{
+    position: absolute;
+    top: 50px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    height: 100%;
+}
+
+.carousel-indicators
+{
+    bottom: 200px;
+}
+
+/* The height of the carousel gradient*/
+.carousel-control.left, .carousel-control.right
+{
+    /*padding-top: 30px;*/
+    height: 80%;
+}
+
+#myCarousel
+{
+  /*margin-top: 60px;*/
+}
+/* Background images are set within the HTML using inline CSS, not here */
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.navbarOverCarousel
+{
+    position:absolute;
+    z-index:10;
+    width:100%;
+}
+
+.navbar, .navbar-header
+{
+    background-color: rgba(51, 51, 53, 0.6);
+    border-style: none;
+}
+
+/*.navbar-header
+{
+    background-color: rgba(51, 51, 53, 0.6);
+}*/
+
+.dropdown-menu
+{
+    background-color: rgba(51, 51, 53, 0.6);
+    width: 100px;
+    height: 300px;
+    display: none;
+    text-color
+}
+
+#fullDropdown
+{
+    display: none;
+}
+
+.navbar li a
+{
+    margin-right: 20px;
+}
+
+ul
+{
+    list-style: none;
+}
+@media screen and (min-width: 792px) and (max-width: 1000px)
+{
+  #navButton
+  {
+      position: fixed;
+      left: 40.5vw;
+  }
+}
+
+@media screen and (min-width: 1001px)
+{
+  #navButton
+  {
+      position: fixed;
+      left: 46.5vw;
+  }
+}
+
+.subnav
+{
+    padding-right: 73px;
+}
+
+.navbar-right
+{
+  margin-right: 20vw;
+}
+
+.navbar-left
+{
+  margin-left: 20vw;
+}
+
+
+.navbar-inverse .navbar-nav > li> a
+{
+    color: #e9e9e9;
+}
+
+.navbar-nav > .active > a
+{
+    color: rgb(0, 3, 255)
+
+}
+
+.active
+{
+    color: rgba(255, 0, 0, 0.0);
+}
