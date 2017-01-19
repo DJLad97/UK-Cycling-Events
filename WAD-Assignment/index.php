@@ -83,7 +83,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <title>Home</title>
+  <title>Home1</title>
 
 
 </head>
