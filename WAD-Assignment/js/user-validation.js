@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
   $.validator.setDefaults({
       errorClass: 'help-block',
       highlight: function(element){
@@ -13,6 +14,38 @@ $(document).ready(function(){
           .removeClass('has-error');
       }
     });
+
+    $.get('get-uname-email.php', function(data){
+      $.validator.addMethod('unameAvailability', function(value, element){
+        var taken = [];
+        // Loop through the data array that contains the usernames and emails
+        for (var i = 0; i < data.length; i++){
+          // If the username entered matches one in the database
+          // add a true to the taken array else add a false
+          value == data[i].Username ? taken.push(true) : taken.push(false);
+        }
+        for (var i = 0; i < taken.length; i++){
+          // Loop through the taken array, if any of them is true
+          // then we know that the username entered is taken
+          if(taken[i] == true)
+            return false;
+        }
+        return true;
+      }, "That username is already taken!");
+
+      $.validator.addMethod('emailAvailability', function(value, element){
+        // Ditto the comments above just for email this time
+        var taken = [];
+        for (var i = 0; i < data.length; i++){
+          value == data[i].Email ? taken.push(true) : taken.push(false);
+        }
+        for (var i = 0; i < taken.length; i++){
+          if(taken[i] == true)
+            return false;
+        }
+        return true;
+      }, "That email is already in use!");
+    }, 'json');
 
   $.validator.addMethod('strongPassword', function(value, element){
     return this.optional(element)
@@ -39,11 +72,13 @@ $(document).ready(function(){
         },
         uName: {
           required: true,
-          nowhitespace: true
+          nowhitespace: true,
+          unameAvailability: true
         },
         email: {
           required: true,
-          email: true
+          email: true,
+          emailAvailability: true
         },
         pass: {
           required: true,
