@@ -1,4 +1,6 @@
 //Add some warning color to indicate that the closing entry date is coming up
+// All the correct races are getting through AND are in data
+// but for some reason one of them is not appearing on the map
 
 function raceMap()
 {
@@ -235,9 +237,8 @@ function raceMap()
       ]
     });
     google.maps.event.trigger(map, 'resize');
-    console.dir(data);
+    // console.dir(data);
 
-    //var startingDate = moment(data[0].RaceDate).format('LLL');
     for(var i = 0; i < data.length; i++){
       latLng = ConvertToLatLng(data[i].RaceLatLong);
 
@@ -246,18 +247,20 @@ function raceMap()
         map: map,
         title: data[i].RaceName
       });
-      // alert(moment().format('MMMM Do YYYY, h:mm:ss a'));
+
       var queryString = 'race-sign-up.php?RaceID=' + data[i].RaceID;
       var content = '<strong>' + data[i].RaceType + ' Race<br>' + data[i].RaceName +
                     '<br></strong>' + moment(data[i].RaceDate).format('LL') + '<br><a href="' + queryString + '"=>More Information »</a>';
 
       google.maps.event.addListener(marker, 'click',
-                function(marker, content, infowindow){
-                  return function() {
-                    infowindow.setContent(content);
-                    infowindow.open(map,marker);
-                  };
-                }(marker, content, infowindow));
+          function(marker, content, infowindow){
+
+            return function() {
+              infowindow.setContent(content);
+              infowindow.open(map,marker);
+            };
+          }(marker, content, infowindow));
+
     }
   }, 'json');
 
