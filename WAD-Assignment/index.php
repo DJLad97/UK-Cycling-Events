@@ -2,6 +2,7 @@
 - Have so html elements fade in when the page loads
 - Do I actually need the isFree column in my races table?
 - Add the user accounts to the CMS system
+- Add something to event listings page where it will say there is no upcoming races if there is no upcoming races
 -->
 <?php
   require('includes/conn.inc.php');
