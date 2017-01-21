@@ -31,11 +31,11 @@
                 WHERE RaceType = 'MTB' AND ClosingEntryDate > NOW() LIMIT 1";
 
   $mtbUpcoming = "SELECT RaceID, RaceName, RaceDate, ClosingEntryDate FROM races
-                 WHERE RaceType = 'MTB' AND RaceDate > NOW() LIMIT 5";
+                 WHERE RaceType = 'MTB'";
 
 
   $roadUpcoming = "SELECT RaceID, RaceName, RaceDate, ClosingEntryDate FROM races
-                  WHERE RaceType = 'Road' AND RaceDate > NOW() LIMIT 5";
+                  WHERE RaceType = 'Road'";
 
   $roadEvent = "SELECT RaceID, RaceName, ClosingEntryDate FROM races
                 WHERE RaceType = 'Road' AND ClosingEntryDate > NOW() LIMIT 1";
@@ -50,11 +50,11 @@
 
   $upcomingQueryMtb = $pdo->prepare($mtbUpcoming);
   $upcomingQueryMtb->execute();
-  $mtbUpcomingRow = $upcomingQueryMtb->fetchObject();
+  // $mtbUpcomingRow = $upcomingQueryMtb->fetchObject();
 
   $upcomingQueryRoad = $pdo->prepare($roadUpcoming);
   $upcomingQueryRoad->execute();
-  $roadUpcomingRow = $upcomingQueryRoad->fetchObject();
+  // $roadUpcomingRow = $upcomingQueryRoad->fetchObject();
 
   $roadQuery = $pdo->prepare($roadEvent);
   $roadQuery->execute();
