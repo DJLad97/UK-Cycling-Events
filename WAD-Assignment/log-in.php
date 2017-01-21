@@ -57,7 +57,7 @@
 <body>
   <div class="container well">
     <div class="form-container">
-      <form class="col-md-4" method="post">
+      <form class="col-md-4" method="post" id="login-form">
         <div class="page-header">
           <h2>SIGN IN</h2>
         </div><hr />
