@@ -7,7 +7,7 @@
 
   $returnArr = array();
   while($row = $stmt->fetch()){
-    $returnArr[] = array("Username" => $row['Username'], "Email" => $row['Email'])
+    $returnArr[] = array("Username" => $row['Username'], "Email" => $row['Email']);
   }
 
   echo json_encode($returnArr);
