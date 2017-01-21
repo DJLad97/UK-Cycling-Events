@@ -9,6 +9,12 @@
     $stmt->execute();
     $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    $imgQuery = "SELECT ProfileImg FROM user WHERE userID = :userID";
+    $imgStmt = $user->runQuery($imgQuery);
+    $imgStmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $imgStmt->execute();
+    $imgRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
     //$racesQuery = "SELECT RaceID FROM racesignup WHERE UserID = :userID";
     $racesQuery = "SELECT * FROM races LEFT JOIN racesignup on races.RaceID = racesignup.RaceID WHERE racesignup.UserID = :userID";
     $raceStmt = $pdo->prepare($racesQuery);
@@ -68,10 +74,10 @@
           </div>
         </div>
           <div class="profile-img col-md-5">
-            <img src="images/default.jpg" class="img" alt="profile image" width="400" height="400">
-            <form action="upload-img.php" method="post" enctype="multipart/form-data">
+            <img src="images/<?=$row['ProfileImg']?>"class="img" alt="profile image" width="400" height="400">
+            <form action="upload-img.php" enctype="multipart/form-data" method="post">
               Select image to upload:
-              <input type="file" name="file" id="fileToUpload" />
+              <input type="file" name="profileImg" id="profileImg" />
               <br />
               <input type="submit" name="upload" value="Save" />
             </form>
