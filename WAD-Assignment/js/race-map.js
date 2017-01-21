@@ -4,7 +4,7 @@ function raceMap()
 {
   var latLng;
   var infowindow = new google.maps.InfoWindow();
-  $.get('get-race-coords.php', function(data){
+  $.get('get-race-details.php', function(data){
 
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 53.270722, lng: -1.820286},
