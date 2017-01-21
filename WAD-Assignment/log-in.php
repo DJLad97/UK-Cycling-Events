@@ -26,7 +26,7 @@
       }
       else
       {
-          $error = "Wrong details!";
+          $error = "Username or password is invalid";
       }
   }
 ?>
