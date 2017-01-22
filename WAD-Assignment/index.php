@@ -242,7 +242,8 @@
         <?php
         while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
         {
-          echo "<h3>{$roadUpcomingRow->RaceName}</h3>";
+          $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
+          echo "<a href='".$linkAddress."' target='_blank'><h3>{$roadUpcomingRow->RaceName}</h3></a>";
           echo "<small>Start Date: {$roadUpcomingRow->RaceDate}</small><br />";
           echo "<small>ClosingEntryDate: {$roadUpcomingRow->ClosingEntryDate}</small>";
         }
