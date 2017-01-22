@@ -229,7 +229,8 @@
         <?php
         while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
         {
-          echo "<h3>{$mtbUpcomingRow->RaceName}</h3>";
+          $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
+          echo "<a href='".$linkAddress."' target='_blank'><h3>{$mtbUpcomingRow->RaceName}</h3></a>";
           echo "<small>Start Date: {$mtbUpcomingRow->RaceDate}</small><br />";
           echo "<small>ClosingEntryDate: {$mtbUpcomingRow->ClosingEntryDate}</small>";
         }
