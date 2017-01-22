@@ -2,15 +2,18 @@
   require('includes/conn.inc.php');
 
   $userID = $_SESSION['userSession'];
+  $IDinDB = $userID . '%';
+  $delStmt = $pdo->prepare("UPDATE user SET ProfileImg = NULL WHERE ProfileImg = :userID");
+  $delStmt->bindParam(":userID", $IDinDB);
+  $delStmt->execute();
 
   $fileError = $_FILES['profileImg']['error'];
-  // http://php.net/manual/en/features.file-upload.errors.php
   if($fileError > 0){
       header("Location:profile.php?err=imgUploadError");
       exit;
   }
 
-  
+
 
   $fileTempName = $_FILES['profileImg']['tmp_name'];
   $trueFileType = exif_imagetype($fileTempName);
