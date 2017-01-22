@@ -16,6 +16,12 @@
   $stmt->execute();
   $result = $stmt->fetchObject();
 
+  if(isset($result->RaceID))
+    echo "Exists";
+  else {
+    echo "Doesn't exist";
+  }
+
   $_SESSION['getRaceID'] = $raceID;
 
   $userSignedUp = "SELECT RaceID FROM racesignup WHERE UserID = :userID";
@@ -53,6 +59,10 @@
   <div class="container well">
 
   <div style="padding-left: 30px; padding-right: 30px;">
+    <?php
+    if(isset($result->RaceID)){
+
+    ?>
       <div class="page-header">
         <h2>SIGN UP</h2>
       </div>
@@ -61,14 +71,14 @@
         <!-- <div class="col-xs-4 col-sm-4 col-md-4 colCenterText"> -->
         <?php
 
-        echo "<h1>{$result->RaceName}</h1>";
-        echo "<p>
-        Race Type: {$result->RaceType}
-        <br />
-        Start Date: {$result->RaceDate}
-        <br />
-        Entry Closing Date: {$result->ClosingEntryDate}
-        </p>";
+          echo "<h1>{$result->RaceName}</h1>";
+          echo "<p>
+          Race Type: {$result->RaceType}
+          <br />
+          Start Date: {$result->RaceDate}
+          <br />
+          Entry Closing Date: {$result->ClosingEntryDate}
+          </p>";
 
         ?>
         <!-- </div> -->
@@ -136,7 +146,11 @@
 
       ?>
         <h2>You've already signed up to this race</h2>
-      <?php } ?>
+      <?php }
+      }
+      else {
+        echo "<h1>SORRY, THIS RACE DOESN'T EXIST</h1>";
+      } ?>
       <div id="map"></div>
     </div>
   </div>
