@@ -4,17 +4,17 @@
     $userID = $_SESSION['userSession'];
 
     $userQuery = "SELECT * FROM user WHERE userID = :userID";
+    // Maybe change this to normal prepare...?
     $stmt = $user->runQuery($userQuery);
     $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
     $stmt->execute();
-    $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+    $userRow = $stmt->fetch();
 
     $imgQuery = "SELECT ProfileImg FROM user WHERE userID = :userID";
-    $imgStmt = $user->runQuery($imgQuery);
+    $imgStmt = $pdo->prepare($imgQuery);
     $imgStmt->bindParam(':userID', $userID, PDO::PARAM_INT);
     $imgStmt->execute();
-    $imgRow = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    $imgRow = $imgStmt->fetch();
     //$racesQuery = "SELECT RaceID FROM racesignup WHERE UserID = :userID";
     $racesQuery = "SELECT * FROM races LEFT JOIN racesignup on races.RaceID = racesignup.RaceID WHERE racesignup.UserID = :userID";
     $raceStmt = $pdo->prepare($racesQuery);
@@ -74,7 +74,7 @@
           </div>
         </div>
           <div class="profile-img col-md-5">
-            <img src="images/<?=$row['ProfileImg']?>"class="img" alt="profile image" width="400" height="400">
+            <img src="images/<?=$imgRow['ProfileImg']?>"class="img" alt="profile image" width="400" height="400">
             <form action="upload-img.php" enctype="multipart/form-data" method="post">
               Select image to upload:
               <input type="file" name="profileImg" id="profileImg" />
