@@ -1,6 +1,4 @@
 //Add some warning color to indicate that the closing entry date is coming up
-// All the correct races are getting through AND are in data
-// but for some reason one of them is not appearing on the map
 
 function raceMap()
 {
