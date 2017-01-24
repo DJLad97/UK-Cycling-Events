@@ -77,7 +77,7 @@ class user
    {
       try
       {
-         $stmt = $this->db->prepare("SELECT UserID, Username, Password FROM user WHERE Username=:uName LIMIT 1");
+         $stmt = $this->db->prepare("SELECT UserID, Username, Password, active FROM user WHERE Username = :uName LIMIT 1");
          $stmt->bindParam(':uName', $uName, PDO::PARAM_STR);
          $stmt->execute();
          //$stmt->execute(array(':uName'=>$uName));
@@ -85,7 +85,7 @@ class user
 
          if($stmt->rowCount() > 0)
          {
-            if(password_verify($pass, $userRow['Password']))
+            if(password_verify($pass, $userRow['Password']) && $userRow['active'] == 'yes')
             {
                $_SESSION['userSession'] = $userRow['UserID'];
                return true;
