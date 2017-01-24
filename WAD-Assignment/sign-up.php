@@ -54,7 +54,7 @@
             if($user->register($fName, $sName, $uName, $email, $password,
                 $add1, $add2, $townCity, $county, $postCode, $country))
             {
-              $user->redirect("log-in.php");
+              $user->redirect("log-in.php?action=joined");
             }
 
           }
