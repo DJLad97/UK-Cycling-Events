@@ -26,7 +26,7 @@
       }
       else
       {
-          $error = "Username or password is invalid";
+          $error = "Username or password is invalid or you haven't activated your account!";
       }
   }
 ?>
@@ -63,16 +63,28 @@
         </div><hr />
         <div id="error">
         <?php
-    			if(isset($error))
-    			{
+    			if(isset($error)){
     				?>
               <div class="alert alert-danger">
                  <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
               </div>
               <?php
-    			}
-    		?>
+    			}?>
         </div>
+        <?php
+          if(isset($_GET['action'])){
+
+            switch($_GET['action']){
+              case 'joined':
+                echo '<h2 class="bg-success">Registration successful, please check your email to activate your account</h2>';
+                break;
+              case 'active':
+                echo '<h2 class="bg-success">Your account is now active!</h2>';
+                break;
+            }
+
+          }
+    		?>
         <div class="form-group">
           <label>Username</label>
           <input type="text" class="form-control" name="uName" placeholder="Username" value="" required/>
