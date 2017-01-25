@@ -2,6 +2,11 @@
     require('includes/conn.inc.php');
 
     $userID = $_SESSION['userSession'];
+    if(!isset($_SESSION['userSession']))
+    {
+        header("Location: log-in.php");
+    }
+
 
     $userQuery = "SELECT * FROM user WHERE userID = :userID";
     // Maybe change this to normal prepare...?
