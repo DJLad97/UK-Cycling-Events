@@ -16,5 +16,7 @@ catch (PDOException $e)
 }
 
 require('classes/User.php');
+require('classes/Cart.php');
 $user = new user($pdo);
+$cart = new Cart();
 ?>
