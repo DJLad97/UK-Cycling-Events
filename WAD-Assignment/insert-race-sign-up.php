@@ -18,8 +18,8 @@
   $raceID = $_SESSION['getRaceID'];
   $userID = $userRow['UserID'];
   $name = $nameFromUser;
-  $gender = $_GET['gender'];
-  $ageRange = $_GET['ageRange'];
+  $gender = $_POST['gender'];
+  $ageRange = $_POST['ageRange'];
 
   $sql = "INSERT INTO RaceSignUp (RaceID, UserID, Name, Gender, AgeRange)
           VALUES (:raceID, :userID, :name, :gender, :ageRange)";
