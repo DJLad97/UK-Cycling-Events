@@ -28,9 +28,6 @@
 
   }
 
-  $cart->addItem(23, 'MTB Round 1', 10.99);
-  print_r($cart->showCart());
-
   $mtbEvent = "SELECT RaceID, RaceName, ClosingEntryDate FROM races
                 WHERE RaceType = 'MTB' AND ClosingEntryDate > NOW() LIMIT 1";
 
