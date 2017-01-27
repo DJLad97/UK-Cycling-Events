@@ -44,6 +44,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/main.js"></script>
   <script src="js/race-location.js"></script>
+  <!-- PUT THIS CODE IN AN EXTERNAL FILE -->
   <script>
     function submitForm(action, method){
       document.getElementById('raceForm').action = action;
