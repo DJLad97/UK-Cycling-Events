@@ -1,4 +1,5 @@
 <?php
+require('classes/Cart.php');
 require('sessions/sessions.inc.php');
 $dsn = 'mysql:host=localhost;dbname=wad_project';
 $user = 'root';
@@ -16,7 +17,5 @@ catch (PDOException $e)
 }
 
 require('classes/User.php');
-require('classes/Cart.php');
 $user = new user($pdo);
-$cart = new Cart();
 ?>
