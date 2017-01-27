@@ -2,7 +2,6 @@
   require('includes/conn.inc.php');
   //This is so I can redirect to this page after a login
   $_SESSION['url'] = $_SERVER['REQUEST_URI'];
-
   $userID = $_SESSION['userSession'];
   if(!isset($_SESSION['userSession']))
   {
@@ -15,6 +14,9 @@
   $stmt->bindParam(':raceID', $raceID, PDO::PARAM_INT);
   $stmt->execute();
   $result = $stmt->fetchObject();
+
+  $postURL = ($result->EntryPrice == NULL ? 'insert-race-sign-up.php' : 'add-to-cart.php');
+
 
   $_SESSION['getRaceID'] = $raceID;
 
@@ -42,6 +44,13 @@
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/main.js"></script>
   <script src="js/race-location.js"></script>
+  <script>
+    function submitForm(action, method){
+      document.getElementById('raceForm').action = action;
+      document.getElementById('raceForm').method = method;
+      document.getElementById('raceForm').submit();
+    }
+  </script>
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -95,7 +104,10 @@
 
           ?>
 
-        <form method="post" action="insert-race-sign-up.php">
+        <form method="" action="" id="raceForm">
+          <input type="hidden" name="RaceID" value="<?php echo $raceID?>" />
+          <input type="hidden" name="RaceName" value="<?php echo $result->RaceName?>" />
+          <input type="hidden" name="EntryPrice" value="<?php echo $result->EntryPrice?>" />
           <div class=" form-group">
             <label for="sel1">Gender:</label>
             <label class="radio-inline"><input type="radio" name="gender" checked="checked" value="M">Male</label>
@@ -118,7 +130,7 @@
               <label>Free Entry!</label>
               <br>
 
-              <input type="submit" name="subBtn" id="button" value="Go Race!" class="btn btn-primary btn-default">
+              <input type="submit" name="subBtn" onclick="submitForm('insert-race-sign-up.php', 'post')" id="button" value="Go Race!" class="btn btn-primary btn-default">
               <?php
             }
             else{
@@ -126,8 +138,9 @@
               <p>
                 <label>Price: </label>
                 <?php echo "£{$result->EntryPrice}" ?>
+
               </p>
-              <input type="submit" name="subBtn" id="button" value="Add to Cart" class="btn btn-primary btn-default">
+              <input type="submit" name="subBtn" onclick="submitForm('insert-race-sign-up.php', 'post')" id="button" value="Add to Cart" class="btn btn-primary btn-default">
               <?php
             }
             ?>
