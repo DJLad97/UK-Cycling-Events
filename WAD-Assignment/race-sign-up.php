@@ -16,12 +16,6 @@
   $stmt->execute();
   $result = $stmt->fetchObject();
 
-  if(isset($result->RaceID))
-    echo "Exists";
-  else {
-    echo "Doesn't exist";
-  }
-
   $_SESSION['getRaceID'] = $raceID;
 
   $userSignedUp = "SELECT RaceID FROM racesignup WHERE UserID = :userID";
