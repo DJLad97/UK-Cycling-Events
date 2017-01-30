@@ -10,8 +10,9 @@ class Cart
     $this->cartTotal = 0;
   }
 
-  public function addItem($raceID, $raceName, $price){
-    array_push($this->cartArr, array("RaceID" => $raceID, "RaceName" => $raceName, "EntryPrice" => $price));
+  public function addItem($raceID, $raceName, $price, $gender, $ageRange){
+    array_push($this->cartArr, array("RaceID" => $raceID, "RaceName" => $raceName,
+                                    "EntryPrice" => $price, "Gender" => $gender, "AgeRange" => $ageRange));
     $this->noOfItems++;
   }
 
@@ -19,8 +20,13 @@ class Cart
     //return $this->cartArr;
 
     foreach ($this->cartArr as $var) {
-      echo "\n", $var['RaceID'], "\t\t", $var['RaceName'], "\t\t", $var["EntryPrice"];
+      echo "\nRace ID: ", $var['RaceID'], "\t\t Name: ", $var['RaceName'], "\t\t Price: £", $var['EntryPrice'], "\t\t",
+            "Gender: ", "\t\t", $var['Gender'], "\t\t", "Age Range: ", $var['AgeRange'];
     }
+  }
+
+  public function getCartFirst(){
+    return $this->cartArr['RaceName'];
   }
 }
 ?>
