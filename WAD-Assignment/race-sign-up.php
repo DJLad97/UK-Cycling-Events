@@ -131,7 +131,8 @@
               <label>Free Entry!</label>
               <br>
 
-              <input type="submit" name="subBtn" onclick="submitForm('insert-race-sign-up.php', 'post')" id="button" value="Go Race!" class="btn btn-primary btn-default">
+              <input type="submit" name="subBtn" onclick="submitForm('insert-race-sign-up.php', 'post')"
+                      id="button" value="Go Race!" class="btn btn-primary btn-default">
               <?php
             }
             else{
@@ -141,7 +142,8 @@
                 <?php echo "£{$result->EntryPrice}" ?>
 
               </p>
-              <input type="submit" name="subBtn" onclick="submitForm('insert-race-sign-up.php', 'post')" id="button" value="Add to Cart" class="btn btn-primary btn-default">
+              <input type="submit" name="subBtn" onclick="submitForm('add-to-cart.php', 'get')" 
+                          id="button" value="Add to Cart" class="btn btn-primary btn-default">
               <?php
             }
             ?>
