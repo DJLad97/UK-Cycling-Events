@@ -4,8 +4,6 @@
 
   $userID = $_SESSION['userSession'];
 
-  echo $_SESSION['userSession'];
-
   $userQuery = "SELECT UserID, Forename, Surname FROM user WHERE UserID = :userID";
   $userStmt = $user->runQuery($userQuery);
   $userStmt->bindParam(':userID', $userID, PDO::PARAM_INT);
@@ -21,6 +19,12 @@
   $gender = $_POST['gender'];
   $ageRange = $_POST['ageRange'];
 
+  echo "RaceID" . $raceID;
+  echo "UserID" . $userID;
+  echo "Name" . $name;
+  echo "Gender" . $gender;
+  echo "AgeRange" . $ageRange;
+
   $sql = "INSERT INTO RaceSignUp (RaceID, UserID, Name, Gender, AgeRange)
           VALUES (:raceID, :userID, :name, :gender, :ageRange)";
 
@@ -33,6 +37,7 @@
   $stmt->bindParam(":ageRange", $ageRange, PDO::PARAM_STR);
   $stmt->execute();
 
+  unset($_SESSION['cart']);
   header("Location: index.php");
 
   exit;
