@@ -258,6 +258,35 @@
     </div>
 
   </div>
+  <form role="form" method="post">
+    <div class="input-group input-group-lg col-xs-3">
+      <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="Race Name"></input>
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </div>
+  </form>
+  <ul id="content"></ul>
+        <script>
+        $(document).ready(function() {
+            $('#searchTerm').on('input', function(){
+              var searchKeyword = $(this).val();
+
+              if(searchKeyword.length >= 3){
+                $.post(
+                  'search-race.php',
+                  {searchTerm: searchKeyword},
+                  function(data){
+                    $('ul#content').empty();
+                    $.each(data, function(){
+                      $('ul#content').append('<li><a href="race-sign-up.php?RaceID=' +
+                                            this.RaceID + '">' + this.RaceName + '</a></li>');
+                    })
+                  }, "json");
+              }
+            });
+      });
+        </script>
 
 </div>
 
