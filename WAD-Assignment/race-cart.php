@@ -12,6 +12,19 @@
 
   $nameFromUser = $userRow['Forename'] . " " . $userRow['Surname'];
 
+  $sql = "INSERT INTO RaceSignUp (RaceID, UserID, Name, Gender, AgeRange)
+  VALUES ";
+  $valuesArr = array();
+  $values = "";
+  if(isset($_SESSION['cart'])){
+    foreach ($_SESSION['cart']->cartArr as $key => $value) {
+      $values .= "(" . $value['RaceID'] . ", " . $userID . ", '" .  $nameFromUser .
+                "', '" . $value['Gender'] . "', '" . $value['AgeRange'] . "'), ";
+    }
+  }
+
+  // Concatonate the values and remove the comma at the end of alues
+  $sql .= substr_replace($values, "", -2);
 
 ?>
 
@@ -41,21 +54,13 @@
   //echo $_SESSION['cart']->getCartFirst();
   ?>
   <div id="cart">
+    <h4>CART</h4>
+    <br />
     <?php
-
-    $sql = "INSERT INTO RaceSignUp (RaceID, UserID, Name, Gender, AgeRange)
-    VALUES ";
-    $valuesArr = array();
-    $values = "";
-    if(isset($_SESSION['cart'])){
-      foreach ($_SESSION['cart']->cartArr as $key => $value) {
-        $values .= "(" . $value['RaceID'] . ", " . $userID . ", '" .  $nameFromUser .
-                  "', '" . $value['Gender'] . "', '" . $value['AgeRange'] . "'), ";
-      }
+    foreach ($_SESSION['cart']->cartArr as $key => $value){
+      echo "Race: " . $value['RaceName'] . "\t\t" . "Category: " . $value['AgeRange'] . " - " . $value['Gender'];
+      echo '<br />';
     }
-
-    // Concatonate the values and remove the comma at the end of alues
-    $sql .= substr_replace($values, "", -2);
     ?>
 
     <form action="insert-race-sign-up.php" method="post">
