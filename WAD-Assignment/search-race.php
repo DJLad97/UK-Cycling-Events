@@ -3,7 +3,7 @@ require('includes/conn.inc.php');
 $searchTerm = filter_var($_POST['searchTerm'], FILTER_SANITIZE_STRING);
 $searchTerm = "%" . $searchTerm . "%";
 
-$sql = "SELECT * FROM races WHERE RaceName LIKE :raceName";
+$sql = "SELECT * FROM races WHERE RaceName LIKE :raceName OR RaceType LIKE :raceName";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(":raceName", $searchTerm, PDO::PARAM_STR);
 $stmt->execute();
