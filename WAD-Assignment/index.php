@@ -3,6 +3,7 @@
 - Do I actually need the isFree column in my races table?
 - Add the user accounts to the CMS system
 - Add something to event listings page where it will say there is no upcoming races if there is no upcoming races
+- Set the user session to quit after a certain amount of time
 -->
 <?php
   require('includes/conn.inc.php');
