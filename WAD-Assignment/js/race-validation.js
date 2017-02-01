@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+// MOVE THESE TO MAIN.JS
   $('#startDate').datepicker({
        changeMonth: true,
        changeYear: true,

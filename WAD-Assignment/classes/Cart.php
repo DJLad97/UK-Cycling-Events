@@ -16,6 +16,10 @@ class Cart
     $this->noOfItems++;
   }
 
+  public function showTotal($price){
+    return $this->cartTotal += $price;
+  }
+
   public function showCart(){
     //return $this->cartArr;
 
@@ -23,10 +27,10 @@ class Cart
       echo "\nRace ID: ", $var['RaceID'], "\t\t Name: ", $var['RaceName'], "\t\t Price: £", $var['EntryPrice'], "\t\t",
             "Gender: ", "\t\t", $var['Gender'], "\t\t", "Age Range: ", $var['AgeRange'];
     }
-  }
 
-  public function getCartFirst(){
-    return $this->cartArr['RaceName'];
+    foreach ($this->cartArr as $key => $value) {
+      echo $value['RaceName'];
+    }
   }
 }
 ?>

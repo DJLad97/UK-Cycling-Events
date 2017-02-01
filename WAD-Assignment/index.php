@@ -175,7 +175,7 @@
                  ?>
 
                 <h3>SEE MORE EVENTS BELOW</h3>
-                <div class="button">
+                <div class="moveDownBtn">
                     <i class="fa fa-angle-double-down fa-4x" aria-hidden="true"></i></div>
               </div>
             </div>

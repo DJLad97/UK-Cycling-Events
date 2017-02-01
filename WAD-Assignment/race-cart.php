@@ -1,3 +1,6 @@
+<!--  TODO:
+  - ADD REMOVING RACE FROM CART
+-->
 <?php
   require('includes/conn.inc.php');
 
@@ -37,6 +40,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animate.css">
+  <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -58,14 +62,17 @@
     <br />
     <?php
     foreach ($_SESSION['cart']->cartArr as $key => $value){
-      echo "Race: " . $value['RaceName'] . "\t\t" . "Category: " . $value['AgeRange'] . " - " . $value['Gender'];
+      echo "<button type=\"button\" id=\"remove-item\">
+              <i class=\"fa fa-times\" aria-hidden=\"true\"></i>
+            </button>
+            Race: " . $value['RaceName'] . "\t\t" . "Category: " . $value['AgeRange'] . " - " . $value['Gender'];
       echo '<br />';
     }
     ?>
 
     <form action="insert-race-sign-up.php" method="post">
       <input type="hidden" name="sqlQuery" value="<?php echo $sql?>" />
-      <input type="submit" name="checkout" id="button" value="Checkout" class="btn btn-primary btn-default">
+      <input type="submit" name="checkout" id="checkoutBtn" value="Checkout" class="btn btn-primary btn-default">
     </form>
   </div>
 

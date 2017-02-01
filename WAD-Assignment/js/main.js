@@ -20,7 +20,7 @@ function moveDownCirle(){
 
 $(document).ready(function(){
 
-   $(".button").click(function(){
+   $(".moveDownBtn").click(function(){
 
        $('html, body').animate({
           scrollTop: $("#calander").offset().top - 500

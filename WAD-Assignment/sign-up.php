@@ -94,11 +94,6 @@
 
   <title>Sign Up</title>
 
-<!--  TODO:
-  -ADD EMAIL VALIDATION TO CHECK THE EMAIL THE USER ENTERED IS NOT ALREADY REGISTERED
-  (AND DO THIS FOR THE USERNAME AS WELL)
--->
-
 </head>
 <body>
   <div class="container well">
