@@ -1,3 +1,5 @@
+<!--  Add some warning color to indicate that the closing entry date is coming up -->
+
 <?php
   require('includes/conn.inc.php');
   //This is so I can redirect to this page after a login
@@ -139,12 +141,28 @@
               ?>
               <p>
                 <label>Price: </label>
-                <?php echo "£{$result->EntryPrice}" ?>
-
-              </p>
-              <input type="submit" name="subBtn" onclick="submitForm('add-to-cart.php', 'get')" 
-                          id="button" value="Add to Cart" class="btn btn-primary btn-default">
-              <?php
+                <?php
+                echo "£{$result->EntryPrice}";
+                //print_r($_SESSION['cart']->cartArr);
+                //unset($_SESSION['cart']);
+                ?>
+                </p>
+                <?php
+                  $found = false;
+                  
+                  if(isset($_SESSION['cart'])){
+                  for($i = 0; $i < $_SESSION['cart']->noOfItems; $i++){
+                    if(in_array($raceID, $_SESSION['cart']->cartArr[$i])){
+                      echo "<p>Race already in cart! </p>";
+                      $found = true;
+                    }
+                  }
+                }
+                if(!$found){ ?>
+                  <input type="submit" name="subBtn" onclick="submitForm('add-to-cart.php', 'get')"
+                  id="button" value="Add to Cart" class="btn btn-primary btn-default">
+                  <?php
+                }
             }
             ?>
 
