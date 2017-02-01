@@ -82,6 +82,7 @@
   <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
+  <script src="js/live-race-search.js"></script>
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -260,34 +261,13 @@
   </div>
   <form role="form" method="post">
     <div class="input-group input-group-lg col-xs-3">
-      <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="Race Name"></input>
+      <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="Race Name" autocomplete="off"></input>
       <div class="input-group-btn">
         <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
       </div>
     </div>
   </form>
   <ul id="content"></ul>
-        <script>
-        $(document).ready(function() {
-            $('#searchTerm').on('input', function(){
-              var searchKeyword = $(this).val();
-
-              if(searchKeyword.length >= 3){
-                $.post(
-                  'search-race.php',
-                  {searchTerm: searchKeyword},
-                  function(data){
-                    $('ul#content').empty();
-                    $.each(data, function(){
-                      $('ul#content').append('<li><a href="race-sign-up.php?RaceID=' +
-                                            this.RaceID + '">' + this.RaceName + '</a></li>');
-                    })
-                  }, "json");
-              }
-            });
-      });
-        </script>
-
 </div>
 
 <footer style="background-color: #000000; margin-top: 20vh;">
