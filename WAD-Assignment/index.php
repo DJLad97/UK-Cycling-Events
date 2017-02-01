@@ -4,6 +4,9 @@
 - Add the user accounts to the CMS system
 - Add something to event listings page where it will say there is no upcoming races if there is no upcoming races
 - Set the user session to quit after a certain amount of time
+- Add a feature for the admin to print off a page containg the race sign up details
+  (Or send a email to the event organiser containing the page of sign ups for them to print off,
+  this email will get sent when the closing entry date has come)
 -->
 <?php
   require('includes/conn.inc.php');
