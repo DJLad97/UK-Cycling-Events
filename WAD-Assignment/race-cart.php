@@ -29,21 +29,28 @@
   ?>
   <div id="cart">
     <?php
+    $sql = "INSERT INTO RaceSignUp (RaceID, Gender, AgeRange)
+    VALUES ";
+    $valuesArr = array();
+    $values = "";
     if(isset($_SESSION['cart'])){
       foreach ($_SESSION['cart']->cartArr as $key => $value) {
-        echo $value['EntryPrice'];
+        // echo $value['RaceID'];
+        $values .= "(" . $value['RaceID'] . "," . $value['Gender'] . "," . $value['AgeRange'] . "), ";
       }
     }
-      //echo $_SESSION['cart']->showCart();
-      for($i = 0; $i < $_SESSION['cart']->noOfItems; $i++){
-        $gender = implode(', ', $_SESSION['cart']->cartArr[$i]['$gender']);
-        $ageRange = implode(', ', $_SESSION['cart']->cartArr[$i]['$ageRange']);
-        echo "GENDERS: " . $gender;
-        echo "AGERANGES: " . $ageRange;
-      }
+
+    $sql .= $values;
+    echo $sql;
+      // echo implode(', ', array_map(function($entry) {
+      //   return $entry['AgeRange'];
+      // }, $_SESSION['cart']->cartArr));
+
+      // $valuesArr[] =
     ?>
 
     <form action="insert-race-sign-up.php" method="post">
+      <input type="hidden" name="sqlQuery" value="<?php echo $sql?>" />
       <?php
         foreach ($_SESSION['cart']->cartArr as $key => $value) {
 
