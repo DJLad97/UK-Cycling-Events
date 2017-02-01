@@ -7,6 +7,7 @@
 - Add a feature for the admin to print off a page containg the race sign up details
   (Or send a email to the event organiser containing the page of sign ups for them to print off,
   this email will get sent when the closing entry date has come)
+- Add a view preview details to live search for each race
 -->
 <?php
   require('includes/conn.inc.php');
