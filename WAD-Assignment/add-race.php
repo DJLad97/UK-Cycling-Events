@@ -47,67 +47,81 @@
             }
        ?>
            </div>
-        <form class="col-md-4" method="post" id="add-race-form" action="insert-race.php">
+        <form method="post" id="add-race-form" action="insert-race.php">
           <div class="page-header">
             <h2>ADD RACE</h2>
-          </div><hr />
-            <div class="form-group">
-              <label>Race Type</label>
-              <select name="raceType" class="form-control">
-                <option value="">Select</option>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Race Type</label>
+                <select name="raceType" class="form-control">
+                  <option value="">Select</option>
                   <option value="MTB">MTB</option>
                   <option value="Road">Road</option>
-              </select>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Organiser Name *</label>
+                <input type="text" class="form-control" name="organiserName" placeholder="Sheffield MTB"/>
+              </div>
+              <div class="form-group">
+                <label>Organiser Enquiry Email *</label>
+                <input type="text" class="form-control" name="organiserEmail" placeholder="organiser@race.com"/>
+              </div><hr>
             </div>
-            <div class="form-group">
-              <label>Organiser Name *</label>
-              <input type="text" class="form-control" name="organiserName" placeholder="Sheffield MTB"/>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Race Name *</label>
+                <input type="text" class="form-control" name="raceName" placeholder="MTB Race - Round 1"/>
+              </div>
+              <div class="form-group">
+                <label>Closing Entry Date *</label>
+                <input type="text" class="form-control" id="closingEntryDate" name="closingEntryDate" readonly="readonly"/>
+              </div>
+              <div class="form-group">
+                <label id="test">Race Start Date *</label>
+                <input type="text" class="form-control" id="startDate" name="raceStartDate" readonly="readonly"/>
+                <hr>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Organiser Enquiry Email *</label>
-              <input type="text" class="form-control" name="organiserEmail" placeholder="organiser@race.com"/>
-            </div><hr>
-            <div class="form-group">
-              <label>Race Name *</label>
-              <input type="text" class="form-control" name="raceName" placeholder="MTB Race - Round 1"/>
-            </div>
-            <div class="form-group">
-              <label>Closing Entry Date *</label>
-              <input type="text" class="form-control" id="closingEntryDate" name="closingEntryDate" readonly="readonly"/>
-            </div>
-            <div class="form-group">
-              <label id="test">Race Start Date *</label>
-              <input type="text" class="form-control" id="startDate" name="raceStartDate" readonly="readonly"/>
-            </div>
-            <div class="form-group">
-               <label>Race Address *</label>
-               <input type="text" class="form-control" name="raceAddress" placeholder="Address of race start location"/>
-            </div>
-            <div class="form-group">
-               <label>Race Postcode *</label>
-               <input type="text" class="form-control" name="racePostcode" placeholder="S11 7TT"/>
-            </div>
-            <div class="form-group">
-               <label>Race Latitude *</label> <label><small>Click on the map to get your latitude and longitude</small></label>
-               <input type="text" class="form-control" id="latLong" name="raceLatLong" readonly="readonly"/>
-               <div id="map"></div>
-            </div>
-            <div class="form-group">
-              <label>Is your race free to enter? *</label>
-              <select name="isFree" id="isFreeDropdown" class="form-control">
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Race Address *</label>
+                <input type="text" class="form-control" name="raceAddress" placeholder="Address of race start location"/>
+              </div>
+              <div class="form-group">
+                <label>Race Postcode *</label>
+                <input type="text" class="form-control" name="racePostcode" placeholder="S11 7TT"/>
+              </div>
+              <div class="form-group">
+                <label>Race Latitude *</label> <label><small>Click on the map to get your latitude and longitude</small></label>
+                <input type="text" class="form-control" id="latLong" name="raceLatLong" readonly="readonly"/>
+                <hr>
+              </div>
+              <div class="form-group">
+                <label>Is your race free to enter? *</label>
+                <select name="isFree" id="isFreeDropdown" class="form-control">
                   <option value="">Select</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
-              </select>
+                </select>
+              </div>
+              <div class="form-group" id="priceTextBox">
+                <label>Entry Price</label>
+                <input type="text" class="form-control" name="entryPrice" placeholder="£10.00" />
+              </div>
+              <div class="form-group">
+                <label>Race Description</label>
+                <textarea type="comments" class="form-control" name="raceDesc" placeholder="Provide your race description here to make your race more appealing"></textarea>
+              </div>
             </div>
-            <div class="form-group" id="priceTextBox">
-               <label>Entry Price</label>
-               <input type="text" class="form-control" name="entryPrice" placeholder="£10.00" />
+            <div class="col-md-4">
+              <div id="map"></div>
             </div>
-            <div class="form-group">
-               <label>Race Description</label>
-               <textarea type="comments" class="form-control" name="raceDesc" placeholder="Provide your race description here to make your race more appealing"></textarea>
-            </div>
+          </div>
             <div class="form-group">
                 <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-lg" />
             </div>
