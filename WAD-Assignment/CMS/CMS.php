@@ -20,8 +20,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
 
   <!--[if lt IE 9]>
@@ -32,24 +30,11 @@
   <title>CMS</title>
 </head>
 <body>
+  <?php include('header.php'); ?>
   <div class="container well">
     <div class="page-header">
       <h1>Content Management System</h1>
     </div>
-    <?php
-    $dir = "images/";
-    $fileNames = array();
-    // Open a directory, and read its contents
-    if (is_dir($dir)){
-      if ($dh = opendir($dir)){
-        while (($file = readdir($dh)) !== false){
-          $fileNames[] = $file;
-        }
-        closedir($dh);
-      }
-    }
-
-    ?>
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#races">Races</a></li>
       <li><a data-toggle="tab" href="#users">Users</a></li>
@@ -130,7 +115,7 @@
                 </tr>
               </thead>
               <?php
-               foreach(glob('./images/*.*') as $filename){
+               foreach(glob('../images/*.*') as $filename){
                 // Removes the directory from the name
                 $noDirFile = basename($filename);
                 echo "<tr>";
