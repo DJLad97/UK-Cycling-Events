@@ -1,6 +1,6 @@
 <?php
-require('classes/Cart.php');
-require('sessions/sessions.inc.php');
+require('/../classes/Cart.php');
+require('/../sessions/sessions.inc.php');
 $dsn = 'mysql:host=localhost;dbname=wad_project';
 $user = 'root';
 $password = 'billion2468';
@@ -16,6 +16,6 @@ catch (PDOException $e)
   echo 'Connection failed again: ' . $e->getMessage();
 }
 
-require('classes/User.php');
+require('/../classes/User.php');
 $user = new user($pdo);
 ?>
