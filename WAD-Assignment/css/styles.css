@@ -1,7 +1,14 @@
+@font-face{
+  font-family: MacFont;
+  src: url('../fonts/System San Francisco Display Thin.ttf');
+}
+
 html, body
 {
     height: 100%;
     background-color: rgb(238, 238, 238);
+    font-family: MacFont;
+    font-size: 20px;
 }
 
 @media screen and (max-width: 768px)
@@ -16,6 +23,26 @@ html, body
         margin-left: 50%;
     }
 
+}
+
+.getPreview{
+  /*color: red;*/
+}
+
+.table-text{
+  color:rgb(51, 51, 51)
+}
+
+.fullDetails {
+	display:none;
+	position:absolute;
+	z-index:1;
+	background:rgba(0,0,0,0.8);
+	color:#fff;
+	padding:10px;
+	width:280px;
+	margin-right:10px;
+	border-radius:8px;
 }
 
 #welcome{
