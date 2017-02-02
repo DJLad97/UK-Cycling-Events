@@ -4,10 +4,18 @@
 - Add the user accounts to the CMS system
 - Add something to event listings page where it will say there is no upcoming races if there is no upcoming races
 - Set the user session to quit after a certain amount of time
+- Do a reset password feature
 - Add a feature for the admin to print off a page containg the race sign up details
   (Or send a email to the event organiser containing the page of sign ups for them to print off,
   this email will get sent when the closing entry date has come)
 - Add a view preview details to live search for each race
+- Do some sort of keywords for the live search
+- Create a php function that will test a given date and return true or
+  false depending on that date's range to the current date
+  (will be used to display the closing entry date in orange or red depending on how
+  close the closing entry date is)
+  - Add information about the add your event feature like that we will email you the sign ups
+  when the closing entry date has arrived or an option to get emails daily
 -->
 <?php
   require('includes/conn.inc.php');
@@ -110,6 +118,9 @@
       <img src="images/circleBtn.png" id="navButton" alt="circle button">
         <ul class="removeLeft nav navbar-nav navbar-left">
           <li class="dropdown"><a href="#">MTB & ROAD</a></li>
+          <?php if(isset($_SESSION['userSession']) && $userRow['IsAdmin'] == 'admin'){ ?>
+          <li class="dropdown"><a href="CMS.php">CMS Page</a></li>
+          <?php }?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <?php
@@ -261,6 +272,7 @@
 
   </div>
   <form role="form" method="post">
+    <label>Search race name or race type (MTB or Road)</label>
     <div class="input-group input-group-lg col-xs-3">
       <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="Race Name" autocomplete="off"></input>
       <div class="input-group-btn">
