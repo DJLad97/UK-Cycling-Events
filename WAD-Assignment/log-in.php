@@ -15,6 +15,7 @@
   else
     $url = 'profile.php';
 
+
   if(isset($_POST['submit']))
   {
       $uName = strip_tags($_POST['uName']);
@@ -22,7 +23,10 @@
 
       if($login->login($uName, $password))
       {
-          $login->redirect($url);
+        if($_SESSION['userLevel'] == 'admin')
+          $url = 'CMS/CMS.php';
+
+        $login->redirect($url);
       }
       else
       {
