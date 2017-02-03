@@ -1,0 +1,17 @@
+@font-face{
+  font-family: MacFont;
+  src: url('../fonts/System San Francisco Display Thin.ttf');
+}
+
+html, body{
+    height: 100%;
+    background-color: rgb(238, 238, 238);
+    font-family: MacFont;
+    font-size: 20px;
+}
+
+#map{
+    padding: 20px 20px 20px 0;
+    width:400px;
+    height:400px;
+}
