@@ -33,7 +33,7 @@
   <?php include('header.php'); ?>
   <div class="container well">
     <div class="page-header">
-      <h1>Content Management System</h1>
+      <h1>Content Management System t</h1>
     </div>
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#races">Races</a></li>
