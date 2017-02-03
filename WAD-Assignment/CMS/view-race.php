@@ -2,6 +2,7 @@
 
 <?php
   require('../includes/conn.inc.php');
+  require('check-user.php');
 
   $raceID = $_GET['RaceID'];
   $sql = "SELECT * FROM races WHERE RaceID = :raceID";
