@@ -77,16 +77,18 @@ class user
    {
       try
       {
-         $stmt = $this->db->prepare("SELECT UserID, Username, Password, active FROM user WHERE Username = :uName LIMIT 1");
+         $stmt = $this->db->prepare("SELECT UserID, Username, Password, active, IsAdmin FROM user WHERE Username = :uName LIMIT 1");
          $stmt->bindParam(':uName', $uName, PDO::PARAM_STR);
          $stmt->execute();
          //$stmt->execute(array(':uName'=>$uName));
-         $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+         $userRow = $stmt->fetch(PDO::FETCH_ASSOC);;
+
 
          if($stmt->rowCount() > 0)
          {
             if(password_verify($pass, $userRow['Password']) && $userRow['active'] == 'yes')
             {
+               $_SESSION['userLevel'] = $userRow['IsAdmin'];
                $_SESSION['userSession'] = $userRow['UserID'];
                return true;
             }
