@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-md-12">
             <table class="table table-striped">
-              <p><a href="insert-race.php" class="btn btn-success">Add New Race</a></p>
+              <p><a href="insert-race-cms.php" class="btn btn-success">Add New Race</a></p>
               <thead>
                 <tr>
                   <th class="table-text">Race</th>
