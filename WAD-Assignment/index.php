@@ -23,6 +23,7 @@
   if(isset($_SESSION['userSession']))
   {
       echo "user session started";
+      echo $_SESSION['userLevel'];
   }
   else
   {
@@ -119,7 +120,7 @@
         <ul class="removeLeft nav navbar-nav navbar-left">
           <li class="dropdown"><a href="#">MTB & ROAD</a></li>
           <?php if(isset($_SESSION['userSession']) && $userRow['IsAdmin'] == 'admin'){ ?>
-          <li class="dropdown"><a href="CMS.php">CMS Page</a></li>
+          <li class="dropdown"><a href="CMS/CMS.php">CMS Page</a></li>
           <?php }?>
         </ul>
         <ul class="nav navbar-nav navbar-right">
