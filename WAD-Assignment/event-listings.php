@@ -1,5 +1,12 @@
 <?php
   require('includes/conn.inc.php');
+
+  // IF THE MAP DOESN'T SHOW UP THIS IS WHAT I DID TO FIX IT:
+  /*
+        In the src for the race map I put a "../" before to see if that would work
+        it didn't, so I put it back and refreshed and it worked
+        Maybe it was the ctrl-f5 that did it but just in case
+  */
 ?>
 
 <!DOCTYPE html>
