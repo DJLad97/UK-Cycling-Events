@@ -25,6 +25,7 @@ $row = $stmt->fetchObject();
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
 
+  <link rel="stylesheet" href="../css/CMS-style.css">
   <script src="../js/main.js"></script>
   <script src="../js/race-validation.js"></script>
   <script src="../js/google-maps.js"></script>
@@ -36,7 +37,7 @@ $row = $stmt->fetchObject();
   <title>DELETE <?php echo $row->RaceName; ?></title>
 </head>
 <body>
-  <?php include('header.php'); echo $raceID; ?>
+  <?php include('header.php'); ?>
   <div class="container well">
     <div class="page-header">
       <h1>DELETE <?php echo $row->RaceName; ?></h1>

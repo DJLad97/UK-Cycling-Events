@@ -17,7 +17,7 @@
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
 
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/CMS-style.css">
   <script src="../js/main.js"></script>
   <script src="../js/race-validation.js"></script>
   <script src="../js/google-maps.js"></script>

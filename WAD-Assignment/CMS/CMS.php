@@ -1,3 +1,5 @@
+<!--  ADD A CHECK TO SEE IF THE ID EXISTS ON EACH CMS PAGE-->
+
 <?php
   require('/../includes/conn.inc.php');
   require('check-user.php');
@@ -22,6 +24,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <link rel="stylesheet" href="../css/CMS-style.css">
   <script src="js/main.js"></script>
 
   <!--[if lt IE 9]>
@@ -49,7 +52,7 @@
         <div class="row">
           <div class="col-md-12">
             <table class="table table-striped">
-              <p><a href="insert-race-cms.php" class="btn btn-success">Add New Race</a></p>
+              <p><a href="add-race-cms.php" class="btn btn-success">Add New Race</a></p>
               <thead>
                 <tr>
                   <th class="table-text">Race</th>
