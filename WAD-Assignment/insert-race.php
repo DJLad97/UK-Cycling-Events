@@ -75,13 +75,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-
-  $sql = "INSERT INTO races (RaceType, OrganiserName, OrganiserEmail, RaceName, RaceDate, RaceDescription,
-                            RaceAddress, RacePostcode, RaceLatLong, IsFree, EntryPrice, ClosingEntryDate)
-                      VALUES (:raceType, :orgName, :orgEmail, :name, :sDate, :raceDesc,
-                             :raceAdd, :racePC, :raceLoc, :isFree, :entryPrice, :cDate)";
+  if($_GET['fromCMS'] == true){
+      $sql = "UPDATE races SET RaceType = :raceType, OrganiserName = :orgName, OrganiserEmail = :orgEmail,
+                               RaceName = :name, RaceDate = :sDate, RaceDescription = :raceDesc,
+                               RaceAddress = :raceAdd, RacePostcode = :racePC, RaceLatLong = :raceLoc,
+                               IsFree = :isFree, EntryPrice = :entryPrice, ClosingEntryDate
+                               WHERE RaceID = :raceID;"
+  }
+  else{
+      $sql = "INSERT INTO races (RaceType, OrganiserName, OrganiserEmail, RaceName, RaceDate, RaceDescription,
+                                 RaceAddress, RacePostcode, RaceLatLong, IsFree, EntryPrice, ClosingEntryDate)
+                          VALUES (:raceType, :orgName, :orgEmail, :name, :sDate, :raceDesc,
+                                  :raceAdd, :racePC, :raceLoc, :isFree, :entryPrice, :cDate)";
+  }
 
    $stmt = $pdo->prepare($sql);
+   $stmt->bindParam(':raceID', $raceID, PDO::PARAM_INT);
    $stmt->bindParam(":raceType", $raceType, PDO::PARAM_STR);
    $stmt->bindParam(":orgName", $organiserName, PDO::PARAM_STR);
    $stmt->bindParam(":orgEmail", $organiserEmail, PDO::PARAM_STR);
