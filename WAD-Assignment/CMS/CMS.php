@@ -1,5 +1,7 @@
 <?php
   require('/../includes/conn.inc.php');
+  require('check-user.php');
+
   $sql = "SELECT * FROM races";
   $stmt = $pdo->prepare($sql);
   $stmt->execute();
@@ -33,7 +35,7 @@
   <?php include('header.php'); ?>
   <div class="container well">
     <div class="page-header">
-      <h1>Content Management System t</h1>
+      <h1>Content Management System</h1>
     </div>
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#races">Races</a></li>
@@ -62,7 +64,7 @@
                 echo "<td class=\"table-text\">{$row->RaceName}</td>";
                 echo "<td><a href=\"edit-race.php?RaceID={$row->RaceID}\"</a>Edit</td>";
                 echo "<td><a href=\"delete-race.php?RaceID={$row->RaceID}\"</a>Delete</td>";
-                echo "<td><a href=\"race-details.php?RaceID={$row->RaceID}\"</a>View</td>";
+                echo "<td><a href=\"view-race.php?RaceID={$row->RaceID}\"</a>View</td>";
                 echo "</tr>";
               }
               ?>
