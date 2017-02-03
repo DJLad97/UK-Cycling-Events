@@ -14,10 +14,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
   $address = filter_var(strip_tags(trim($_POST['raceAddress'])), FILTER_SANITIZE_STRING);
   $postCode = filter_var(strip_tags(trim($_POST['racePostcode'])), FILTER_SANITIZE_STRING);
   $loc = filter_var(strip_tags(trim($_POST['raceLatLong'])), FILTER_SANITIZE_STRING);
-  if($_POST['isFree'] == 'Yes')
-    $isFree = 1;
-  else
-    $isFree = 0;
 
   if($_POST['entryPrice'] == null)
     $entryPrice = NULL;
@@ -64,49 +60,46 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       array_push($_SESSION['error'], "Please choose the latitude and longtitude on the map!");
       $showError = true;
   }
-  if(empty($isFree)){
-      array_push($_SESSION['error'], "Please specifiy if your race is free to enter or not!");
-      $showError = true;
-  }
 
   if($showError)
     header("Location: add-race.php");
 }
 
-
-
-  if($_GET['fromCMS'] == true){
+  if(isset($_GET['fromCMS']) && $_GET['fromCMS'] == true){
+      $raceID = $_GET['RaceID'];
       $sql = "UPDATE races SET RaceType = :raceType, OrganiserName = :orgName, OrganiserEmail = :orgEmail,
                                RaceName = :name, RaceDate = :sDate, RaceDescription = :raceDesc,
                                RaceAddress = :raceAdd, RacePostcode = :racePC, RaceLatLong = :raceLoc,
-                               IsFree = :isFree, EntryPrice = :entryPrice, ClosingEntryDate
-                               WHERE RaceID = :raceID;"
+                               EntryPrice = :entryPrice, ClosingEntryDate = :cDate
+                               WHERE RaceID = :raceID";
+
   }
   else{
       $sql = "INSERT INTO races (RaceType, OrganiserName, OrganiserEmail, RaceName, RaceDate, RaceDescription,
-                                 RaceAddress, RacePostcode, RaceLatLong, IsFree, EntryPrice, ClosingEntryDate)
+                                 RaceAddress, RacePostcode, RaceLatLong, EntryPrice, ClosingEntryDate)
                           VALUES (:raceType, :orgName, :orgEmail, :name, :sDate, :raceDesc,
-                                  :raceAdd, :racePC, :raceLoc, :isFree, :entryPrice, :cDate)";
+                                  :raceAdd, :racePC, :raceLoc, :entryPrice, :cDate)";
   }
 
-   $stmt = $pdo->prepare($sql);
+ $stmt = $pdo->prepare($sql);
+ if(isset($_GET['fromCMS']) && $_GET['fromCMS'] == true){
    $stmt->bindParam(':raceID', $raceID, PDO::PARAM_INT);
-   $stmt->bindParam(":raceType", $raceType, PDO::PARAM_STR);
-   $stmt->bindParam(":orgName", $organiserName, PDO::PARAM_STR);
-   $stmt->bindParam(":orgEmail", $organiserEmail, PDO::PARAM_STR);
-   $stmt->bindParam(":name", $raceName, PDO::PARAM_STR);
-   $stmt->bindParam(":sDate", $newStartDate, PDO::PARAM_STR);
-   $stmt->bindParam(":raceDesc", $raceDesc, PDO::PARAM_STR);
-   $stmt->bindParam(":raceAdd", $address, PDO::PARAM_STR);
-   $stmt->bindParam(":racePC", $postCode, PDO::PARAM_STR);
-   $stmt->bindParam(":raceLoc", $loc, PDO::PARAM_STR);
-   $stmt->bindParam(":isFree", $isFree, PDO::PARAM_STR);
-   $stmt->bindParam(":entryPrice", $entryPrice, PDO::PARAM_STR);
-   $stmt->bindParam(":cDate", $newCloseDate, PDO::PARAM_STR);
-   $stmt->execute();
+ }
+ $stmt->bindParam(":raceType", $raceType, PDO::PARAM_STR);
+ $stmt->bindParam(":orgName", $organiserName, PDO::PARAM_STR);
+ $stmt->bindParam(":orgEmail", $organiserEmail, PDO::PARAM_STR);
+ $stmt->bindParam(":name", $raceName, PDO::PARAM_STR);
+ $stmt->bindParam(":sDate", $newStartDate, PDO::PARAM_STR);
+ $stmt->bindParam(":raceDesc", $raceDesc, PDO::PARAM_STR);
+ $stmt->bindParam(":raceAdd", $address, PDO::PARAM_STR);
+ $stmt->bindParam(":racePC", $postCode, PDO::PARAM_STR);
+ $stmt->bindParam(":raceLoc", $loc, PDO::PARAM_STR);
+ $stmt->bindParam(":entryPrice", $entryPrice, PDO::PARAM_STR);
+ $stmt->bindParam(":cDate", $newCloseDate, PDO::PARAM_STR);
+ $stmt->execute();
 
-   unset($_SESSION['error']);
+ unset($_SESSION['error']);
 
-   header("Location: index.php");
-   exit;
+ header("Location: index.php");
+ exit;
 ?>
