@@ -47,6 +47,14 @@ $(document).ready(function(){
       return /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i.test(value);
     }, 'Please enter a valid postcode!')
 
+    $.validator.addMethod('validCoords', function(value, element){
+      return /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/i.test(value);
+    }, 'Please enter valid coordinates!')
+
+    // $.validator.addMethod('validCoords', function(value, element){
+    //   return /^([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}/.test(value);
+    // }, 'Pleaser enter valid coordinates!')
+
   $('#add-race-form').validate({
       rules: {
         raceType: {
@@ -63,7 +71,10 @@ $(document).ready(function(){
           required: true,
           validPostcode: true
         },
-        raceLatLong: "required",
+        raceLatLong: {
+          required: true,
+          validCoords: true
+        },
         raceType: "required",
         raceStartDate: {
           required: true,
