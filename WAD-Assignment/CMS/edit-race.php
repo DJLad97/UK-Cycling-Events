@@ -1,5 +1,7 @@
 <?php
-  require('/../includes/conn.inc.php');
+  require('../includes/conn.inc.php');
+  require('check-user.php');
+
   $raceID = $_GET['RaceID'];
   $sql = "SELECT * FROM races WHERE RaceID = :raceID";
   $stmt = $pdo->prepare($sql);
@@ -15,12 +17,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
 
   <script src="../js/main.js"></script>
-  <script src="../js/jquery.easing.js"></script>
+  <script src="../js/race-validation.js"></script>
   <script src="../js/google-maps.js"></script>
 
   <!--[if lt IE 9]>
@@ -31,14 +37,14 @@
 </head>
 <body>
   <?php include('header.php'); ?>
-  <div class="container">
+  <div class="container well">
     <div class="page-header">
       <h1>EDIT <?php echo $row->RaceName; ?></h1>
     </div>
-
-    <form method="post" id="add-race-form" action="insert-race.php">
+    <?php $string = '../insert-race.php?fromCMS=true&RaceID=' . $raceID;?>
+    <form method="post" id="add-race-form" action="<?php echo $string; ?>">
       <div class="page-header">
-        <h2>ADD RACE</h2>
+        <h2>EDIT RACE</h2>
       </div>
       <div class="row">
         <div class="col-md-4">
@@ -46,8 +52,8 @@
             <label>Race Type</label>
             <select name="raceType" class="form-control">
               <option value="">Select</option>
-              <option value="MTB">MTB</option>
-              <option value="Road">Road</option>
+              <option value="MTB" <?php if($row->RaceType == 'MTB') echo 'selected';?>>MTB</option>
+              <option value="Road" <?php if($row->RaceType == 'Road') echo 'selected';?>>Road</option>
             </select>
           </div>
           <div class="form-group">
@@ -85,7 +91,7 @@
           </div>
           <div class="form-group" id="priceTextBox">
             <label>Entry Price</label>
-            <input type="text" class="form-control" name="entryPrice" placeholder="£10.00" value="<?php $row->EntryPrice; ?>"/>
+            <input type="text" class="form-control" name="entryPrice" placeholder="£10.00" value="<?php echo $row->EntryPrice; ?>"/>
           </div>
           <div class="form-group">
             <label>Race Description</label>
@@ -108,7 +114,6 @@
             <input type="text" class="form-control" id="latLong" name="raceLatLong" value="<?php echo $row->RaceLatLong; ?>" readonly="readonly"/>
             <hr>
           </div>
-
         </div>
         <div class="col-md-4">
           <div id="map"></div>
