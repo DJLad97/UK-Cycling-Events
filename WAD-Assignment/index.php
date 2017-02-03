@@ -16,6 +16,8 @@
   close the closing entry date is)
   - Add information about the add your event feature like that we will email you the sign ups
   when the closing entry date has arrived or an option to get emails daily
+  - PREVENT THE USER FROM DIRECTLY ACCESSING PURE PHP SCRIPTS
+  (http://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
 -->
 <?php
   require('includes/conn.inc.php');
