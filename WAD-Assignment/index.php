@@ -1,7 +1,6 @@
 <!--
 - Have so html elements fade in when the page loads
 - Do I actually need the isFree column in my races table?
-- Add the user accounts to the CMS system
 - Add something to event listings page where it will say there is no upcoming races if there is no upcoming races
 - Set the user session to quit after a certain amount of time
 - Do a reset password feature
@@ -18,6 +17,7 @@
   when the closing entry date has arrived or an option to get emails daily
   - PREVENT THE USER FROM DIRECTLY ACCESSING PURE PHP SCRIPTS
   (http://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
+  -HAVE SOME SORT OF CONSTANT SIDE BAR SUCH AS SHOWING 5 RACES OR SO
 -->
 <?php
   require('includes/conn.inc.php');
