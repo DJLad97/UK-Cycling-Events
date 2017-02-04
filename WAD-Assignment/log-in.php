@@ -14,8 +14,7 @@
     $url = $_SESSION['url'];
   else
     $url = 'profile.php';
-
-
+    
   if(isset($_POST['submit']))
   {
       $uName = strip_tags($_POST['uName']);
