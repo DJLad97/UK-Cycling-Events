@@ -60,4 +60,17 @@ $(document).ready(function(){
       }
   });
 
+  // var replyForm = "<div id="reply-comment">" + 
+  //   "<form action="add-comment.php" method="post">" +
+  //     "<input type="hidden" name="raceID" value="<?php echo $commentResult->CommentID; ?>">" +
+  //     "<label>Reply to comment</label>" +
+  //     "<textarea type="comments" class="form-control" name="replyCommet"></textarea>" +
+  //     "<input type="submit" value="Reply" name="replyBtn" class="btn btn-primary"></input>" +
+  //   "</form>" +
+  // "</div>"
+  //
+  // $('.reply-text').click(function(){
+  //     $('#reply-comment').slideToggle('slow');
+  // });
+
 });
