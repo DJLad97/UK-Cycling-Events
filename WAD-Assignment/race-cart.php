@@ -62,7 +62,7 @@
     <br />
     <?php
     foreach ($_SESSION['cart']->cartArr as $key => $value){
-      echo "<button type=\"button\" id=\"remove-item\">
+      echo "<button type=\"button\" id=\"remove-item\"class=\"empty-button\">
               <i class=\"fa fa-times\" aria-hidden=\"true\"></i>
             </button>
             Race: " . $value['RaceName'] . "\t\t" . "Category: " . $value['AgeRange'] . " - " . $value['Gender'];
