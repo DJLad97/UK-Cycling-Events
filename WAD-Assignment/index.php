@@ -19,6 +19,8 @@
   (http://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
   -HAVE SOME SORT OF CONSTANT SIDE BAR SUCH AS SHOWING 5 RACES OR SO
   -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -Race route with google maps polyline
+  -Results page for each race
 -->
 <?php
   require('includes/conn.inc.php');
