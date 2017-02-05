@@ -21,6 +21,7 @@
   -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
   -Race route with google maps polyline
   -Results page for each race
+  -Website with 2 halves
 -->
 <?php
   require('includes/conn.inc.php');
