@@ -79,7 +79,11 @@
           </div>
         </div>
           <div class="profile-img col-md-5">
-            <img src="images/<?=$imgRow['ProfileImg']?>"class="img" alt="profile image" width="400" height="400">
+            <img src="images/<?php
+              $default = 'default.jpg';
+              if(isset($imgRow['ProfileImg'])) echo $imgRow['ProfileImg'];
+              else echo $default
+            ?>"class="img" alt="profile image" width="400" height="400">
             <form action="upload-img.php" enctype="multipart/form-data" method="post">
               Select image to upload:
               <input type="file" name="profileImg" id="profileImg" />
