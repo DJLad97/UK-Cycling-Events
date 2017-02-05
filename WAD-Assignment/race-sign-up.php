@@ -81,14 +81,39 @@
           <!-- <div class="col-xs-4 col-sm-4 col-md-4 colCenterText"> -->
           <?php
 
+            $temp = strtotime($result->ClosingEntryDate);
+            $closeDate = date($temp);
+            $now = time();
+
+            $dateDiff = $closeDate - $now;
+
+            $daysBeforeClose = floor ($dateDiff / 86400);
+            $warningType;
+
+            echo $daysBeforeClose;
+            if($daysBeforeClose > 7)
+              $warningType = 'alert alert-success';
+            else if($daysBeforeClose <= 7 && $daysBeforeClose > 1)
+              $warningType = 'alert alert-warning';
+            else if($daysBeforeClose <= 1)
+              $warningType = 'alert alert-danger';
+
+            $span = '<span class="' . $warningType . '">';
+
             echo "<h1>{$result->RaceName}</h1>";
             echo "<p>
             Race Type: {$result->RaceType}
             <br />
             Start Date: {$result->RaceDate}
-            <br />
-            Entry Closing Date: {$result->ClosingEntryDate}
-            </p>";
+            <br /><br />";
+            echo $span . "Entry Closing Date: {$result->ClosingEntryDate}</span>
+            </p><br />";
+
+
+            // if($closeDate < $now)
+            //   echo '<p class="alert alert-danger">' . $closeDate . '</p>';
+            // else if($closeDate - )
+
 
           ?>
           <!-- </div> -->
@@ -194,20 +219,23 @@
         <div class="col-md-4">
 
       <?php
+      $i = 0;
        while($commentResult = $commentStmt->fetchObject()){
           ?>
           <div class="well">
-            <button class="empty-button reply-text">Reply</button>
+            <button class="empty-button reply-text replyButton<?php echo $i;?>">Reply</button>
             <p><strong><?php echo $commentResult->Username; ?></strong></p>
             <p><?php echo $commentResult->CommentContent; ?></p>
-              <!-- <form class="reply-form" action="add-comment.php" method="post">
-                <input type="hidden" name="raceID" value="<?php //echo $commentResult->CommentID; ?>">
+              <form class="reply-form reply-form<?php echo $i; ?>" action="add-comment.php" method="post">
+                <input type="hidden" name="raceID" value="<?php echo $commentResult->CommentID; ?>">
                 <label>Reply to comment</label>
                 <textarea type="comments" class="form-control" name="replyCommet"></textarea>
                 <input type="submit" value="Reply" name="replyBtn" class="btn btn-primary"></input>
-              </form> -->
+              </form>
           </div>
+          <script>var commentCount = <?php echo(json_encode($i)); ?>;</script>
           <?php
+          $i++;
       }
       ?>
         <form method="post" action="add-comment.php">
