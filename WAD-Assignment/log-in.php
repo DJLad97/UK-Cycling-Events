@@ -14,7 +14,7 @@
     $url = $_SESSION['url'];
   else
     $url = 'profile.php';
-    
+
   if(isset($_POST['submit']))
   {
       $uName = strip_tags($_POST['uName']);
@@ -44,9 +44,12 @@
   <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/main.js"></script>
+  <script src="js/log-in-validation.js"></script>
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -90,12 +93,13 @@
     		?>
         <div class="form-group">
           <label>Username</label>
-          <input type="text" class="form-control" name="uName" placeholder="Username" value="" required/>
+          <input type="text" class="form-control" name="uName" placeholder="Username"/>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input type="password" class="form-control" name="pass" placeholder="Password" value="" required/>
+          <input type="password" class="form-control" name="pass" placeholder="Password"/>
         </div>
+        <p><a href="sign-up.php">Don't have an account?</a></p>
         <div class="form-group">
             <input type="submit" name="submit" value="Sign In" class="btn btn-primary btn-lg" />
         </div>
