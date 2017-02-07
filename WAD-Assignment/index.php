@@ -17,6 +17,8 @@
   -Race route with google maps polyline
   -Results page for each race
   -Website with 2 halves
+  -Comments need to be a part of the race (add race id to comment)
+  -Add the check to see if user is logged in into a separte file
 -->
 <?php
   require('includes/conn.inc.php');
