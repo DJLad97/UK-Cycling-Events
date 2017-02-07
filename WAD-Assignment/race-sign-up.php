@@ -128,6 +128,10 @@
           // then display sign up details, otherwise inform you've signed up to this race
           if(!in_array($_GET['RaceID'], $signUpIDs)) {
 
+            $temp = strtotime($result->ClosingEntryDate);
+            $closeDate = date($temp);
+            $now = time();
+            if($now < $closeDate){
             ?>
 
           <form method="" action="" id="raceForm">
@@ -151,41 +155,46 @@
 
             <div class="form-group">
               <?php
-              if($result->EntryPrice == NULL) {
-                ?>
-                <label>Free Entry!</label>
-                <br>
 
-                <input type="submit" name="subBtn" onclick="submitForm('insert-race-sign-up.php', 'post')"
-                        id="button" value="Go Race!" class="btn btn-primary btn-default">
-                <?php
-              }
-              else{
-                ?>
-                <p>
-                  <label>Price: </label>
-                  <?php
-                  echo "£{$result->EntryPrice}";
-                  //print_r($_SESSION['cart']->cartArr);
-                  //unset($_SESSION['cart']);
+                if($result->EntryPrice == NULL) {
                   ?>
-                  </p>
-                  <?php
-                    $found = false;
+                  <label>Free Entry!</label>
+                  <br>
 
-                    if(isset($_SESSION['cart'])){
-                    for($i = 0; $i < $_SESSION['cart']->noOfItems; $i++){
-                      if(in_array($raceID, $_SESSION['cart']->cartArr[$i])){
-                        echo "<p>Race already in cart! </p>";
-                        $found = true;
+                  <input type="submit" name="subBtn" onclick="submitForm('insert-race-sign-up.php', 'post')"
+                          id="button" value="Go Race!" class="btn btn-primary btn-default">
+                  <?php
+                }
+                else{
+                  ?>
+                  <p>
+                    <label>Price: </label>
+                    <?php
+                    echo "£{$result->EntryPrice}";
+                    //print_r($_SESSION['cart']->cartArr);
+                    //unset($_SESSION['cart']);
+                    ?>
+                    </p>
+                    <?php
+                      $found = false;
+
+                      if(isset($_SESSION['cart'])){
+                      for($i = 0; $i < count($_SESSION['cart']->cartArr); $i++){
+                        if(in_array($raceID, $_SESSION['cart']->cartArr[$i])){
+                          echo "<p>Race already in cart! </p>";
+                          $found = true;
+                        }
                       }
                     }
-                  }
-                  if(!$found){ ?>
-                    <input type="submit" name="subBtn" onclick="submitForm('add-to-cart.php', 'get')"
-                    id="button" value="Add to Cart" class="btn btn-primary btn-default">
-                    <?php
-                  }
+                    if(!$found){ ?>
+                      <input type="submit" name="subBtn" onclick="submitForm('add-to-cart.php', 'get')"
+                      id="button" value="Add to Cart" class="btn btn-primary btn-default">
+                      <?php
+                    }
+                }
+              }
+              else if($now > $closeDate){
+                echo "<h1>SIGN UPS HAVE NOW FINISHED!</h1>";
               }
               ?>
 

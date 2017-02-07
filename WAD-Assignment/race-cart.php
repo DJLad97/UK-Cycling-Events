@@ -38,12 +38,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animate.css">
-  <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -57,16 +59,20 @@
   // Need to try an get the individual elements in the array
   //echo $_SESSION['cart']->getCartFirst();
   ?>
+  <?php print_r($_SESSION['cart']->cartArr); ?>
   <div id="cart">
     <h4>CART</h4>
     <br />
     <?php
+    // echo $_SESSION['cart']->cartArr[0]['RaceName'];
+    $i = 0;
     foreach ($_SESSION['cart']->cartArr as $key => $value){
-      echo "<button type=\"button\" id=\"remove-item\"class=\"empty-button\">
+      echo "<button type=\"button\" id=\"remove-item\"class=\"empty-button" . $i . "\"\">
               <i class=\"fa fa-times\" aria-hidden=\"true\"></i>
             </button>
             Race: " . $value['RaceName'] . "\t\t" . "Category: " . $value['AgeRange'] . " - " . $value['Gender'];
       echo '<br />';
+      $i++;
     }
     ?>
 

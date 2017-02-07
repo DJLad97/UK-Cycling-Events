@@ -8,11 +8,6 @@
   (Or send a email to the event organiser containing the page of sign ups for them to print off,
   this email will get sent when the closing entry date has come)
 - Add a view preview details to live search for each race
-- Do some sort of keywords for the live search
-- Create a php function that will test a given date and return true or
-  false depending on that date's range to the current date
-  (will be used to display the closing entry date in orange or red depending on how
-  close the closing entry date is)
   - Add information about the add your event feature like that we will email you the sign ups
   when the closing entry date has arrived or an option to get emails daily
   - PREVENT THE USER FROM DIRECTLY ACCESSING PURE PHP SCRIPTS
