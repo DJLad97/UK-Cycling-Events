@@ -24,6 +24,11 @@
       $values .= "(" . $value['RaceID'] . ", " . $userID . ", '" .  $nameFromUser .
                 "', '" . $value['Gender'] . "', '" . $value['AgeRange'] . "'), ";
     }
+    // echo count($_SESSION['cart']->cartArr);
+    // for($i = 0; $i < count($_SESSION['cart']->cartArr); $i++){
+    //     $values .= "(" . $_SESSION['cart']->cartArr[$i]['RaceID'] . ", " . $userID . ", '" .  $nameFromUser .
+    //               "', '" . $_SESSION['cart']->cartArr[$i]['Gender'] . "', '" . $_SESSION['cart']->cartArr[$i]['AgeRange'] . "'), ";
+    //   }
   }
 
   // Concatonate the values and remove the comma at the end of alues
@@ -59,26 +64,50 @@
   // Need to try an get the individual elements in the array
   //echo $_SESSION['cart']->getCartFirst();
   ?>
-  <?php print_r($_SESSION['cart']->cartArr); ?>
+  <?php
+  //print_r($_SESSION['cart']->cartArr);
+  ?>
   <div id="cart">
     <h4>CART</h4>
     <br />
     <?php
     // echo $_SESSION['cart']->cartArr[0]['RaceName'];
-    $i = 0;
-    foreach ($_SESSION['cart']->cartArr as $key => $value){
-      echo "<button type=\"button\" id=\"remove-item\"class=\"empty-button" . $i . "\"\">
-              <i class=\"fa fa-times\" aria-hidden=\"true\"></i>
-            </button>
-            Race: " . $value['RaceName'] . "\t\t" . "Category: " . $value['AgeRange'] . " - " . $value['Gender'];
-      echo '<br />';
-      $i++;
-    }
-    ?>
+      $cartEmpty = true;
 
+      if(!empty($_SESSION['cart']->cartArr)){
+        $cartEmpty = false;
+        $i = 0;
+
+      // for($i = 0; $i < count($_SESSION['cart']->cartArr); $i++){
+      //   echo '<form name="cart-form" method="post" action="remove-from-cart.php">';
+      //   echo "<input type=\"submit\" id=\"remove-item\"class=\"empty-button" . $i . "\"\">
+      //           <i class=\"fa fa-times\" aria-hidden=\"true\"></i>
+      //         </button>
+      //         Race: " . $_SESSION['cart']->cartArr[$i]['RaceName'] . "\t\t" . "Category: " .
+      //         $_SESSION['cart']->cartArr[$i]['AgeRange'] . " - " . $_SESSION['cart']->cartArr[$i]['Gender'];
+      //   echo '<br />';
+      //   echo '<input type="hidden" name="cart-item" value="' . $_SESSION['cart']->cartArr[$i]['RaceID'] .'"/>';
+      //   echo '</form>';
+      // }
+        foreach ($_SESSION['cart']->cartArr as $key => $value){
+          echo '<form name="cart-form" method="post" action="remove-from-cart.php">';
+          echo "<input type=\"submit\" id=\"remove-item\"class=\"empty-button" . $i . "\"\">
+                  <i class=\"fa fa-times\" aria-hidden=\"true\"></i>
+                </button>
+                Race: " . $value['RaceName'] . "\t\t" . "Category: " . $value['AgeRange'] . " - " . $value['Gender'];
+          echo '<br />';
+          echo '<input type="hidden" name="cart-item" value="' . $value['RaceID'] .'"/>';
+          echo '</form>';
+          $i++;
+        }
+    }
+    else{
+    ?>
+    <p>CART IS EMPTY</p>
+    <?php } ?>
     <form action="insert-race-sign-up.php" method="post">
       <input type="hidden" name="sqlQuery" value="<?php echo $sql?>" />
-      <input type="submit" name="checkout" id="checkoutBtn" value="Checkout" class="btn btn-primary btn-default">
+      <input type="submit" name="checkout" id="checkoutBtn" value="Checkout" class="btn btn-primary btn-default" <?php if($cartEmpty) echo "disabled"; ?>>
     </form>
   </div>
 
