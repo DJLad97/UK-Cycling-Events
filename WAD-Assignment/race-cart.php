@@ -3,6 +3,9 @@
 -->
 <?php
   require('includes/conn.inc.php');
+  if(!isset($_SESSION['userSession'])){
+    header("Location: log-in.php");
+  }
 
   $userID = $_SESSION['userSession'];
 
