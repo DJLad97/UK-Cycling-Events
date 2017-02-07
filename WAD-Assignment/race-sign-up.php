@@ -1,4 +1,3 @@
-<!--  Add some warning color to indicate that the closing entry date is coming up -->
 
 <?php
   require('includes/conn.inc.php');
