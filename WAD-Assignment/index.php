@@ -29,7 +29,6 @@
   if(isset($_SESSION['userSession']))
   {
       echo "user session started";
-      echo $_SESSION['userLevel'];
   }
   else
   {
@@ -122,7 +121,7 @@
       </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <img src="images/circleBtn.png" id="navButton" alt="circle button">
+      <!-- <img src="images/navbar-image.png" id="navButton" alt="nav button"> -->
         <ul class="removeLeft nav navbar-nav navbar-left">
           <li class="dropdown"><a href="#">MTB & ROAD</a></li>
           <?php if(isset($_SESSION['userSession']) && $userRow['IsAdmin'] == 'admin'){ ?>
