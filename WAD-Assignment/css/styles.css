@@ -245,7 +245,7 @@ p.eventDesc
 
 .navbar, .navbar-header
 {
-    background-color: rgba(51, 51, 53, 0.6);
+    background-color: rgba(14, 14, 14, 1);
     border-style: none;
 }
 
@@ -256,11 +256,11 @@ p.eventDesc
 
 .dropdown-menu
 {
-    background-color: rgba(51, 51, 53, 0.6);
+    background-color: rgba(14, 14, 14, 1);
     width: 100px;
     height: 300px;
     display: none;
-    text-color
+    /*text-color*/
 }
 
 #fullDropdown
@@ -277,7 +277,16 @@ ul
 {
     list-style: none;
 }
-@media screen and (min-width: 792px) and (max-width: 1000px)
+
+#navButton{
+  margin: 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+/*@media screen and (min-width: 792px) and (max-width: 1000px)
 {
   #navButton
   {
@@ -293,7 +302,7 @@ ul
       position: fixed;
       left: 46.5vw;
   }
-}
+}*/
 
 .subnav
 {
