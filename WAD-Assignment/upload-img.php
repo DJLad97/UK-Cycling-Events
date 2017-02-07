@@ -1,11 +1,14 @@
 <?php
   require('includes/conn.inc.php');
 
+
   $userID = $_SESSION['userSession'];
   $IDinDB = $userID . '%';
   $delStmt = $pdo->prepare("UPDATE user SET ProfileImg = NULL WHERE ProfileImg = :userID");
   $delStmt->bindParam(":userID", $IDinDB);
   $delStmt->execute();
+
+  unlink('images/' . $IDinDB);
 
   $fileError = $_FILES['profileImg']['error'];
   if($fileError > 0){
