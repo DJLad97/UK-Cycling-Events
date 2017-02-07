@@ -90,7 +90,6 @@
             $daysBeforeClose = floor ($dateDiff / 86400);
             $warningType;
 
-            echo $daysBeforeClose;
             if($daysBeforeClose > 7)
               $warningType = 'alert alert-success';
             else if($daysBeforeClose <= 7 && $daysBeforeClose > 1)
@@ -108,11 +107,6 @@
             <br /><br />";
             echo $span . "Entry Closing Date: {$result->ClosingEntryDate}</span>
             </p><br />";
-
-
-            // if($closeDate < $now)
-            //   echo '<p class="alert alert-danger">' . $closeDate . '</p>';
-            // else if($closeDate - )
 
 
           ?>
