@@ -47,7 +47,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <title>Home</title>
+  <title>Profile</title>
 
 
 </head>
@@ -90,6 +90,19 @@
               <br />
               <input type="submit" name="upload" value="Save" />
             </form>
+            <?php
+            if(!empty($_GET)){
+              switch($_GET['err']){
+                case 'WrongFileType':
+                  echo '<p class="error-text">WRONG FILE TYPE</p>';
+                break;
+                case 'imgUploadError':
+                  echo '<p class="error-text">Something went wrong with the upload</p>';
+                break;
+
+              }
+            }
+            ?>
           </div>
         </div>
     </div>
