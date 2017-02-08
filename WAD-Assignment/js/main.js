@@ -20,6 +20,8 @@ function moveDownCirle(){
 
 $(document).ready(function(){
 
+  $('header nav').meanmenu();
+
    $(".moveDownBtn").click(function(){
 
        $('html, body').animate({
@@ -60,7 +62,7 @@ $(document).ready(function(){
       }
   });
 
-  // var replyForm = "<div id="reply-comment">" + 
+  // var replyForm = "<div id="reply-comment">" +
   //   "<form action="add-comment.php" method="post">" +
   //     "<input type="hidden" name="raceID" value="<?php echo $commentResult->CommentID; ?>">" +
   //     "<label>Reply to comment</label>" +
