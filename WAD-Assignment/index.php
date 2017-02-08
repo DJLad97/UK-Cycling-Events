@@ -31,6 +31,7 @@
   -Add the check to see if user is logged in into a separte file
   -Event organiser page to submit results
   -Race Banner
+  -RACE MAP AT THE BOTTOM OF THE PAGE 2 maps for both mtb and road
 -->
 <?php
   require('includes/conn.inc.php');
@@ -60,11 +61,11 @@
                 WHERE RaceType = 'MTB' AND ClosingEntryDate > NOW() LIMIT 1";
 
   $mtbUpcoming = "SELECT RaceID, RaceName, RaceDate, ClosingEntryDate FROM races
-                 WHERE RaceType = 'MTB' AND RaceDate > NOW() LIMIT 5";
+                 WHERE RaceType = 'MTB' AND RaceDate > NOW() ORDER BY RaceDate LIMIT 5";
 
 
   $roadUpcoming = "SELECT RaceID, RaceName, RaceDate, ClosingEntryDate FROM races
-                  WHERE RaceType = 'Road' AND RaceDate > NOW() LIMIT 5";
+                  WHERE RaceType = 'Road' AND RaceDate > NOW() ORDER BY RaceDate LIMIT 5";
 
   $roadEvent = "SELECT RaceID, RaceName, ClosingEntryDate FROM races
                 WHERE RaceType = 'Road' AND ClosingEntryDate > NOW() LIMIT 1";
@@ -272,19 +273,60 @@
 </div>
 
 <div id="upcoming-races">
+  <div class="im-centered">
   <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-1"></div>
-    <div class="col-md-4" id="mtb-heading">
+    <div class="col-xs-12 col-sm-12 col-md-4" id="mtb-table">
       <h1 class="big">MTB RACES</h1>
-      <div class="border-bottomMTB"></div>
+      <?php
+        while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
+        {
+          $temp = strtotime($mtbUpcomingRow->RaceDate);
+          $temp2 = strtotime($mtbUpcomingRow->ClosingEntryDate);
+          $day = date("d", $temp);
+          $month = date("M", $temp);
+          $closeDay = date("d", $temp2);
+          $closeMonth = date("M", $temp2);
+          echo "<div class='event-box'>";
+          $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
+          echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
+          echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
+          echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
+
+          // echo "<p class='race-month'>" . $month . "</p>";
+          // echo "<small>Start Date: {$mtbUpcomingRow->RaceDate}</small><br />";
+          // echo "<small>ClosingEntryDate: {$mtbUpcomingRow->ClosingEntryDate}</small>";
+          echo "</div>";
+        }
+      ?>
+      <!-- <div class="border-bottomMTB"></div> -->
     </div>
-    <div class="col-md-4" id="road-heading">
+    <div class="col-xs-12 col-sm-12 col-md-4" id="road-table">
       <h1 class="big">ROAD RACES</h1>
-      <div class="border-bottomROAD"></div>
+      <?php
+        while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
+        {
+          $temp = strtotime($roadUpcomingRow->RaceDate);
+          $temp2 = strtotime($roadUpcomingRow->ClosingEntryDate);
+          $day = date("d", $temp);
+          $month = date("M", $temp);
+          $closeDay = date("d", $temp2);
+          $closeMonth = date("M", $temp2);
+          echo "<div class='event-box'>";
+          $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
+          echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
+          echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
+          echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
+          echo "</div>";
+        }
+      ?>
+      <!-- <div class="border-bottomROAD"></div> -->
     </div>
     <div class="col-md-2"></div>
+    <div class="spacing"></div>
+
   </div>
+</div>
 
     <!-- <div id="btnAddEvent">
       <div class="row">
@@ -296,54 +338,47 @@
         <div class="col-xs-4 col-sm-4 col-md-4"></div>
       </div>
     </div> -->
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-1"></div>
-      <div class="col-md-4">
+    <!-- <div class="row">
+      <div class="col-md-6">
         <?php
-          while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
-          {
-            $temp = strtotime($mtbUpcomingRow->RaceDate);
-            $temp2 = strtotime($mtbUpcomingRow->ClosingEntryDate);
-            $day = date("d", $temp);
-            $month = date("M", $temp);
-            $closeDay = date("d", $temp2);
-            $closeMonth = date("M", $temp2);
-            echo "<div class='event-box'>";
-            $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
-            echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
-            echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
-
-            // echo "<p class='race-month'>" . $month . "</p>";
-            // echo "<small>Start Date: {$mtbUpcomingRow->RaceDate}</small><br />";
-            // echo "<small>ClosingEntryDate: {$mtbUpcomingRow->ClosingEntryDate}</small>";
-            echo "</div>";
-          }
+          // while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
+          // {
+          //   $temp = strtotime($mtbUpcomingRow->RaceDate);
+          //   $temp2 = strtotime($mtbUpcomingRow->ClosingEntryDate);
+          //   $day = date("d", $temp);
+          //   $month = date("M", $temp);
+          //   $closeDay = date("d", $temp2);
+          //   $closeMonth = date("M", $temp2);
+          //   echo "<div class='event-box'>";
+          //   $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
+          //   echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
+          //   echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
+          //   echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
+          //   echo "</div>";
+          // }
         ?>
       </div>
-      <div class="vertical-line col-md-4 ">
+      <div class="col-md-6">
         <?php
-          while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
-          {
-            $temp = strtotime($roadUpcomingRow->RaceDate);
-            $temp2 = strtotime($roadUpcomingRow->ClosingEntryDate);
-            $day = date("d", $temp);
-            $month = date("M", $temp);
-            $closeDay = date("d", $temp2);
-            $closeMonth = date("M", $temp2);
-            echo "<div class='event-box'>";
-            $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
-            echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
-            echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
-            echo "</div>";
-          }
+          // while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
+          // {
+          //   $temp = strtotime($roadUpcomingRow->RaceDate);
+          //   $temp2 = strtotime($roadUpcomingRow->ClosingEntryDate);
+          //   $day = date("d", $temp);
+          //   $month = date("M", $temp);
+          //   $closeDay = date("d", $temp2);
+          //   $closeMonth = date("M", $temp2);
+          //   echo "<div class='event-box'>";
+          //   $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
+          //   echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
+          //   echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
+          //   echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
+          //   echo "</div>";
+          // }
         ?>
       </div>
-      <div class="col-md-2"></div>
 
-    </div>
+    </div> -->
 
   </div>
 </div>
