@@ -181,15 +181,22 @@
 </nav> -->
 
   <?php include('includes/navbar.php'); ?>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-6">
 
-  <div id="myCarousel" class="carousel slide">
-    <!-- Indicators -->
+    </div>
+    <div class="col-md-6">
+
+    </div>
+  </div>
+</div> -->
+   <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
     </ol>
 
-    <!-- Wrapper for Slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <div class="fill" style="background-image:url('images/mtb2.2.jpg');"></div>
@@ -214,7 +221,7 @@
                 <h3>SEE MORE EVENTS BELOW</h3>
                 <div class="moveDownBtn">
                     <i class="fa fa-angle-double-down fa-4x" aria-hidden="true"></i></div>
-              </div>
+                </div>
             </div>
         </div>
         <div class="item">
@@ -235,13 +242,14 @@
 
                  ?>
                 <h3>SEE MORE EVENTS BELOW</h3>
-                <div id="seeMoreBtn"><i class="fa fa-angle-double-down fa-4x" aria-hidden="true"></i></div>
+                <div class="moveDownBtn">
+                    <i class="fa fa-angle-double-down fa-4x" aria-hidden="true"></i></div>
+                </div>
               </div>
             </div>
         </div>
     </div>
 
-    <!-- Controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     </a>
@@ -250,51 +258,7 @@
     </a>
 </div>
 
-<div class="container">
-  <div id="calander">
-    <div id="btnAddEvent">
-      <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-4"></div>
-        <div class="col-xs-4 col-sm-4 col-md-4">
-          <a href="add-race.php"><input type="submit" value="ADD YOUR EVENT" class="btn btn-lg btn-primary"></a>
-          <a href="event-listings.php"><input type="submit" value="EVENT LISTINGS" class="btn btn-lg btn-primary" style="margin: 10px;"></a>
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-4"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 col-sm-3 col-md-3"></div>
-      <div class="col-xs-3 col-sm-3 col-md-3">
-        <h1>MTB RACES</h1>
-        <hr />
-        <?php
-        while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
-        {
-          $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
-          echo "<a href='".$linkAddress."' target='_blank'><h3>{$mtbUpcomingRow->RaceName}</h3></a>";
-          echo "<small>Start Date: {$mtbUpcomingRow->RaceDate}</small><br />";
-          echo "<small>ClosingEntryDate: {$mtbUpcomingRow->ClosingEntryDate}</small>";
-        }
-        ?>
-      </div>
-      <div class="col-xs-3 col-sm-3 col-md-3">
-        <h1>ROAD RACES</h1>
-        <hr />
-        <?php
-        while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
-        {
-          $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
-          echo "<a href='".$linkAddress."' target='_blank'><h3>{$roadUpcomingRow->RaceName}</h3></a>";
-          echo "<small>Start Date: {$roadUpcomingRow->RaceDate}</small><br />";
-          echo "<small>ClosingEntryDate: {$roadUpcomingRow->ClosingEntryDate}</small>";
-        }
-        ?>
-      </div>
-      <div class="col-xs-3 col-sm-3 col-md-3"></div>
-
-    </div>
-
-  </div>
+<div id="search">
   <form role="form" method="post">
     <label>Search race name or race type (MTB or Road)</label>
     <div class="input-group input-group-lg col-xs-3">
@@ -305,6 +269,83 @@
     </div>
   </form>
   <ul id="content"></ul>
+</div>
+
+<div id="upcoming-races">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4" id="mtb-heading">
+      <h1 class="big">MTB RACES</h1>
+      <div class="border-bottomMTB"></div>
+    </div>
+    <div class="col-md-4" id="road-heading">
+      <h1 class="big">ROAD RACES</h1>
+      <div class="border-bottomROAD"></div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+    <!-- <div id="btnAddEvent">
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4"></div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+          <a href="add-race.php"><input type="submit" value="ADD YOUR EVENT" class="btn btn-lg btn-primary"></a>
+          <a href="event-listings.php"><input type="submit" value="EVENT LISTINGS" class="btn btn-lg btn-primary" style="margin: 10px;"></a>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4"></div>
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <?php
+          while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
+          {
+            $temp = strtotime($mtbUpcomingRow->RaceDate);
+            $temp2 = strtotime($mtbUpcomingRow->ClosingEntryDate);
+            $day = date("d", $temp);
+            $month = date("M", $temp);
+            $closeDay = date("d", $temp2);
+            $closeMonth = date("M", $temp2);
+            echo "<div class='event-box'>";
+            $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
+            echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
+            echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
+            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
+
+            // echo "<p class='race-month'>" . $month . "</p>";
+            // echo "<small>Start Date: {$mtbUpcomingRow->RaceDate}</small><br />";
+            // echo "<small>ClosingEntryDate: {$mtbUpcomingRow->ClosingEntryDate}</small>";
+            echo "</div>";
+          }
+        ?>
+      </div>
+      <div class="vertical-line col-md-4 ">
+        <?php
+          while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
+          {
+            $temp = strtotime($roadUpcomingRow->RaceDate);
+            $temp2 = strtotime($roadUpcomingRow->ClosingEntryDate);
+            $day = date("d", $temp);
+            $month = date("M", $temp);
+            $closeDay = date("d", $temp2);
+            $closeMonth = date("M", $temp2);
+            echo "<div class='event-box'>";
+            $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
+            echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
+            echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
+            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
+            echo "</div>";
+          }
+        ?>
+      </div>
+      <div class="col-md-2"></div>
+
+    </div>
+
+  </div>
 </div>
 
 <footer style="background-color: #000000; margin-top: 20vh;">
