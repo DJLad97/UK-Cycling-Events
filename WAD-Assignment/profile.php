@@ -40,7 +40,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/meanmenu.css">
+  <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
+  <script src="js/jquery.easing.js"></script>
+  <script src="js/live-race-search.js"></script>
+  <script src="js/jquery.meanmenu.js"></script>
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -52,6 +57,7 @@
 
 </head>
 <body>
+  <?php include('includes/navbar.php'); ?>
 
   <div class="container">
     <div class="profile-header page-header">
@@ -59,11 +65,9 @@
         <div class="col-md-7">
           <h1 id="welcome">MY PROFILE</h1>
           <h2>
-            <a href="index.php" style="text-decoration: none">
               <?php
               echo "Hello " . $userRow['Forename'] . " " . $userRow['Surname'];
               ?>
-            </a>
           </h2>
           <div class="user-races">
             <h3>Your upcoming races</h3>
