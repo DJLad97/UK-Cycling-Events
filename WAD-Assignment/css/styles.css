@@ -1,3 +1,5 @@
+/* REMOVE THE RULES THAT ARE NOT NEEDED FOR THE NAV BAR*/
+
 @font-face{
   font-family: MacFont;
   src: url('../fonts/System San Francisco Display Thin.ttf');
@@ -56,6 +58,14 @@ article {
   padding: 3em 2%;
 }
 
+a.non-nav{
+  color:rgb(14, 14, 14);
+}
+
+a.non-nav:hover{
+  color:rgb(0, 160, 195);
+}
+
 @media screen and (max-width: 768px)
 {
     .colCenterText
@@ -68,6 +78,126 @@ article {
         margin-left: 50%;
     }
 
+}
+
+/* Carosusel Fade instead of sliding*/
+.carousel-fade .carousel-inner .item {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 1s;
+  transition-timing-function:linear;
+}
+
+.carousel-fade .carousel-inner .active {
+  opacity: 1;
+}
+
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+
+#search{
+
+}
+
+#upcoming-races{
+  background-color: rgb(255, 255, 255);
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.event-box{
+  /*background-color: rgb(240, 240, 240);*/
+  width: 60%;
+  height: 80px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-top: 1px;
+  margin-top: 10px;
+  border-bottom: 1px solid
+}
+.race-name{
+  position: relative;
+  left: 50px;
+  top: -14px;
+}
+.race-day{
+  position: absolute;
+  left: 15px;
+  /*font-weight:900;*/
+  font-size: 30px;
+  color: rgb(150, 150, 150);
+}
+
+.race-month{
+  position: absolute;
+  display: block;
+  left: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  color: rgb(191, 191, 191);
+}
+
+.race-day em{
+  font-style:normal;
+  font-weight: normal;
+  display: block;
+  font-size: 14px;
+}
+
+.close-date {
+  position: absolute;
+  left: 75px;
+  font-weight: 900;
+  color: rgb(255, 182, 182);
+  padding-top: 38px;
+}
+.header-img{
+  position: relative;
+  width: 163%;
+  height: 100%;
+  right: 50%;
+}
+
+.header-img2{
+  position: relative;
+  width: 163%;
+  left: 50%;
+}
+
+.img-container{
+  float: left;
+}
+.big{
+  font-size: 50px;
+}
+
+#mtb-heading{
+}
+#road-heading{
+}
+
+.border-bottomMTB{
+  border-bottom: 1px solid;
+  width: 41%;
+  border-color: rgb(0, 160, 195);
+}
+
+.border-bottomROAD{
+  border-bottom: 1px solid;
+  width: 45%;
+  border-color: rgb(0, 160, 195);
 }
 
 .error-text{
