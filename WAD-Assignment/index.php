@@ -14,23 +14,35 @@
   (http://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
   -HAVE SOME SORT OF CONSTANT SIDE BAR SUCH AS SHOWING 5 RACES OR SO
   -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
+  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
   -Race route with google maps polyline
   -Results page for each race
   -Website with 2 halves
   -Comments need to be a part of the race (add race id to comment)
   -Add the check to see if user is logged in into a separte file
+  -Event organiser page to submit results
+  -Race Banner
 -->
 <?php
   require('includes/conn.inc.php');
 
-  if(isset($_SESSION['userSession']))
-  {
-      echo "user session started";
-  }
-  else
-  {
-      echo "no user session";
-  }
+  // if(isset($_SESSION['userSession']))
+  // {
+  //     echo "user session started";
+  // }
+  // else
+  // {
+  //     echo "no user session";
+  // }
 
   if(isset($_SESSION['userSession']))
   {
@@ -91,10 +103,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/meanmenu.css">
   <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
   <script src="js/live-race-search.js"></script>
+  <script src="js/jquery.meanmenu.js"></script>
+
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -106,19 +121,23 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-        </button>
-      </div>
+        </button> -->
+        <!--  <div id="nav-icon3">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>-->
+      <!-- </div> -->
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <!-- <img src="images/navbar-image.png" id="navButton" alt="nav button"> -->
+    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="removeLeft nav navbar-nav navbar-left">
           <li class="dropdown"><a href="#">MTB & ROAD</a></li>
           <?php if(isset($_SESSION['userSession']) && $userRow['IsAdmin'] == 'admin'){ ?>
@@ -139,10 +158,10 @@
               else
               {
           ?>
-          <li><a href="log-in.php">SIGN IN</a></li>
-          <li><a href="sign-up.php">SIGN UP</a></li>
+          <li class="dropdown"><a href="log-in.php">SIGN IN</a></li>
+          <li class="dropdown"><a href="sign-up.php">SIGN UP</a></li>
           <?php } ?>
-          <li><a href="#">CART</a></li>
+          <li class="dropdown"><a href="#">CART</a></li>
         </ul>
 
     </div>
@@ -159,7 +178,9 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> -->
+
+  <?php include('includes/navbar.php'); ?>
 
   <div id="myCarousel" class="carousel slide">
     <!-- Indicators -->
@@ -300,7 +321,5 @@
     </p>
   </div>
 </footer>
-
-
 </body>
 </html>
