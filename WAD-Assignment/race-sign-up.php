@@ -29,8 +29,9 @@
     $signUpIDs[] = $row->RaceID;
   }
 
-  $commentSQL = "SELECT * FROM comment";
+  $commentSQL = "SELECT * FROM comment WHERE RaceID = :raceID";
   $commentStmt = $pdo->prepare($commentSQL);
+  $commentStmt->bindParam(':raceID', $raceID, PDO::PARAM_INT);
   $commentStmt->execute();
 ?>
 
@@ -44,10 +45,19 @@
   <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/meanmenu.css">
+  <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
-  <script src="js/race-location.js"></script>
+  <script src="js/jquery.easing.js"></script>
+  <script src="js/live-race-search.js"></script>
+  <script src="js/moment.js"></script>
+  <script src="js/index-map.js"></script>
+  <script src="js/user-validation.js"></script>
+  <script src="js/jquery.meanmenu.js"></script>
   <!-- PUT THIS CODE IN AN EXTERNAL FILE -->
   <script>
     function submitForm(action, method){
@@ -64,6 +74,14 @@
   <title>Race Sign Up</title>
 </head>
 <body>
+  <?php
+   include('includes/navbar.php');
+  ?>
+
+  <div class="container">
+    <img src="mtb" alt="">
+  </div>
+
   <div class="container">
     <div class="well">
 
