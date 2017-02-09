@@ -32,6 +32,8 @@
   -Event organiser page to submit results
   -Race Banner
   -RACE MAP AT THE BOTTOM OF THE PAGE 2 maps for both mtb and road
+  -IMPLEMENT USERS INTO THE CMS
+  -FIX THE LOGIN MODAL FORM
 -->
 <?php
   require('includes/conn.inc.php');
@@ -89,6 +91,29 @@
   $roadQuery = $pdo->prepare($roadEvent);
   $roadQuery->execute();
   $resultRoadRow = $roadQuery->fetchObject();
+
+  if(isset($_SESSION['url']))
+    $url = $_SESSION['url'];
+  else
+    $url = 'profile.php';
+
+  if(isset($_POST['submit']))
+  {
+      $uName = strip_tags($_POST['uName']);
+      $password = strip_tags($_POST['pass']);
+
+      if($user->login($uName, $password))
+      {
+        if($_SESSION['userLevel'] == 'admin')
+          $url = 'CMS/CMS.php';
+
+        $user->redirect($url);
+      }
+      else
+      {
+        $error = "Username or password is invalid or you haven't activated your account!";
+      }
+  }
 ?>
 
 
@@ -122,6 +147,41 @@
 
 </head>
 <body>
+  <div id="login-modal" class="modal">
+
+      <div class="col-xs-1 col-sm-1 col-md-4"></div>
+      <form class="model-content animate col-xs-10 col-sm-10 col-md-4" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" id="login-form">
+        <span onclick="document.getElementById('login-modal').style.display='none'"
+        class="close" title="Close Modal">&times;</span>
+        <div id="error">
+        <?php
+    			if(isset($error)){
+    				?>
+              <div class="alert alert-danger">
+                 <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
+              </div>
+              <?php
+    			}?>
+        </div>
+        <div class="page-header">
+          <h2>SIGN IN</h2>
+        </div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" class="form-control text-box" name="uName" placeholder="Username"/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control text-box" name="pass" placeholder="Password"/>
+        </div>
+        <p><a href="sign-up.php">Don't have an account?</a></p>
+        <div class="form-group">
+          <input type="submit" name="submit" value="Sign In" class="btn btn-primary btn-lg" />
+        </div>
+      </form>
+      <div class="col-xs-1 col-sm-1 col-md-4"></div>
+
+  </div>
   <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -367,5 +427,16 @@
     </p>
   </div>
 </footer>
+<script>
+// Get the modal
+var modal = document.getElementById('login-modal');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
