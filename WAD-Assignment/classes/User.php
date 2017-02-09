@@ -16,8 +16,7 @@ class user
       return $stmt;
   }
 
-  public function register($fName, $sName, $uName, $email, $password,
-                          $add1, $add2, $townCity, $county, $postCode, $country)
+  public function register($fName, $sName, $uName, $email, $password)
   {
     try
     {
@@ -26,22 +25,14 @@ class user
       $safePass = filter_var($password, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
       $hashedPass = password_hash($safePass, PASSWORD_BCRYPT);
       $this->hashedPassGlb = $hashedPass;
-      $stmt = $this->db->prepare("INSERT INTO User(Forename, Surname, Username, Email, Password,
-      AddressLine1, AddressLine2, TownCity, County, PostCode, Country, active)
-      VALUES(:fName, :sName, :uName, :email, :password, :add1, :add2,
-              :townCity, :county, :postCode, :country, :active)");
+      $stmt = $this->db->prepare("INSERT INTO User(Forename, Surname, Username, Email, Password, active)
+      VALUES(:fName, :sName, :uName, :email, :password, :active)");
 
       $stmt->bindParam(':fName', $fName);
       $stmt->bindParam(':sName', $sName);
       $stmt->bindParam(':uName', $uName);
       $stmt->bindParam(':email', $email);
       $stmt->bindParam(':password', $hashedPass);
-      $stmt->bindParam(':add1', $add1);
-      $stmt->bindParam(':add2', $add2);
-      $stmt->bindParam(':townCity', $townCity);
-      $stmt->bindParam(':county', $county);
-      $stmt->bindParam(':postCode', $postCode);
-      $stmt->bindParam(':country', $country);
       $stmt->bindParam(':active', $activation);
 
       $stmt->execute();
