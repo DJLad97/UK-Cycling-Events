@@ -259,7 +259,7 @@
     </a>
 </div>
 
-<div id="search">
+<div id="search" class="fade-in">
   <form role="form" method="post">
     <label>Search race name or race type (MTB or Road)</label>
     <div class="input-group input-group-lg col-xs-3">
@@ -272,7 +272,7 @@
   <ul id="content"></ul>
 </div>
 
-<div id="upcoming-races">
+<div id="upcoming-races" class="fade-in">
   <div class="im-centered">
   <div class="row">
     <div class="col-md-2"></div>
@@ -302,6 +302,7 @@
       <!-- <div class="border-bottomMTB"></div> -->
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4" id="road-table">
+      <div class="spacing"><p></p></div>
       <h1 class="big">ROAD RACES</h1>
       <?php
         while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
@@ -323,7 +324,6 @@
       <!-- <div class="border-bottomROAD"></div> -->
     </div>
     <div class="col-md-2"></div>
-    <div class="spacing"></div>
 
   </div>
 </div>
@@ -338,47 +338,7 @@
         <div class="col-xs-4 col-sm-4 col-md-4"></div>
       </div>
     </div> -->
-    <!-- <div class="row">
-      <div class="col-md-6">
-        <?php
-          // while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
-          // {
-          //   $temp = strtotime($mtbUpcomingRow->RaceDate);
-          //   $temp2 = strtotime($mtbUpcomingRow->ClosingEntryDate);
-          //   $day = date("d", $temp);
-          //   $month = date("M", $temp);
-          //   $closeDay = date("d", $temp2);
-          //   $closeMonth = date("M", $temp2);
-          //   echo "<div class='event-box'>";
-          //   $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
-          //   echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
-          //   echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-          //   echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
-          //   echo "</div>";
-          // }
-        ?>
-      </div>
-      <div class="col-md-6">
-        <?php
-          // while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
-          // {
-          //   $temp = strtotime($roadUpcomingRow->RaceDate);
-          //   $temp2 = strtotime($roadUpcomingRow->ClosingEntryDate);
-          //   $day = date("d", $temp);
-          //   $month = date("M", $temp);
-          //   $closeDay = date("d", $temp2);
-          //   $closeMonth = date("M", $temp2);
-          //   echo "<div class='event-box'>";
-          //   $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
-          //   echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
-          //   echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-          //   echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
-          //   echo "</div>";
-          // }
-        ?>
-      </div>
 
-    </div> -->
 
   </div>
 </div>
