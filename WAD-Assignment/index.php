@@ -218,8 +218,7 @@
                   }
 
                  ?>
-
-                <h3>SEE MORE EVENTS BELOW</h3>
+                <h3 class="see-more">SEE MORE EVENTS BELOW</h3>
                 <div class="moveDownBtn">
                     <i class="fa fa-angle-double-down fa-4x" aria-hidden="true"></i></div>
                 </div>
@@ -249,6 +248,27 @@
               </div>
             </div>
         </div>
+        <!-- <h1 id="header"><strong>RACE INFO</strong></h1> -->
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4"></div>
+              <div id="search" class="col-xs-4 col-sm-4 col-md-4 fade-in">
+                <form role="form" method="post">
+                  <label>Search race name or race type (MTB or Road)</label>
+                  <div class="search-div">
+                    <div class="cmn-t-underline">
+                      <input type="text" id="searchTerm" name="searchTerm" class="search-races cmn-t-underline" placeholder="Race Name" autocomplete="off"></input>
+                    </div>
+                    <!-- <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                  </div> -->
+                </div>
+              </form>
+              <ul id="content"></ul>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4"></div>
+          </div>
+        </div>
     </div>
 
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -259,17 +279,7 @@
     </a>
 </div>
 
-<div id="search" class="fade-in">
-  <form role="form" method="post">
-    <label>Search race name or race type (MTB or Road)</label>
-    <div class="input-group input-group-lg col-xs-3">
-      <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="Race Name" autocomplete="off"></input>
-      <div class="input-group-btn">
-        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-      </div>
-    </div>
-  </form>
-  <ul id="content"></ul>
+<div class="container">
 </div>
 
 <div id="upcoming-races" class="fade-in">
@@ -341,7 +351,7 @@
 
 
   </div>
-</div>
+<!-- </div> -->
 
 <footer style="background-color: #000000; margin-top: 20vh;">
   <div class="container-fluid">
