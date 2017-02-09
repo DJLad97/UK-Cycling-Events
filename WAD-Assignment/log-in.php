@@ -29,12 +29,13 @@
       }
       else
       {
-          $error = "Username or password is invalid or you haven't activated your account!";
+        $login->redirect('index.php');
+        $_SESSION['error'] = "Username or password is invalid or you haven't activated your account!";
       }
   }
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -50,11 +51,6 @@
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/main.js"></script>
   <script src="js/log-in-validation.js"></script>
-
-  <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 
   <title>Log In</title>
 
@@ -109,4 +105,4 @@
 
 
 </body>
-</html>
+</html> -->
