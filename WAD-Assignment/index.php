@@ -182,56 +182,10 @@
       <div class="col-xs-1 col-sm-1 col-md-4"></div>
 
   </div>
-  <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button> -->
-        <!--  <div id="nav-icon3">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>-->
-      <!-- </div> -->
 
-    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="removeLeft nav navbar-nav navbar-left">
-          <li class="dropdown"><a href="#">MTB & ROAD</a></li>
-
-          <li class="dropdown"><a href="#">CART</a></li>
-        </ul>
-
-    </div>
-    <div id="fullDropdown">
-      <ul class="nav navbar-left nav-stacked">
-        <li class="dropdown"><a href="#">RACES</a></li>
-        <li><a href="#">MAP</a></li>
-        <li><a href="#">CALANDER</a></li>
-      </ul>
-      <ul class="nav navbar-right subnav">
-        <li><a href="#">PROFILE</a></li>
-        <li><a href="#">MY RACES</a></li>
-        <li><a href="#">log-out</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
 
   <?php include('includes/navbar.php'); ?>
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-
-    </div>
-    <div class="col-md-6">
-
-    </div>
-  </div>
-</div> -->
+  
    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -359,7 +313,7 @@
           if(isset($_SESSION['userSession']))
             echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
           else{
-            $_SESSION['url'] = "race-sign-up.php?RaceID=" . $linkAddress;
+            $_SESSION['url'] = $linkAddress;
             ?>
             <a class='non-nav a-with-pointer' onclick="document.getElementById('login-modal').style.display='block'">
               <h3 class='race-name'><strong><?php echo $mtbUpcomingRow->RaceName ?></strong></h3>
@@ -394,7 +348,7 @@
           if(isset($_SESSION['userSession']))
             echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
           else{
-            $_SESSION['url'] = "race-sign-up.php?RaceID=" . $linkAddress;
+            $_SESSION['url'] = $linkAddress;
             ?>
             <a class='non-nav a-with-pointer' onclick="document.getElementById('login-modal').style.display='block'">
               <h3 class='race-name'><strong><?php echo $roadUpcomingRow->RaceName ?></strong></h3>
