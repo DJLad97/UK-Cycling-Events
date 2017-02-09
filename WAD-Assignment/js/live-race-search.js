@@ -10,12 +10,12 @@ $(document).ready(function() {
           function(data){
             $('ul#content').empty();
             $.each(data, function(){
-              previewHTML = '<div class="parent"><div class="preview"><a href="#" data-id=' +
+              previewHTML = '<div class="parent"><div class="preview"><a class="non-nav" href="#" data-id=' +
                                   this.RaceID + ' class="getPreview">Preview</a></div>' +
                                   '<div class="fullDetails"></div></div>';
 
-              $('ul#content').append('<li><a href="race-sign-up.php?RaceID=' +
-                                    this.RaceID + '">' + this.RaceName + '</a>' + previewHTML + '</li>');
+              $('ul#content').append('<li><strong><a class="non-nav" href="race-sign-up.php?RaceID=' +
+                                    this.RaceID + '">' + this.RaceName + '</a>' + previewHTML + '</strong></li>');
 
               // $('ul#content').append('<li><a href="race-sign-up.php?RaceID=' +
               //                       this.RaceID + '">' + this.RaceName + '</a>' +
@@ -23,6 +23,9 @@ $(document).ready(function() {
               //                       this.RaceID + ' class="getPreview">Preview</a></div></li>');
             })
           }, "json");
+      }
+      else if(searchKeyword.length <= 0){
+        $('ul#content').empty();
       }
     });
     $(document).on('click', '.getPreview', function(ev){
