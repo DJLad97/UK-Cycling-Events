@@ -171,12 +171,19 @@
 									jQuery(meanMenu).hide();
 									jQuery(".meanmenu-reveal").show();
 
+
 									// turn 'X' on or off
 									jQuery(meanRevealClass).html(meanMenuOpen);
 									$navreveal = jQuery(meanRevealClass);
 
 									//hide mean-nav ul
 									jQuery('.mean-nav ul').hide();
+
+									$('.sign-in').on('click', function(){
+										jQuery(".mean-nav ul").hide();
+										jQuery(meanRevealClass).html(meanMenuOpen);
+										$navreveal = jQuery(meanRevealClass);
+									});
 
 									// hide sub nav
 									if(meanShowChildren) {
