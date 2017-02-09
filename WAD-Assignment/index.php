@@ -201,27 +201,7 @@
     <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="removeLeft nav navbar-nav navbar-left">
           <li class="dropdown"><a href="#">MTB & ROAD</a></li>
-          <?php if(isset($_SESSION['userSession']) && $userRow['IsAdmin'] == 'admin'){ ?>
-          <li class="dropdown"><a href="CMS/CMS.php">CMS Page</a></li>
-          <?php }?>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <?php
-              if(isset($_SESSION['userSession']))
-              {
 
-          ?>
-          <li><a href="profile.php"><?php echo $userRow['Username'] ?></a></li>
-          <li><a href="log-out.php">LOG OUT</a></li>
-
-          <?php
-              }
-              else
-              {
-          ?>
-          <li class="dropdown"><a href="log-in.php">SIGN IN</a></li>
-          <li class="dropdown"><a href="sign-up.php">SIGN UP</a></li>
-          <?php } ?>
           <li class="dropdown"><a href="#">CART</a></li>
         </ul>
 
@@ -264,13 +244,21 @@
             <div class="carousel-caption text-center">
               <div class="full-width text-center">
                 <?php
+                  $openModal = 'onclick="document.getElementById("login-modal").style.display="block"';
                   if($mtbQuery->rowCount() > 0){
 
                     echo "<h1>
                     {$resultMtbRow->RaceName}<br />
                     {$resultMtbRow->ClosingEntryDate}
                     </h1>";
-                    echo "<p><a href=\"race-sign-up.php?RaceID={$resultMtbRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
+                    if(isset($_SESSION['userSession']))
+                      echo "<p><a href=\"race-sign-up.php?RaceID={$resultMtbRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
+                    else{
+                      $_SESSION['url'] = "race-sign-up.php?RaceID={$resultMtbRow->RaceID}";
+                      ?>
+                      <p><a onclick="document.getElementById('login-modal').style.display='block'" class="regBtn a-with-pointer">REGISTER</a></p>
+                      <?php
+                    }
                   }
                   else{
                     echo "<h1>NO UPCOMING RACES</h1>";
@@ -294,7 +282,14 @@
                   {$resultRoadRow->RaceName}<br />
                   {$resultRoadRow->ClosingEntryDate}
                   </h1>";
-                  echo "<p><a href=\"race-sign-up.php?RaceID={$resultRoadRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
+                  if(isset($_SESSION['userSession']))
+                    echo "<p><a href=\"race-sign-up.php?RaceID={$resultRoadRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
+                  else{
+                    $_SESSION['url'] = "race-sign-up.php?RaceID={$resultRoadRow->RaceID}";
+                    ?>
+                    <p><a onclick="document.getElementById('login-modal').style.display='block'" class="regBtn a-with-pointer">REGISTER</a></p>
+                    <?php
+                  }
                 }
                 else{
                   echo "<h1>NO UPCOMING RACES</h1>";
@@ -361,7 +356,16 @@
           $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
           echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
           echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-          echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
+          if(isset($_SESSION['userSession']))
+            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
+          else{
+            $_SESSION['url'] = "race-sign-up.php?RaceID=" . $linkAddress;
+            ?>
+            <a class='non-nav a-with-pointer' onclick="document.getElementById('login-modal').style.display='block'">
+              <h3 class='race-name'><strong><?php echo $mtbUpcomingRow->RaceName ?></strong></h3>
+            </a>
+            <?php
+          }
 
           // echo "<p class='race-month'>" . $month . "</p>";
           // echo "<small>Start Date: {$mtbUpcomingRow->RaceDate}</small><br />";
@@ -387,7 +391,16 @@
           $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
           echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
           echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-          echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
+          if(isset($_SESSION['userSession']))
+            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
+          else{
+            $_SESSION['url'] = "race-sign-up.php?RaceID=" . $linkAddress;
+            ?>
+            <a class='non-nav a-with-pointer' onclick="document.getElementById('login-modal').style.display='block'">
+              <h3 class='race-name'><strong><?php echo $roadUpcomingRow->RaceName ?></strong></h3>
+            </a>
+            <?php
+          }
           echo "</div>";
         }
       ?>
@@ -429,14 +442,14 @@
 </footer>
 <script>
 // Get the modal
-var modal = document.getElementById('login-modal');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+// var modal = document.getElementById('login-modal');
+//
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
 </script>
 </body>
 </html>
