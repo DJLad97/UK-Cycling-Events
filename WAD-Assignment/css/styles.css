@@ -107,30 +107,318 @@ a.non-nav:hover{
 .carousel-fade .carousel-control {
   z-index: 2;
 }
+.fade-in{
+  opacity: 0;
+}
+
+.moveDownBtn{
+
+}
+
+#header{
+  margin: auto;
+  max-width: 500px;
+}
 
 #search{
+  width: 100%;
+  padding-bottom: 13%;
+  padding-top: 6%;
+}
 
+#content{
+  position:absolute;
+
+}
+
+
+
+.search-div{
+  width: 100%;
+}
+
+@media screen and (min-width: 992px) {
+  .search-races{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid rgb(166, 166, 166);
+    width: 25%;
+    font-size: 40px;
+  }
+
+  .search-races:hover{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid;
+    width: 25%;
+  }
+
+  .cmn-t-underline {
+    position: relative;
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 3px;
+    background-color: rgb(28, 28, 28);
+    content: "";
+    transition: width 0.2s;
+  }
+  .search-races.cmn-t-underline:hover {
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:hover:after {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .search-races{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid rgb(166, 166, 166);
+    width: 35%;
+    font-size: 40px;
+  }
+
+  .search-races:hover{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid;
+    width: 35%;
+  }
+
+  .cmn-t-underline {
+    position: relative;
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 3px;
+    background-color: rgb(28, 28, 28);
+    content: "";
+    transition: width 0.2s;
+  }
+  .search-races.cmn-t-underline:hover {
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:hover:after {
+    width: 35%;
+  }
+}
+
+@media screen and(max-width: 768px) {
+  .search-races{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid rgb(166, 166, 166);
+    width: 35%;
+    font-size: 40px;
+  }
+
+  .search-races:hover{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid;
+    width: 35%;
+  }
+
+  .cmn-t-underline {
+    position: relative;
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 3px;
+    background-color: rgb(28, 28, 28);
+    content: "";
+    transition: width 0.2s;
+  }
+  .search-races.cmn-t-underline:hover {
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:hover:after {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .search-races{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid rgb(166, 166, 166);
+    width: 58%;
+    font-size: 40px;
+  }
+
+  .search-races:hover{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid;
+    width: 58%;
+  }
+
+  .cmn-t-underline {
+    position: relative;
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 3px;
+    background-color: rgb(28, 28, 28);
+    content: "";
+    transition: width 0.2s;
+  }
+  .search-races.cmn-t-underline:hover {
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:hover:after {
+    width: 58%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search-races{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid rgb(166, 166, 166);
+    width: 77%;
+    font-size: 40px;
+  }
+
+  .search-races:hover{
+    background-color: inherit;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid;
+    width: 77%;
+  }
+
+  .cmn-t-underline {
+    position: relative;
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 3px;
+    background-color: rgb(28, 28, 28);
+    content: "";
+    transition: width 0.2s;
+  }
+  .search-races.cmn-t-underline:hover {
+    color: rgb(28, 28, 28);
+  }
+  .cmn-t-underline:hover:after {
+    width: 77%;
+  }
 }
 
 #upcoming-races{
   background-color: rgb(255, 255, 255);
-  padding-bottom: 15px;
+  padding-bottom: 30px;
   padding-top: 15px;
 }
-.event-box{
-  /*background-color: rgb(240, 240, 240);*/
-  width: 60%;
-  height: 80px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-top: 1px;
-  margin-top: 10px;
-  border-bottom: 1px solid
+
+@media screen and (max-width: 991px) {
+  .im-centered {
+    margin: auto;
+    max-width: 500px;
+    padding-left: 14%;
+  }
 }
+
+@media screen and (max-width: 1153px) {
+  .event-box{
+    width: 76%;
+    height: 80px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 1px;
+    margin-top: 10px;
+    border-bottom: 1px solid
+  }
+
+
+
+}
+
+@media screen and (max-width: 991px) {
+  .event-box{
+    width: 70%;
+    height: 80px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 1px;
+    margin-top: 10px;
+    border-bottom: 1px solid
+  }
+  .spacing{
+    /*display: block;*/
+
+    border-left: 1px solid;
+    height: 15%;
+    padding-top: 5%;
+    margin-top: 5%;
+    padding-left: 40%;
+    margin-left: 36%;
+  }
+}
+
+@media screen and (min-width: 1153px) {
+.event-box{
+    width: 70%;
+    height: 80px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 1px;
+    margin-top: 10px;
+    border-bottom: 1px solid;
+  }
+  .spacing{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .spacing{
+    display: none;
+  }
+}
+
 .race-name{
   position: relative;
   left: 50px;
   top: -14px;
+  white-space: nowrap;
 }
 .race-day{
   position: absolute;
@@ -138,6 +426,12 @@ a.non-nav:hover{
   /*font-weight:900;*/
   font-size: 30px;
   color: rgb(150, 150, 150);
+}
+#mtb-table{
+  /*margin-left: 50%;*/
+}
+#road-table{
+  /*margin-left: -30%;*/
 }
 
 .race-month{
@@ -183,10 +477,6 @@ a.non-nav:hover{
   font-size: 50px;
 }
 
-#mtb-heading{
-}
-#road-heading{
-}
 
 .border-bottomMTB{
   border-bottom: 1px solid;
@@ -348,12 +638,36 @@ p.eventDesc
   display: inline-block;
   margin-top: 20px;
   margin-bottom: 45px;
+  /*width: 74%;*/
 }
 
+@media screen and (max-width: 991px) {
+  .regBtn
+  {
+    width: 298px;
+    height: 70px;
+    color: #fff;
+    background: transparent;
+    border: 2px solid #fff;
+    font-size: 26px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 200;
+    line-height: 66px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 45px;
+    width: 74%;
+  }
+}
 .regBtn:hover
 {
     text-decoration: none;
     color: #ababab
+}
+
+.see-more{
+  margin: 0 0 0 0;
 }
 .carousel, .item, .active
 {
