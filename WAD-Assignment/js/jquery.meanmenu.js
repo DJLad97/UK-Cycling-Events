@@ -185,6 +185,12 @@
 										$navreveal = jQuery(meanRevealClass);
 									});
 
+									$('.sign-up').on('click', function(){
+										jQuery(".mean-nav ul").hide();
+										jQuery(meanRevealClass).html(meanMenuOpen);
+										$navreveal = jQuery(meanRevealClass);
+									});
+
 									// hide sub nav
 									if(meanShowChildren) {
 											// allow expandable sub nav(s)
