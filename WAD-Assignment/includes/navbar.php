@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-inverse navbar-fixed-top">
       <ul>
-        <li><a href="#">MTB & ROAD</a></li>
+        <li><a href="index.php">MTB & ROAD</a></li>
         <?php if(isset($_SESSION['userSession']) && $userRow['IsAdmin'] == 'admin'){ ?>
         <li><a href="CMS/CMS.php">CMS Page</a></li>
         <?php }?>
@@ -18,7 +18,7 @@
             else
             {
         ?>
-        <li><a href="log-in.php">SIGN IN</a></li>
+        <li><a class="sign-in" onclick="document.getElementById('login-modal').style.display='block'">SIGN IN</a></li>
         <li><a href="sign-up.php">SIGN UP</a></li>
         <?php } ?>
         <li><a href="#">CART</a></li>
