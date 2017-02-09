@@ -18,14 +18,43 @@ function moveDownCirle(){
   }
 }
 
+// function fadeInElements(){
+//   $(window).scroll(function(){
+//     $('fade-in').each(function(i){
+//       var bottomOfObject = $(this).position().top + $(this).outerHeight();
+//       var bottomOfWindow = $(window).scrollTop() + $(window).height();
+//
+//       if(bottomOfWindow > bottomOfObject){
+//         $(this).animate({'opacity' : '1'}, 1500);
+//       }
+//     });
+//   });
+// }
+
 $(document).ready(function(){
 
   $('header nav').meanmenu();
+  $('#myCarousel').carousel();
+  $('#myCarousel').fadeIn('slow');
+
+  $(window).scroll( function(){
+      $('.fade-in').each( function(i){
+
+          var bottomOfObject = $(this).position().top + $(this).outerHeight();
+          var bottomOfWindow = $(window).scrollTop() + $(window).height();
+
+          bottomOfWindow = bottomOfWindow + 200;
+
+          if( bottomOfWindow > bottomOfObject ){
+              $(this).animate({'opacity':'1'},500);
+          }
+      });
+   });
 
    $(".moveDownBtn").click(function(){
 
        $('html, body').animate({
-          scrollTop: $("#calander").offset().top - 500
+          scrollTop: $("#upcoming-races").offset().top - 500
        }, 1200, 'easeInOutSine');
 
    });
