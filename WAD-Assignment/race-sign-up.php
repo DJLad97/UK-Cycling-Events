@@ -72,6 +72,7 @@
 </head>
 <body>
   <?php
+   include('includes/modals.php');
    include('includes/navbar.php');
   ?>
 
