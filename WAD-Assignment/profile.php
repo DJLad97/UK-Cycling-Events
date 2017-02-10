@@ -6,7 +6,7 @@
     {
         header("Location: index.php?notLoggedIn=true");
     }
-
+    $_SESSION['url'] = $_SERVER['REQUEST_URI'];
 
     $userQuery = "SELECT * FROM user WHERE userID = :userID";
     // Maybe change this to normal prepare...?
@@ -41,7 +41,6 @@
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/meanmenu.css">
-  <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
   <script src="js/live-race-search.js"></script>
@@ -57,63 +56,87 @@
 
 </head>
 <body>
-  <?php include('includes/navbar.php'); ?>
+  <?php
+  include('includes/navbar.php');
+  if(isset($_SESSION['userSession'])){
+    require_once('race-cart.php');
+  }
 
-  <div class="container">
+  ?>
+
+  <div class="container well-custom">
     <div class="profile-header page-header">
       <div class="row">
-        <div class="col-md-7">
-          <h1 id="welcome">MY PROFILE</h1>
-          <h2>
-              <?php
-              echo "Hello " . $userRow['Forename'] . " " . $userRow['Surname'];
-              ?>
-          </h2>
-          <div class="user-races">
-            <h3>Your upcoming races</h3>
-              <?php
-              while($raceRow = $raceStmt->fetchObject())
-              {
-                  echo "<p><strong>{$raceRow->RaceName}</strong></p>";
-                  echo "<p>{$raceRow->RaceDate}</p>";
-                  echo "<br />";
-              }
-
-              ?>
-          </div>
+        <div class="col-xs-4 col-sm-4 col-md-4"></div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+          <img src="images/<?php
+          $default = 'default.jpg';
+          if(isset($imgRow['ProfileImg'])) echo $imgRow['ProfileImg'];
+          else echo $default
+          ?>"class="img" alt="profile image">
         </div>
-          <div class="profile-img col-md-5">
-            <img src="images/<?php
-              $default = 'default.jpg';
-              if(isset($imgRow['ProfileImg'])) echo $imgRow['ProfileImg'];
-              else echo $default
-            ?>"class="img" alt="profile image" width="400" height="400">
-            <form action="upload-img.php" enctype="multipart/form-data" method="post">
-              Select image to upload:
-              <input type="file" name="profileImg" id="profileImg" />
-              <br />
-              <input type="submit" name="upload" value="Save" />
-            </form>
+        <div class="col-xs-4 col-sm-4 col-md-4"></div>
+      </div>
+    </div>
+      <h1 id="welcome" class="big">MY PROFILE</h1>
+      <h1>
+        <?php
+        echo "Hello, " . $userRow['Forename'] . " " . $userRow['Surname'];
+        ?>
+      </h1>
+      <div class="details-section">
+        <h3><strong><a class="non-nav races" href="#">Your upcoming races</a></strong></h3>
+        <div id="user-races" class="reveal-details">
+          <br>
+          <?php
+          while($raceRow = $raceStmt->fetchObject())
+          {
+            $queryString =  'race-sign-up.php?RaceID=' . $raceRow->RaceID;
+            $temp = strtotime($raceRow->RaceDate);
+            $startDate = date("d F", $temp);
+
+            $temp = strtotime($raceRow->ClosingEntryDate);
+            $closeDate = date("d F", $temp);
+            echo "<div class='race-listing'>";
+            $queryString = 'race-sign-up.php?RaceID=' . $raceRow->RaceID;
+
+            echo "<h3><strong><a class='non-nav' href='" . $queryString . "'>{$raceRow->RaceName}</strong> | <small>{$raceRow->RaceAddress}</small></h3></a>";
+            echo "<p class='race-listing-details'>{$raceRow->OrganiserName} - Race Date $startDate - Entries Close $closeDate</p>";
+            echo "</div>";
+            echo "<hr />";
+          }
+
+          ?>
+        </div>
+        <h3><strong><a class="non-nav profile" href="#">Profile Details</a></strong></h3>
+
+        <div id="profile-customize" class="reveal-details">
+          <form action="upload-img.php" enctype="multipart/form-data" method="post">
+            <label for="">Change profile image</label>
+            <input type="file" name="profileImg" id="profileImg" />
+            <br />
             <?php
             if(!empty($_GET)){
               switch($_GET['err']){
                 case 'WrongFileType':
-                  echo '<p class="error-text">Only .png .jpg, .gif allowed</p>';
+                echo '<p class="error-text">Only .png .jpg, .gif allowed</p>';
                 break;
                 case 'imgUploadError':
-                  echo '<p class="error-text">Something went wrong with the upload</p>';
+                echo '<p class="error-text">Something went wrong with the upload</p>';
                 break;
 
               }
             }
             ?>
-          </div>
+            <input type="submit" name="upload" value="Save" class="modal-btn listing"/>
+          </form>
         </div>
-    </div>
+      </div>
 
 
   </div>
 
+  <?php include('includes/footer.php'); ?>
 
 </body>
 </html>

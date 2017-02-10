@@ -1,51 +1,6 @@
-<!--
-- Have so html elements fade in when the page loads
-- Do I actually need the isFree column in my races table?
-- Add something to event listings page where it will say there is no upcoming races if there is no upcoming races
-- Set the user session to quit after a certain amount of time
-- Do a reset password feature
-- Add a feature for the admin to print off a page containg the race sign up details
-  (Or send a email to the event organiser containing the page of sign ups for them to print off,
-  this email will get sent when the closing entry date has come)
-- Add a view preview details to live search for each race
-  - Add information about the add your event feature like that we will email you the sign ups
-  when the closing entry date has arrived or an option to get emails daily
-  - PREVENT THE USER FROM DIRECTLY ACCESSING PURE PHP SCRIPTS
-  (http://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
-  -HAVE SOME SORT OF CONSTANT SIDE BAR SUCH AS SHOWING 5 RACES OR SO
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
-  -Race route with google maps polyline
-  -Results page for each race
-  -Comments need to be a part of the race (add race id to comment)
-  -Add the check to see if user is logged in into a separte file
-  -Event organiser page to submit results
-  -Race Banner
-  -FIX THE LOGIN MODAL FORM
-  -Add fontawesome icons to race sign up
-  -Style the profile page
--->
 <?php
   require('includes/conn.inc.php');
   $_SESSION['url'] = $_SERVER['REQUEST_URI'];
-
-  // if(isset($_SESSION['userSession']))
-  // {
-  //     echo "user session started";
-  // }
-  // else
-  // {
-  //     echo "no user session";
-  // }
 
   if(isset($_SESSION['userSession']))
   {
@@ -94,7 +49,9 @@
   $roadQuery->execute();
   $resultRoadRow = $roadQuery->fetchObject();
 
-
+  if(isset($_SESSION['userSession'])){
+    require_once('race-cart.php');
+  }
 ?>
 
 
@@ -113,7 +70,6 @@
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/meanmenu.css">
-  <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
   <script src="js/live-race-search.js"></script>
@@ -137,99 +93,11 @@
 
 </head>
 <body>
+  <?php
 
-  <!-- <div id="login-modal" class="modal">
-    <div class="col-xs-1 col-sm-3 col-md-4"></div>
-    <form class="model-content animate col-xs-10 col-sm-6 col-md-4" method="post" action="log-in.php" id="login-form">
-      <span onclick="document.getElementById('login-modal').style.display='none'"
-      class="close" title="Close Modal">&times;</span>
-      <div id="error">
-      <?php
-  			//if(!empty($_GET['er']) && $_GET['er'] == 'failedLogin'){
-  				?>
-            <div class="alert alert-danger">
-               <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php //echo "Username or password is invalid or you haven't activated your account!"; ?>
-            </div>
-            <?php
-  			//}?>
-      </div>
-      <div class="page-header">
-        <h2>SIGN IN</h2>
-      </div>
-      <div class="form-group">
-        <label>Username</label>
-        <input type="text" class="text-box" name="uName" placeholder="Username"/>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="text-box" name="pass" placeholder="Password"/>
-      </div>
-      <p><a href="sign-up.php">Don't have an account?</a></p>
-      <div class="form-group">
-        <input type="submit" name="submit" value="Sign In" class="modal-btn" />
-      </div>
-    </form>
-    <div class="col-xs-1 col-sm-3 col-md-4"></div>
-  </div>
-
-  <div id="signup-modal" class="modal">
-    <div class="col-xs-1 col-sm-3 col-md-3"></div>
-    <form class="model-content animate col-xs-10 col-sm-6 col-md-6" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" id="register-form">
-      <span onclick="document.getElementById('signup-modal').style.display='none'"
-      class="close" title="Close Modal">&times;</span>
-      <div class="page-header">
-        <h2>SIGN UP</h2>
-      </div>
-      <label>Have an account? <a class="non-nav" href="index.php">Sign In</a></label>
-      <div class="row">
-        <div class="col-sm-6 col-md-6">
-          <div class="form-group">
-            <label>First Name *</label>
-            <input type="text" class="text-box" name="fName" placeholder="First Name"/>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-          <div class="form-group">
-            <label>Last Name *</label>
-            <input type="text" class="text-box" name="sName"  placeholder="Last Name"/>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-12">
-          <div class="form-group">
-            <label>Username *</label>
-            <input type="text" class="text-box" name="uName"  placeholder="Username"/>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-12">
-          <div class="form-group">
-            <label>Email *</label>
-            <input type="text" class="text-box" name="email" placeholder="Email" />
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-          <div class="form-group">
-            <label>Password *</label>
-            <input type="password" class="text-box" id="pass" name="pass" placeholder="Password"/>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-          <div class="form-group">
-            <label>Confirm Password *</label>
-            <input type="password" class="text-box" name="passConf" placeholder="Confirm Password"/>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group">
-            <input type="submit" name="submit" value="Register" id="submit-button" class="modal-btn" />
-          </div>
-        </div>
-      </div>
-    </form>
-    <div class="col-xs-1 col-sm-6 col-md-3"></div>
-  </div> -->
-
-  <?php include('includes/modals.php'); ?>
-  <?php include('includes/navbar.php'); ?>
+      include('includes/modals.php');
+      include('includes/navbar.php');
+  ?>
    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -288,7 +156,6 @@
               </div>
             </div>
         </div>
-        <!-- <h1 id="header"><strong>RACE INFO</strong></h1> -->
         <div class="container">
           <div class="row">
             <div class="col-xs-4 col-sm-4 "></div>
@@ -299,9 +166,6 @@
                     <div class="cmn-t-underline">
                       <input type="text" id="searchTerm" name="searchTerm" class="search-races cmn-t-underline" placeholder="Race Name" autocomplete="off"></input>
                     </div>
-                    <!-- <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                  </div> -->
                 </div>
               </form>
               <ul id="content"></ul>
@@ -328,75 +192,55 @@
     <div class="col-md-4"></div>
   </div>
   <div class="im-centered">
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-xs-12 col-sm-12 col-md-4" id="mtb-table">
-      <h1 class="big">MTB RACES</h1>
-      <?php
-        while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
-        {
-          $temp = strtotime($mtbUpcomingRow->RaceDate);
-          $temp2 = strtotime($mtbUpcomingRow->ClosingEntryDate);
-          $day = date("d", $temp);
-          $month = date("M", $temp);
-          $closeDay = date("d", $temp2);
-          $closeMonth = date("M", $temp2);
-          echo "<div class='event-box'>";
-          $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
-          echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
-          echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-          echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
-
-          // echo "<p class='race-month'>" . $month . "</p>";
-          // echo "<small>Start Date: {$mtbUpcomingRow->RaceDate}</small><br />";
-          // echo "<small>ClosingEntryDate: {$mtbUpcomingRow->ClosingEntryDate}</small>";
-          echo "</div>";
-        }
-      ?>
-      <!-- <div class="border-bottomMTB"></div> -->
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-4" id="road-table">
-      <div class="spacing"><p></p></div>
-      <h1 class="big">ROAD RACES</h1>
-      <?php
-        while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
-        {
-          $temp = strtotime($roadUpcomingRow->RaceDate);
-          $temp2 = strtotime($roadUpcomingRow->ClosingEntryDate);
-          $day = date("d", $temp);
-          $month = date("M", $temp);
-          $closeDay = date("d", $temp2);
-          $closeMonth = date("M", $temp2);
-          echo "<div class='event-box'>";
-          $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
-          echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
-          echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-          echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
-
-          echo "</div>";
-        }
-      ?>
-      <!-- <div class="border-bottomROAD"></div> -->
-    </div>
-    <div class="col-md-2"></div>
-
-  </div>
-</div>
-
-    <!-- <div id="btnAddEvent">
-      <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-4"></div>
-        <div class="col-xs-4 col-sm-4 col-md-4">
-          <a href="add-race.php"><input type="submit" value="ADD YOUR EVENT" class="btn btn-lg btn-primary"></a>
-          <a href="event-listings.php"><input type="submit" value="EVENT LISTINGS" class="btn btn-lg btn-primary" style="margin: 10px;"></a>
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-4"></div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-xs-12 col-sm-12 col-md-4" id="mtb-table">
+        <h1 class="big">MTB RACES</h1>
+        <?php
+          while($mtbUpcomingRow = $upcomingQueryMtb->fetchObject())
+          {
+            $temp = strtotime($mtbUpcomingRow->RaceDate);
+            $temp2 = strtotime($mtbUpcomingRow->ClosingEntryDate);
+            $day = date("d", $temp);
+            $month = date("M", $temp);
+            $closeDay = date("d", $temp2);
+            $closeMonth = date("M", $temp2);
+            echo "<div class='event-box'>";
+            $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
+            echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
+            echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
+            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";;
+            echo "</div>";
+          }
+        ?>
       </div>
-    </div> -->
+      <div class="col-xs-12 col-sm-12 col-md-4" id="road-table">
+        <div class="spacing"><p></p></div>
+        <h1 class="big">ROAD RACES</h1>
+        <?php
+          while($roadUpcomingRow = $upcomingQueryRoad->fetchObject())
+          {
+            $temp = strtotime($roadUpcomingRow->RaceDate);
+            $temp2 = strtotime($roadUpcomingRow->ClosingEntryDate);
+            $day = date("d", $temp);
+            $month = date("M", $temp);
+            $closeDay = date("d", $temp2);
+            $closeMonth = date("M", $temp2);
+            echo "<div class='event-box'>";
+            $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
+            echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
+            echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
+            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
 
+            echo "</div>";
+          }
+        ?>
+      </div>
+      <div class="col-md-2"></div>
 
+    </div>
   </div>
-<!-- </div> -->
+  </div>
 
 <div class="container fade-in">
   <div class="row">
@@ -409,21 +253,9 @@
   </div>
 </div>
 
-<footer style="background-color: #000000; margin-top: 20vh;">
-  <div class="container-fluid">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium minima amet quia hic adipisci expedita iusto, voluptatum ducimus praesentium, suscipit non. Esse, illum explicabo voluptatem. Sed velit, magni id nemo!
-    </p>
 
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium minima amet quia hic adipisci expedita iusto, voluptatum ducimus praesentium, suscipit non. Esse, illum explicabo voluptatem. Sed velit, magni id nemo!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium minima amet quia hic adipisci expedita iusto, voluptatum ducimus praesentium, suscipit non. Esse, illum explicabo voluptatem. Sed velit, magni id nemo!
-    </p>
-  </div>
-</footer>
 <?php
+  include('includes/footer.php');
   if(!empty($_GET['er'])){
     ?>
     <script>

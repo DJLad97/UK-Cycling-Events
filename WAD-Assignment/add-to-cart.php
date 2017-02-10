@@ -12,6 +12,6 @@ if(!isset($_SESSION['cart'])){
 }
 
 $_SESSION['cart']->addItem($raceID, $raceName, $price, $gender, $ageRange);
-header('Location: race-cart.php');
+header('Location: race-sign-up.php?RaceID=' . $raceID);
 exit;
 ?>

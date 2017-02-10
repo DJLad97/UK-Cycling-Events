@@ -1,8 +1,11 @@
-/* REMOVE THE RULES THAT ARE NOT NEEDED FOR THE NAV BAR*/
 
-@font-face{
-  font-family: MacFont;
-  src: url('../fonts/System San Francisco Display Thin.ttf');
+@font-face {
+    font-family: MacFont;
+    src: url('../fonts/system_san_francisco_display_thin-webfont.woff2') format('woff2'),
+         url('../fonts/system_san_francisco_display_thin-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 html, body{
@@ -10,6 +13,19 @@ html, body{
     background-color: rgb(238, 238, 238);
     font-family: MacFont;
     font-size: 20px;
+}
+
+footer{
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 40px;
+  padding-bottom: 17px;
+}
+
+.home{
+  border-right: 1px solid #fff;
+  padding-right: 3%;
 }
 
 hr {
@@ -121,7 +137,7 @@ hr {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  margin-top: 30px;
+  padding-top: 95px;
   background-color: #f5f5f5;
 }
 
@@ -132,9 +148,14 @@ hr {
   background-color: #f5f5f5;
 }
 
+.well-custom.comment{
+  padding-top: 20px;
+
+}
+
 #closing-date-header{
-  /*margin-left: 20px;
-  position: absolute;*/
+  margin-top: 35px;
+  white-space: nowrap;
 }
 
 .modal-btn{
@@ -165,19 +186,6 @@ hr {
 .modal-btn.listing{
     width: 185px;
     height: 68px;
-    color: rgb(14,14,14);
-    background: transparent;
-    border: 2px solid rgb(14,14,14);
-    font-size: 26px;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 200;
-    line-height: 66px;
-    display: inline-block;
-    margin-top: 20px;
-    margin-bottom: 45px;
-    transition: background 0.5s ease;
-    transition: color 0.5s ease;
 }
 .modal-btn:hover.listing{
     width: 185px;
@@ -760,11 +768,25 @@ li.race-results {
   padding-top: 10px;
 }
 
-#cart{
-  background-color: rgb(186, 186, 186);
+.cart-window{
+  /*background-color: rgb(186, 186, 186);
   width: 200px;
   margin-left: 20px;
   padding: 20px 20px 20px 20px;
+  position: absolute;
+  display: none;*/
+  background-color: #FFFFFF;
+  border: 1px solid #999999;
+  cursor: default;
+  display: none;
+  margin-top: 15px;
+  position: fixed;
+  text-align: left;
+  width: 394px;
+  z-index: 50;
+  padding: 25px 25px 29px;
+  margin-top: 90px;
+  left: 50%;
 }
 #checkoutBtn{
   margin: 5px 5px 5px 5px;
@@ -777,20 +799,68 @@ li.race-results {
   outline: none;
 }
 #remove-item:hover{
-  font-size: 17px;
+  font-weight: bolder;
 }
 
 .profile-img{
   margin-top: 10px;
 }
 
-.img{
-  max-width: 100%;
-  width: auto\9;
-  height: auto;
-  vertical-align: middle;
-  border: 0;
+#user-races{
+  display: none;
 }
+
+#profile-customize{
+  display: none;
+}
+
+@media screen and (min-width: 769px){
+  .img{
+    border-radius: 100%;
+    margin-bottom: 10%;
+    width: 400px;
+    height: 400px;
+    margin-left: -20px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .img{
+    border-radius: 100%;
+    margin-bottom: 10%;
+    width: 400px;
+    height: 400px;
+    margin-left: -90px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .img{
+    border-radius: 100%;
+    margin-bottom: 25%;
+    width: 300px;
+    height: 300px;
+    margin-left: -113px;
+  }
+}
+/*@media screen and(min-width: 1200px){
+  .img{
+    max-width: 100%;
+    width: auto;
+    vertical-align: middle;
+    border: 0;
+    margin-bottom: 10%;
+  }
+}
+
+@media screen and(max-width: 1199px){
+  .img{
+    width: auto;
+    vertical-align: middle;
+    border: 0;
+    margin-bottom: 10%;
+  }
+}*/
 .profile-header.page-header{
   border-bottom: none;
 }

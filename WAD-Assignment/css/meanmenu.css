@@ -27,8 +27,9 @@ a.meanmenu-reveal {
 .mean-container a.meanmenu-reveal {
 	width: 22px;
 	height: 22px;
-	padding: 13px 45px 11px 13px;
-	position: absolute;
+	padding: 8px 48px 12px 45%;
+	/* position: absolute; */
+	left: 50%;
 	top: 0;
 	right: 0;
 	cursor: pointer;

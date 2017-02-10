@@ -45,7 +45,6 @@ $resultRoadRow = $roadQuery->fetchObject();
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/meanmenu.css">
-  <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
   <script src="js/live-race-search.js"></script>
@@ -63,18 +62,23 @@ $resultRoadRow = $roadQuery->fetchObject();
   <title>Document</title>
 </head>
 <body>
-  <?php include('includes/modals.php'); ?>
-  <?php include('includes/navbar.php'); ?>
-  <div class="container well-custom-listing">
+  <?php
+    include('includes/modals.php');
+    include('includes/navbar.php');
+    if(isset($_SESSION['userSession'])){
+      require_once('race-cart.php');
+    }
+  ?>
+
+  <div class="container well-custom">
     <div class="jumbotron">
       <h1>RACE LISTINGS</h1>
     </div>
     <form action="sort-races.php" method="post">
       <div class="form-group">
-        <!-- <div class="col-xs-4 col-sm-2 col-md-2"></div> -->
         <label for="sel2">Sort By:</label>
         <select name="sortBy" class="form-control">
-          <option value="">-Select-</option>
+          <option value="">No Filter</option>
           <option value="MTB">MTB Races</option>
           <option value="Road">Road Races</option>
           <option value="RaceDate">Start Date</option>
@@ -96,9 +100,8 @@ $resultRoadRow = $roadQuery->fetchObject();
             $closeDate = date("d F", $temp);
             echo "<div class='race-listing'>";
             $queryString = 'race-sign-up.php?RaceID=' . $eventRow->RaceID;
-              // echo "<p><a href=\"race-sign-up.php?RaceID={$resultMtbRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
-            echo "<h3><strong><a class='non-nav' href='" . $queryString . "'>{$eventRow->RaceName}</strong> | <small>{$eventRow->RaceAddress}</small></h3></a>";
 
+            echo "<h3><strong><a class='non-nav' href='" . $queryString . "'>{$eventRow->RaceName}</strong> | <small>{$eventRow->RaceAddress}</small></h3></a>";
             echo "<p class='race-listing-details'>{$eventRow->OrganiserName} - Race Date $startDate - Entries Close $closeDate</p>";
             echo "</div>";
             echo "<hr />";
@@ -109,6 +112,7 @@ $resultRoadRow = $roadQuery->fetchObject();
         </div>
     </div>
   </div>
+  <?php include('includes/footer.php'); ?>
 
 </body>
 </html>

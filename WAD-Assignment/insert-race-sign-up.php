@@ -43,9 +43,10 @@
   }
 
   $stmt->execute();
-
-  unset($_SESSION['cart']);
-  header("Location: index.php");
+  if(isset($_POST['checkout'])){
+    unset($_SESSION['cart']);
+  }
+  header("Location: profile.php");
 
   exit;
 ?>

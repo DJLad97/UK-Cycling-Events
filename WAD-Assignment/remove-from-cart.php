@@ -18,5 +18,5 @@ for($i = 0; $i < count($tempArr); $i++){
 // Do what I mentioned above
 $_SESSION['cart']->cartArr = array_values($tempArr);
 
-header('Location: race-cart.php');
+header('Location: ' . $_SESSION['url']);
 ?>

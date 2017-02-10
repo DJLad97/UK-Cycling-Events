@@ -1,9 +1,10 @@
-
 <?php
   require('includes/conn.inc.php');
   if(isset($_SESSION['userSession'])){
     $userID = $_SESSION['userSession'];
   }
+
+  $_SESSION['url'] = $_SERVER['REQUEST_URI'];
 
   $raceID = $_GET['RaceID'];
   $sql = "SELECT * FROM races WHERE RaceID = :raceID";
@@ -46,7 +47,6 @@
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/meanmenu.css">
-  <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
   <script src="js/live-race-search.js"></script>
@@ -54,7 +54,6 @@
   <script src="js/race-location.js"></script>
   <script src="js/user-validation.js"></script>
   <script src="js/jquery.meanmenu.js"></script>
-  <!-- PUT THIS CODE IN AN EXTERNAL FILE -->
   <script>
 
     function submitForm(action, method){
@@ -72,8 +71,11 @@
 </head>
 <body>
   <?php
-   include('includes/modals.php');
-   include('includes/navbar.php');
+    include('includes/modals.php');
+    include('includes/navbar.php');
+    if(isset($_SESSION['userSession'])){
+      require_once('race-cart.php');
+    }
   ?>
 
    <div class="carousel-inner">
@@ -93,8 +95,6 @@
           <h2 class="big">SIGN UP</h2>
         </div>
         <div class="row">
-          <!-- <div class="col-xs-4 col-sm-2 col-md-2"></div> -->
-          <!-- <div class="col-xs-4 col-sm-4 col-md-4 colCenterText"> -->
           <?php
 
             $temp = strtotime($result->ClosingEntryDate);
@@ -127,9 +127,6 @@
 
 
           ?>
-          <!-- </div> -->
-          <!-- <div class="col-xs-8 col-sm-4 col-md-4 colCenterText"> -->
-          <!-- <p class="RaceDesc centerDesc"> -->
           <p>
             <?php
             echo "{$result->RaceDescription}";
@@ -139,7 +136,6 @@
         </div>
 
         <div class="row">
-          <!-- <div class="col-xs-4 col-sm-2 col-md-2"></div> -->
           <?php
           // If user hasn't signed up to the race that is currently been displayed
           // then display sign up details, otherwise inform you've signed up to this race
@@ -161,7 +157,6 @@
               <label class="radio-inline"><input type="radio" name="gender" value="F">Female</label>
             </div>
             <div class="form-group">
-              <!-- <div class="col-xs-4 col-sm-2 col-md-2"></div> -->
               <label for="sel2">Your Age Range:</label>
               <select name="ageRange" id="sel3" class="form-control">
                 <option value="14-17">14-17</option>
@@ -188,8 +183,6 @@
                     <label>Price: </label>
                     <?php
                     echo "£{$result->EntryPrice}";
-                    //print_r($_SESSION['cart']->cartArr);
-                    //unset($_SESSION['cart']);
                     ?>
                     </p>
                     <?php
@@ -242,7 +235,7 @@
       $i = 0;
        while($commentResult = $commentStmt->fetchObject()){
           ?>
-          <div class="well">
+          <div class="well-custom comment">
             <button class="empty-button reply-text replyButton<?php echo $i;?>">Reply</button>
             <p><strong><?php echo $commentResult->Username; ?></strong></p>
             <p><?php echo $commentResult->CommentContent; ?></p>
