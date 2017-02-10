@@ -30,9 +30,9 @@
   -Add the check to see if user is logged in into a separte file
   -Event organiser page to submit results
   -Race Banner
-  -IMPLEMENT USERS INTO THE CMS
   -FIX THE LOGIN MODAL FORM
-  -WORK ON LOGIN REDIRECT ON THE MAPS
+  -Add fontawesome icons to race sign up
+  -Style the profile page
 -->
 <?php
   require('includes/conn.inc.php');
