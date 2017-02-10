@@ -2,7 +2,7 @@
   require('../includes/conn.inc.php');
   require('check-user.php');
 
-  $raceID = $_GET['RaceID'];
+  $raceID = filter_var(strip_tags(trim($_GET['RaceID'])), FILTER_SANITIZE_STRING);
   $sql = "SELECT * FROM races WHERE RaceID = :raceID";
   $stmt = $pdo->prepare($sql);
   $stmt->bindParam(':raceID', $raceID, PDO::PARAM_INT);

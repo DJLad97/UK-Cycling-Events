@@ -26,17 +26,17 @@
   -CONFIGUE XAMPP ON SURFACE TO SET UP EMAILS
   -Race route with google maps polyline
   -Results page for each race
-  -Website with 2 halves
   -Comments need to be a part of the race (add race id to comment)
   -Add the check to see if user is logged in into a separte file
   -Event organiser page to submit results
   -Race Banner
-  -RACE MAP AT THE BOTTOM OF THE PAGE 2 maps for both mtb and road
   -IMPLEMENT USERS INTO THE CMS
   -FIX THE LOGIN MODAL FORM
+  -WORK ON LOGIN REDIRECT ON THE MAPS
 -->
 <?php
   require('includes/conn.inc.php');
+  $_SESSION['url'] = $_SERVER['REQUEST_URI'];
 
   // if(isset($_SESSION['userSession']))
   // {
@@ -49,6 +49,7 @@
 
   if(isset($_SESSION['userSession']))
   {
+      $userLoggedIn = "true";
       $userID = $_SESSION['userSession'];
 
       $userQuery = "SELECT * FROM user WHERE userID = :userID";
@@ -58,6 +59,7 @@
       $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
   }
+
 
   $mtbEvent = "SELECT RaceID, RaceName, ClosingEntryDate FROM races
                 WHERE RaceType = 'MTB' AND ClosingEntryDate > NOW() LIMIT 1";
@@ -92,28 +94,7 @@
   $roadQuery->execute();
   $resultRoadRow = $roadQuery->fetchObject();
 
-  if(isset($_SESSION['url']))
-    $url = $_SESSION['url'];
-  else
-    $url = 'profile.php';
 
-  if(isset($_POST['submit']))
-  {
-      $uName = strip_tags($_POST['uName']);
-      $password = strip_tags($_POST['pass']);
-
-      if($user->login($uName, $password))
-      {
-        if($_SESSION['userLevel'] == 'admin')
-          $url = 'CMS/CMS.php';
-
-        $user->redirect($url);
-      }
-      else
-      {
-        $error = "Username or password is invalid or you haven't activated your account!";
-      }
-  }
 ?>
 
 
@@ -127,6 +108,8 @@
   <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/meanmenu.css">
@@ -134,7 +117,12 @@
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
   <script src="js/live-race-search.js"></script>
+  <script type="text/javascript">var loggedIn = "<?= $userLoggedIn ?>"</script>
+  <script src="js/moment.js"></script>
+  <script src="js/index-map.js"></script>
+  <script src="js/user-validation.js"></script>
   <script src="js/jquery.meanmenu.js"></script>
+
 
 
   <!--[if lt IE 9]>
@@ -145,47 +133,103 @@
   <title>Home1</title>
 
 
+
+
 </head>
 <body>
-  <div id="login-modal" class="modal">
 
-      <div class="col-xs-1 col-sm-1 col-md-4"></div>
-      <form class="model-content animate col-xs-10 col-sm-10 col-md-4" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" id="login-form">
-        <span onclick="document.getElementById('login-modal').style.display='none'"
-        class="close" title="Close Modal">&times;</span>
-        <div id="error">
-        <?php
-    			if(isset($error)){
-    				?>
-              <div class="alert alert-danger">
-                 <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
-              </div>
-              <?php
-    			}?>
-        </div>
-        <div class="page-header">
-          <h2>SIGN IN</h2>
-        </div>
-        <div class="form-group">
-          <label>Username</label>
-          <input type="text" class="form-control text-box" name="uName" placeholder="Username"/>
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control text-box" name="pass" placeholder="Password"/>
-        </div>
-        <p><a href="sign-up.php">Don't have an account?</a></p>
-        <div class="form-group">
-          <input type="submit" name="submit" value="Sign In" class="btn btn-primary btn-lg" />
-        </div>
-      </form>
-      <div class="col-xs-1 col-sm-1 col-md-4"></div>
-
+  <!-- <div id="login-modal" class="modal">
+    <div class="col-xs-1 col-sm-3 col-md-4"></div>
+    <form class="model-content animate col-xs-10 col-sm-6 col-md-4" method="post" action="log-in.php" id="login-form">
+      <span onclick="document.getElementById('login-modal').style.display='none'"
+      class="close" title="Close Modal">&times;</span>
+      <div id="error">
+      <?php
+  			//if(!empty($_GET['er']) && $_GET['er'] == 'failedLogin'){
+  				?>
+            <div class="alert alert-danger">
+               <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php //echo "Username or password is invalid or you haven't activated your account!"; ?>
+            </div>
+            <?php
+  			//}?>
+      </div>
+      <div class="page-header">
+        <h2>SIGN IN</h2>
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="text-box" name="uName" placeholder="Username"/>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="text-box" name="pass" placeholder="Password"/>
+      </div>
+      <p><a href="sign-up.php">Don't have an account?</a></p>
+      <div class="form-group">
+        <input type="submit" name="submit" value="Sign In" class="modal-btn" />
+      </div>
+    </form>
+    <div class="col-xs-1 col-sm-3 col-md-4"></div>
   </div>
 
+  <div id="signup-modal" class="modal">
+    <div class="col-xs-1 col-sm-3 col-md-3"></div>
+    <form class="model-content animate col-xs-10 col-sm-6 col-md-6" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" id="register-form">
+      <span onclick="document.getElementById('signup-modal').style.display='none'"
+      class="close" title="Close Modal">&times;</span>
+      <div class="page-header">
+        <h2>SIGN UP</h2>
+      </div>
+      <label>Have an account? <a class="non-nav" href="index.php">Sign In</a></label>
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" class="text-box" name="fName" placeholder="First Name"/>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" class="text-box" name="sName"  placeholder="Last Name"/>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12">
+          <div class="form-group">
+            <label>Username *</label>
+            <input type="text" class="text-box" name="uName"  placeholder="Username"/>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12">
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="text" class="text-box" name="email" placeholder="Email" />
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+          <div class="form-group">
+            <label>Password *</label>
+            <input type="password" class="text-box" id="pass" name="pass" placeholder="Password"/>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+          <div class="form-group">
+            <label>Confirm Password *</label>
+            <input type="password" class="text-box" name="passConf" placeholder="Confirm Password"/>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <input type="submit" name="submit" value="Register" id="submit-button" class="modal-btn" />
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="col-xs-1 col-sm-6 col-md-3"></div>
+  </div> -->
 
+  <?php include('includes/modals.php'); ?>
   <?php include('includes/navbar.php'); ?>
-  
    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -205,14 +249,7 @@
                     {$resultMtbRow->RaceName}<br />
                     {$resultMtbRow->ClosingEntryDate}
                     </h1>";
-                    if(isset($_SESSION['userSession']))
-                      echo "<p><a href=\"race-sign-up.php?RaceID={$resultMtbRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
-                    else{
-                      $_SESSION['url'] = "race-sign-up.php?RaceID={$resultMtbRow->RaceID}";
-                      ?>
-                      <p><a onclick="document.getElementById('login-modal').style.display='block'" class="regBtn a-with-pointer">REGISTER</a></p>
-                      <?php
-                    }
+                    echo "<p><a href=\"race-sign-up.php?RaceID={$resultMtbRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
                   }
                   else{
                     echo "<h1>NO UPCOMING RACES</h1>";
@@ -236,14 +273,8 @@
                   {$resultRoadRow->RaceName}<br />
                   {$resultRoadRow->ClosingEntryDate}
                   </h1>";
-                  if(isset($_SESSION['userSession']))
-                    echo "<p><a href=\"race-sign-up.php?RaceID={$resultRoadRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
-                  else{
-                    $_SESSION['url'] = "race-sign-up.php?RaceID={$resultRoadRow->RaceID}";
-                    ?>
-                    <p><a onclick="document.getElementById('login-modal').style.display='block'" class="regBtn a-with-pointer">REGISTER</a></p>
-                    <?php
-                  }
+                  echo "<p><a href=\"race-sign-up.php?RaceID={$resultRoadRow->RaceID}\" class=\"regBtn\">REGISTER</a></p>";
+
                 }
                 else{
                   echo "<h1>NO UPCOMING RACES</h1>";
@@ -260,10 +291,10 @@
         <!-- <h1 id="header"><strong>RACE INFO</strong></h1> -->
         <div class="container">
           <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4"></div>
-              <div id="search" class="col-xs-4 col-sm-4 col-md-4 fade-in">
+            <div class="col-xs-4 col-sm-4 "></div>
+              <div id="search" class="col-xs-4 col-sm-4 col-md-13 fade-in">
                 <form role="form" method="post">
-                  <label>Search race name or race type (MTB or Road)</label>
+                  <label class="search-heading">Search race name or race type (MTB or Road)</label>
                   <div class="search-div">
                     <div class="cmn-t-underline">
                       <input type="text" id="searchTerm" name="searchTerm" class="search-races cmn-t-underline" placeholder="Race Name" autocomplete="off"></input>
@@ -275,10 +306,9 @@
               </form>
               <ul id="content"></ul>
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4"></div>
+            <div class="col-xs-4 col-sm-4"></div>
           </div>
         </div>
-    </div>
 
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -292,6 +322,11 @@
 </div>
 
 <div id="upcoming-races" class="fade-in">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <h1 class="big col-xs-12 col-sm-12 col-md-4" id="upcoming-races-header">UPCOMING RACES</h1>
+    <div class="col-md-4"></div>
+  </div>
   <div class="im-centered">
   <div class="row">
     <div class="col-md-2"></div>
@@ -310,16 +345,7 @@
           $linkAddress = 'race-sign-up.php?RaceID=' . $mtbUpcomingRow->RaceID;
           echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
           echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-          if(isset($_SESSION['userSession']))
-            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
-          else{
-            $_SESSION['url'] = $linkAddress;
-            ?>
-            <a class='non-nav a-with-pointer' onclick="document.getElementById('login-modal').style.display='block'">
-              <h3 class='race-name'><strong><?php echo $mtbUpcomingRow->RaceName ?></strong></h3>
-            </a>
-            <?php
-          }
+          echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$mtbUpcomingRow->RaceName}</strong></h3></a>";
 
           // echo "<p class='race-month'>" . $month . "</p>";
           // echo "<small>Start Date: {$mtbUpcomingRow->RaceDate}</small><br />";
@@ -345,16 +371,8 @@
           $linkAddress = 'race-sign-up.php?RaceID=' . $roadUpcomingRow->RaceID;
           echo "<span class='race-day'><strong>" . $day . "</strong><em>$month</em></span>";
           echo "<span class='close-date '>Entries Close: $closeDay $closeMonth</span>";
-          if(isset($_SESSION['userSession']))
-            echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
-          else{
-            $_SESSION['url'] = $linkAddress;
-            ?>
-            <a class='non-nav a-with-pointer' onclick="document.getElementById('login-modal').style.display='block'">
-              <h3 class='race-name'><strong><?php echo $roadUpcomingRow->RaceName ?></strong></h3>
-            </a>
-            <?php
-          }
+          echo "<a class='non-nav' href='".$linkAddress."' target='_blank'><h3 class='race-name'><strong>{$roadUpcomingRow->RaceName}</strong></h3></a>";
+
           echo "</div>";
         }
       ?>
@@ -380,6 +398,17 @@
   </div>
 <!-- </div> -->
 
+<div class="container fade-in">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6">
+      <div id="mtbMap"></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6">
+      <div id="roadMap"></div>
+    </div>
+  </div>
+</div>
+
 <footer style="background-color: #000000; margin-top: 20vh;">
   <div class="container-fluid">
     <p>
@@ -394,16 +423,15 @@
     </p>
   </div>
 </footer>
-<script>
-// Get the modal
-// var modal = document.getElementById('login-modal');
-//
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
-</script>
+<?php
+  if(!empty($_GET['er'])){
+    ?>
+    <script>
+      document.getElementById('login-modal').style.display='block';
+    </script>
+    <?php
+  }
+?>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh5LqX12YrJlbySaXrwof1R7XcAURBK1M&callback=mtbMap"></script>
 </body>
 </html>

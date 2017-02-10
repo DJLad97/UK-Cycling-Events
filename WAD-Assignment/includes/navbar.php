@@ -1,7 +1,23 @@
+<?php
+require_once('includes/conn.inc.php');
+if(isset($_SESSION['userSession']))
+{
+    $userLoggedIn = "true";
+    $userID = $_SESSION['userSession'];
+
+    $userQuery = "SELECT * FROM user WHERE userID = :userID";
+    $stmt = $user->runQuery($userQuery);
+    $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+    $stmt->execute();
+    $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+}
+
+?>
 <header>
   <nav class="navbar navbar-inverse navbar-fixed-top">
       <ul>
-        <li><a href="index.php">MTB & ROAD</a></li>
+        <li><a href="race-listings.php">MTB & ROAD</a></li>
         <?php if(isset($_SESSION['userSession']) && $userRow['IsAdmin'] == 'admin'){ ?>
         <li><a href="CMS/CMS.php">CMS Page</a></li>
         <?php }?>
@@ -18,8 +34,8 @@
             else
             {
         ?>
-        <li><a class="sign-in" onclick="document.getElementById('login-modal').style.display='block'">SIGN IN</a></li>
-        <li><a href="sign-up.php">SIGN UP</a></li>
+        <li><a class="a-with-pointer sign-in" onclick="document.getElementById('login-modal').style.display='block'; document.getElementById('signup-modal').style.display='none'">SIGN IN</a></li>
+        <li><a class="a-with-pointer sign-up" onclick="document.getElementById('signup-modal').style.display='block'; document.getElementById('login-modal').style.display='none';">SIGN UP</a></li>
         <?php } ?>
         <li><a href="#">CART</a></li>
       </ul>

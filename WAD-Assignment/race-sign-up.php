@@ -1,12 +1,8 @@
 
 <?php
   require('includes/conn.inc.php');
-  //This is so I can redirect to this page after a login
-  $_SESSION['url'] = $_SERVER['REQUEST_URI'];
-  $userID = $_SESSION['userSession'];
-  if(!isset($_SESSION['userSession']))
-  {
-      header("Location: log-in.php");
+  if(isset($_SESSION['userSession'])){
+    $userID = $_SESSION['userSession'];
   }
 
   $raceID = $_GET['RaceID'];
@@ -55,11 +51,12 @@
   <script src="js/jquery.easing.js"></script>
   <script src="js/live-race-search.js"></script>
   <script src="js/moment.js"></script>
-  <script src="js/index-map.js"></script>
+  <script src="js/race-location.js"></script>
   <script src="js/user-validation.js"></script>
   <script src="js/jquery.meanmenu.js"></script>
   <!-- PUT THIS CODE IN AN EXTERNAL FILE -->
   <script>
+
     function submitForm(action, method){
       document.getElementById('raceForm').action = action;
       document.getElementById('raceForm').method = method;
@@ -78,12 +75,13 @@
    include('includes/navbar.php');
   ?>
 
-  <div class="container">
-    <img src="mtb" alt="">
-  </div>
+   <div class="carousel-inner">
+       <div class="fill" style="background-image:url('images/mtb.jpg');"></div>
+   </div>
+
 
   <div class="container">
-    <div class="well">
+    <div class="well-custom">
 
     <div style="padding-left: 30px; padding-right: 30px;">
       <?php
@@ -91,7 +89,7 @@
 
       ?>
         <div class="page-header">
-          <h2>SIGN UP</h2>
+          <h2 class="big">SIGN UP</h2>
         </div>
         <div class="row">
           <!-- <div class="col-xs-4 col-sm-2 col-md-2"></div> -->
@@ -116,13 +114,14 @@
 
             $span = '<span class="' . $warningType . '">';
 
-            echo "<h1>{$result->RaceName}</h1>";
+            $temp = strtotime($result->RaceDate);
+            $startDate = date("d F", $temp);
+
+            echo "<h1><strong>{$result->RaceName}</strong> | <small><strong>{$result->RaceAddress}</strong></small></h1>";
             echo "<p>
-            Race Type: {$result->RaceType}
-            <br />
-            Start Date: {$result->RaceDate}
-            <br /><br />";
-            echo $span . "Entry Closing Date: {$result->ClosingEntryDate}</span>
+            <i class=\"fa fa-calendar\" aria-hidden=\"true\"></i><strong> $startDate</strong> -
+            <strong>Race: {$result->RaceType}</strong> ";
+            echo "<div id='closing-date-header'><strong>" . $span . "Entries Close: {$result->ClosingEntryDate}</span></strong></div>
             </p><br />";
 
 
@@ -179,7 +178,7 @@
                   <br>
 
                   <input type="submit" name="subBtn" onclick="submitForm('insert-race-sign-up.php', 'post')"
-                          id="button" value="Go Race!" class="btn btn-primary btn-default">
+                          id="button" value="Enter Race" class="modal-btn">
                   <?php
                 }
                 else{
@@ -205,7 +204,7 @@
                     }
                     if(!$found){ ?>
                       <input type="submit" name="subBtn" onclick="submitForm('add-to-cart.php', 'get')"
-                      id="button" value="Add to Cart" class="btn btn-primary btn-default">
+                      id="button" value="Add to Cart" class="modal-btn">
                       <?php
                     }
                 }
@@ -264,7 +263,7 @@
             <label>Leave a comment</label>
             <textarea type="comments" class="form-control" name="raceComment"></textarea>
           </div>
-          <input type="submit" value="Post Comment" name="commentBtn" class="btn btn-primary"></input>
+          <input type="submit" value="Post Comment" name="commentBtn" class="modal-btn"></input>
         <form>
       </div>
     </div>

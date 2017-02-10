@@ -1,6 +1,9 @@
 <?php
   require('includes/conn.inc.php');
   require_once('includes/functions.inc.php');
+  if(!isset($_SESSION['userSession'])){
+    header('Location: index.php?er=notLoggedIn');
+  }
   $userID = $_SESSION['userSession'];
 
   $userQuery = "SELECT UserID, Forename, Surname FROM user WHERE UserID = :userID";
@@ -15,7 +18,7 @@
   $raceID = $_SESSION['getRaceID'];
   $userID = $userRow['UserID'];
   $name = $nameFromUser;
-  
+
   if(!isset($_POST['checkout'])){
     $gender = $_POST['gender'];
     $ageRange = $_POST['ageRange'];

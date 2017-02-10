@@ -25,7 +25,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="../css/CMS-style.css">
-  <script src="js/main.js"></script>
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -56,6 +55,7 @@
               <thead>
                 <tr>
                   <th class="table-text">Race</th>
+                  <th class="table-text">Send Sign Up Email</th>
                   <th class="table-text">Edit</th>
                   <th class="table-text">Delete</th>
                   <th class="table-text">View</th>
@@ -65,6 +65,7 @@
               while($row = $stmt->fetchObject()){
                 echo "<tr>";
                 echo "<td class=\"table-text\">{$row->RaceName}</td>";
+                echo "<td><a href=\"send-signup-email.php?RaceID={$row->RaceID}\"</a>Send</td>";
                 echo "<td><a href=\"edit-race.php?RaceID={$row->RaceID}\"</a>Edit</td>";
                 echo "<td><a href=\"delete-race.php?RaceID={$row->RaceID}\"</a>Delete</td>";
                 echo "<td><a href=\"view-race.php?RaceID={$row->RaceID}\"</a>View</td>";

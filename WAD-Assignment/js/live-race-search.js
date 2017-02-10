@@ -11,7 +11,7 @@ $(document).ready(function() {
             $('ul#content').empty();
             $.each(data, function(){
 
-              $('ul#content').append('<div class="col-md-1"><li class="race-results"><strong><a class="non-nav" href="race-sign-up.php?RaceID=' +
+              $('ul#content').append('<div><li style="white-space:nowrap"><strong><a class="non-nav" href="race-sign-up.php?RaceID=' +
                                     this.RaceID + '">' + this.RaceName + '</a>' + previewHTML + '</strong></li></div>');
 
               // $('ul#content').append('<li><a href="race-sign-up.php?RaceID=' +

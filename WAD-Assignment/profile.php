@@ -4,7 +4,7 @@
     $userID = $_SESSION['userSession'];
     if(!isset($_SESSION['userSession']))
     {
-        header("Location: log-in.php");
+        header("Location: index.php?notLoggedIn=true");
     }
 
 
@@ -98,7 +98,7 @@
             if(!empty($_GET)){
               switch($_GET['err']){
                 case 'WrongFileType':
-                  echo '<p class="error-text">WRONG FILE TYPE</p>';
+                  echo '<p class="error-text">Only .png .jpg, .gif allowed</p>';
                 break;
                 case 'imgUploadError':
                   echo '<p class="error-text">Something went wrong with the upload</p>';

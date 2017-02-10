@@ -1,3 +1,5 @@
+var sent = false;
+
 function raceLocation()
 {
   $.get('get-race-location.php', function(data){
@@ -14,6 +16,30 @@ function raceLocation()
       map: map
     });
 
+    var geocoder = new google.maps.Geocoder;
+    var infowindow = new google.maps.InfoWindow;
+
+    var input = String(latLng);
+    var latlngStr = input.split(',', 2);
+    var latlngTest = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+    geocoder.geocode({'location': latLng}, function(results, status) {
+      if (status === 'OK') {
+        if (results[1]) {
+          infowindow.setContent(results[1].formatted_address);
+          // console.info(sent);
+          //
+          // if(!sent){
+          //   window.location.href += "&address=" + results[3].formatted_address;
+          //   sent = true;
+          // }
+          infowindow.open(map, marker);
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+    });
   }, 'json');
 
 }

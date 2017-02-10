@@ -31,7 +31,7 @@
 
             if($user->register($fName, $sName, $uName, $email, $password))
             {
-              $user->redirect("log-in.php?action=joined");
+              $user->redirect("index.php");
             }
 
           }

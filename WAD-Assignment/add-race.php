@@ -18,9 +18,14 @@
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/meanmenu.css">
+  <link rel="stylesheet" href="css/animate.css">
   <script src="js/main.js"></script>
   <script src="js/race-validation.js"></script>
   <script src="js/google-maps.js"></script>
+
+  <script src="js/jquery.easing.js"></script>
+  <script src="js/jquery.meanmenu.js"></script>
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -32,7 +37,9 @@
 
 </head>
 <body>
-  <div class="container well">
+  <?php include('includes/modals.php'); ?>
+  <?php include('includes/navbar.php'); ?>
+  <div class="container well-custom">
      <div class="form-container">
        <?php
           if(isset($_SESSION['error'])) {
@@ -63,26 +70,26 @@
               </div>
               <div class="form-group">
                 <label>Organiser Name *</label>
-                <input type="text" class="form-control" name="organiserName" placeholder="Sheffield MTB"/>
+                <input type="text" class="text-box" name="organiserName" placeholder="Sheffield MTB"/>
               </div>
               <div class="form-group">
                 <label>Organiser Enquiry Email *</label>
-                <input type="text" class="form-control" name="organiserEmail" placeholder="organiser@race.com"/>
-              </div><hr>
+                <input type="text" class="text-box" name="organiserEmail" placeholder="organiser@race.com"/>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label>Race Name *</label>
-                <input type="text" class="form-control" name="raceName" placeholder="MTB Race - Round 1"/>
+                <input type="text" class="text-box" name="raceName" placeholder="MTB Race - Round 1"/>
               </div>
               <div class="form-group">
                 <label>Closing Entry Date *</label>
-                <input type="text" class="form-control" id="closingEntryDate" name="closingEntryDate" readonly="readonly"/>
+                <input type="text" class="text-box" id="closingEntryDate" name="closingEntryDate" readonly="readonly"/>
               </div>
               <div class="form-group">
                 <label id="test">Race Start Date *</label>
-                <input type="text" class="form-control" id="startDate" name="raceStartDate" readonly="readonly"/>
-                <hr>
+                <input type="text" class="text-box" id="startDate" name="raceStartDate" readonly="readonly"/>
+
               </div>
             </div>
           </div>
@@ -90,16 +97,16 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Race Address *</label>
-                <input type="text" class="form-control" name="raceAddress" placeholder="Address of race start location"/>
+                <input type="text" class="text-box" name="raceAddress" placeholder="Address of race start location"/>
               </div>
               <div class="form-group">
                 <label>Race Postcode *</label>
-                <input type="text" class="form-control" name="racePostcode" placeholder="S11 7TT"/>
+                <input type="text" class="text-box" name="racePostcode" placeholder="S11 7TT"/>
               </div>
               <div class="form-group">
                 <label>Race Latitude *</label> <label><small>Click on the map to get your latitude and longitude</small></label>
-                <input type="text" class="form-control" id="latLong" name="raceLatLong" readonly="readonly"/>
-                <hr>
+                <input type="text" class="text-box" id="latLong" name="raceLatLong" readonly="readonly"/>
+
               </div>
               <div class="form-group">
                 <label>Is your race free to enter? *</label>
@@ -111,11 +118,11 @@
               </div>
               <div class="form-group" id="priceTextBox">
                 <label>Entry Price</label>
-                <input type="text" class="form-control" name="entryPrice" placeholder="£10.00" />
+                <input type="text" class="text-box" name="entryPrice" placeholder="£10.00" />
               </div>
               <div class="form-group">
                 <label>Race Description</label>
-                <textarea type="comments" class="form-control" name="raceDesc" placeholder="Provide your race description here to make your race more appealing"></textarea>
+                <textarea type="comments" class="text-box" name="raceDesc" placeholder="Provide your race description here to make your race more appealing"></textarea>
               </div>
             </div>
             <div class="col-md-4">
@@ -123,7 +130,7 @@
             </div>
           </div>
             <div class="form-group">
-                <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-lg" />
+                <input type="submit" name="submit" value="Submit" class="modal-btn" />
             </div>
             <br />
         </form>
