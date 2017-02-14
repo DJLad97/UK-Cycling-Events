@@ -10,7 +10,7 @@
     $stmt->execute();
 
     if($stmt->rowCount() == 1){
-      header('Location: log-in.php?action=active');
+      header('Location: index.php?er=active');
       exit;
     }
     else {

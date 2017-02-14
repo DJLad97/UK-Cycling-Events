@@ -24,8 +24,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="../css/CMS-style.css">
-  <script src="js/main.js"></script>
-  <script src="js/race-location.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/race-location.js"></script>
 
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>

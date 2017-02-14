@@ -1,5 +1,5 @@
 <?php
-define('DIR', 'http://localhost:1234/UK%20Cycling%20Events/WAD-Assignment/');
+define('DIR', 'http://localhost:4321/UK%20Cycling%20Events/WAD-Assignment/');
 define('SITEEMAIL', 'noreply@UK-Cycling-Events.co.uk');
 class user
 {

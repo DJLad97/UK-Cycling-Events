@@ -73,7 +73,6 @@
   <script src="js/main.js"></script>
   <script src="js/jquery.easing.js"></script>
   <script src="js/live-race-search.js"></script>
-  <script type="text/javascript">var loggedIn = "<?= $userLoggedIn ?>"</script>
   <script src="js/moment.js"></script>
   <script src="js/index-map.js"></script>
   <script src="js/user-validation.js"></script>

@@ -261,8 +261,8 @@
         <form>
       </div>
     </div>
-    <footer></footer>
   </div>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh5LqX12YrJlbySaXrwof1R7XcAURBK1M&callback=raceLocation"></script>
+  <?php include('includes/footer.php'); ?>
 </body>
 </html>

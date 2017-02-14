@@ -907,6 +907,7 @@ li.race-results {
     height:400px;
     border-radius: 100%;
     margin-left: 40px;
+    z-index: 0;
 }
 
 @media screen and (max-width: 375px){
@@ -916,6 +917,7 @@ li.race-results {
     height: 300px;
     border-radius: 100%;
     margin-left: -13px;
+    z-index: 0;
   }
 }
 
@@ -928,6 +930,7 @@ li.race-results {
       border-radius: 100%;
       margin-top: 90px;
       margin-left: 45px;
+      z-index: 0;
   }
 
   #roadMap
@@ -938,6 +941,7 @@ li.race-results {
       border-radius: 100%;
       margin-top: 90px;
       margin-left: -11px;
+      z-index: 0;
   }
 
 }
@@ -952,6 +956,7 @@ li.race-results {
       border-radius: 100%;
       margin-top: 90px;
       margin-left: 175px;
+      z-index: 0;
   }
 
   #roadMap
@@ -962,6 +967,7 @@ li.race-results {
       border-radius: 100%;
       margin-top: 90px;
       margin-left: 175px;
+      z-index: 0;
   }
 }
 
@@ -975,6 +981,7 @@ li.race-results {
       border-radius: 100%;
       margin-top: 90px;
       margin-left: 45px;
+      z-index: 0;
   }
 
   #roadMap
@@ -985,6 +992,7 @@ li.race-results {
       border-radius: 100%;
       margin-top: 90px;
       margin-left: 45px;
+      z-index: 0;
   }
 }
 

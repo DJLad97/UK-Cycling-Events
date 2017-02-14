@@ -2,7 +2,7 @@ var sent = false;
 
 function raceLocation()
 {
-  $.get('get-race-location.php', function(data){
+  $.get('http://localhost:4321/UK Cycling Events/WAD-Assignment/get-race-location.php', function(data){
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 53.270722, lng: -1.820286},
       zoom: 6,
