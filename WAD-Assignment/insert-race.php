@@ -99,7 +99,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
  $stmt->execute();
 
  unset($_SESSION['error']);
-
- header("Location: index.php");
+ if(isset($_GET['fromCMS']) && $_GET['fromCMS'] == true){
+   header("Location: CMS/CMS.php");
+ }
+ else
+   header("Location: index.php");
  exit;
 ?>
