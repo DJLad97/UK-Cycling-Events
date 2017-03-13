@@ -1,5 +1,0 @@
-Didn't confirm activation email has been sent
-Some dead redirection links (active.php)
-No button to take you to add your own race
-Left CMS.php in the main folder
-Forgot footer in race sign up
