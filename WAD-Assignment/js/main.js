@@ -41,6 +41,7 @@ $(document).ready(function(){
 
   var modal = document.getElementById('login-modal');
 
+
   window.onclick = function(event) {
       if (event.target == modal) {
           modal.style.display = "none";
@@ -90,7 +91,7 @@ $(document).ready(function(){
           var bottomOfObject = $(this).position().top + $(this).outerHeight();
           var bottomOfWindow = $(window).scrollTop() + $(window).height();
 
-          bottomOfWindow = bottomOfWindow + 200;
+          bottomOfWindow = bottomOfWindow + 550;
 
           if(bottomOfWindow > bottomOfObject){
               $(this).animate({'opacity':'1'},500);
@@ -140,11 +141,26 @@ $(document).ready(function(){
 
   $('.races').on('click', function(ev){
     ev.preventDefault();
-    $('#user-races').slideToggle('slow');
+    $('#user-races').slideToggle('slow', function(){
+      if($(this).is(':hidden'))  {
+          $('.races').html('Your upcoming races <i class="fa fa-angle-down" aria-hidden="true"></i>');
+      }
+      else{
+          $('.races').html('Your upcoming races <i class="fa fa-angle-up" aria-hidden="true"></i>');
+      }
+    });
   });
+
   $('.profile').on('click', function(ev){
     ev.preventDefault();
-    $('#profile-customize').slideToggle('slow');
+    $('#profile-customize').slideToggle('slow', function(){
+      if($(this).is(':hidden'))  {
+          $('.profile').html('Profile Details <i class="fa fa-angle-down" aria-hidden="true"></i>');
+      }
+      else{
+          $('.profile').html('Profile Details <i class="fa fa-angle-up" aria-hidden="true"></i>');
+      }
+    });
   });
 
   // var replyForm = "<div id="reply-comment">" +

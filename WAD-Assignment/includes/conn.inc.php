@@ -1,9 +1,9 @@
 <?php
-require('/../classes/Cart.php');
-require('/../sessions/sessions.inc.php');
-$dsn = 'mysql:host=localhost;dbname=wad_project';
-$user = 'root';
-$password = 'billion2468';
+require($_SERVER['DOCUMENT_ROOT'] . '/UK-Cycling-Events/classes/Cart.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/UK-Cycling-Events/sessions/sessions.inc.php');
+$dsn = 'mysql:host=**HOST_NAME_**;dbname=**DB_NAME**';
+$user = '';
+$password = '';
 
 try
 {
@@ -16,6 +16,6 @@ catch (PDOException $e)
   echo 'Connection failed again: ' . $e->getMessage();
 }
 
-require('/../classes/User.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/UK-Cycling-Events/classes/User.php');
 $user = new user($pdo);
 ?>

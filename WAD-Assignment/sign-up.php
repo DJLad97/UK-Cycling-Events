@@ -26,12 +26,8 @@
       {
           try
           {
-
-            if($user->register($fName, $sName, $uName, $email, $password))
-            {
-              $user->redirect("index.php");
-            }
-
+            $user->register($fName, $sName, $uName, $email, $password);
+            
           }
           catch(PDOException $e)
           {

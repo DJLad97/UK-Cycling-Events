@@ -38,6 +38,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#404040" />
+  <link rel="icon" type="image/png" href="images/icon.png" sizes="32x32">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -257,7 +259,18 @@
             <label>Leave a comment</label>
             <textarea type="comments" class="form-control" name="raceComment"></textarea>
           </div>
-          <input type="submit" value="Post Comment" name="commentBtn" class="modal-btn"></input>
+          <?php if(isset($_SESSION['userSession'])){ ?>
+            <input type="submit" value="Post Comment" name="commentBtn" class="modal-btn"></input>
+          <?php
+          }
+          else{
+            echo "<p>PLEASE SIGN IN TO LEAVE A COMMENT</p>";
+            ?>
+            <input type="button" value="LOG IN"
+                   onclick="document.getElementById('login-modal').style.display='block';"
+                   name="commentBtn" class="modal-btn"></input>
+            <?php
+          }?>
         <form>
       </div>
     </div>

@@ -34,6 +34,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#404040" />
+  <link rel="icon" type="image/png" href="images/icon.png" sizes="32x32">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://use.fontawesome.com/1a6d4ae9a2.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -85,10 +87,13 @@
         ?>
       </h1>
       <div class="details-section">
-        <h3><strong><a class="non-nav races" href="#">Your upcoming races</a></strong></h3>
+        <h3><strong><a class="non-nav races" href="#">Your upcoming races <i class="fa fa-angle-down" aria-hidden="true"></i></a></strong></h3>
         <div id="user-races" class="reveal-details">
           <br>
           <?php
+          if($raceRow == 0){
+            echo "<h2>NO UPCOMING RACES</h2>";
+          }
           while($raceRow = $raceStmt->fetchObject())
           {
             $queryString =  'race-sign-up.php?RaceID=' . $raceRow->RaceID;
@@ -108,7 +113,7 @@
 
           ?>
         </div>
-        <h3><strong><a class="non-nav profile" href="#">Profile Details</a></strong></h3>
+        <h3><strong><a class="non-nav profile" href="#">Profile Details <i class="fa fa-angle-down" aria-hidden="true"></i></a></strong></h3>
 
         <div id="profile-customize" class="reveal-details">
           <form action="upload-img.php" enctype="multipart/form-data" method="post">

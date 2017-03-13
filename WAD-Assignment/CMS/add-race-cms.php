@@ -48,7 +48,7 @@
             }
        ?>
            </div>
-        <form method="post" id="add-race-form" action="../insert-race.php">
+        <form method="post" id="add-race-form" action="../insert-race.php?fromCMS=true">
           <div class="page-header">
             <h2>ADD RACE</h2>
           </div>

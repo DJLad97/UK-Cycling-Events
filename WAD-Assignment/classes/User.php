@@ -1,10 +1,11 @@
 <?php
-define('DIR', 'http://localhost:4321/UK%20Cycling%20Events/WAD-Assignment/');
+define('DIR', 'http://danjscott.co.uk/UK-Cycling-Events/');
 define('SITEEMAIL', 'noreply@UK-Cycling-Events.co.uk');
 class user
 {
   private $db;
-
+  public $userID;
+  public $activation;
   function __construct($pdo)
   {
       $this->db = $pdo;
@@ -25,7 +26,7 @@ class user
       $safePass = filter_var($password, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
       $hashedPass = password_hash($safePass, PASSWORD_BCRYPT);
       $this->hashedPassGlb = $hashedPass;
-      $stmt = $this->db->prepare("INSERT INTO User(Forename, Surname, Username, Email, Password, active)
+      $stmt = $this->db->prepare("INSERT INTO user(Forename, Surname, Username, Email, Password, active)
       VALUES(:fName, :sName, :uName, :email, :password, :active)");
 
       $stmt->bindParam(':fName', $fName);
@@ -42,21 +43,36 @@ class user
       $to = $email;
       $subject = "Registration Confirmation";
       $body = "<p>Thank you for registering for the site!</p>
-      <p>To activate your account, please click on this link: <a href='".DIR."activate.php?x=$userID&y=$activation'>".DIR."activate.php?x=$userID&y=$activation</a></p>
-			<p>Regards Site Admin</p>";
+      <p>To activate your account, please click on <a href='".DIR."activate.php?x=$userID&y=$activation'>this link</a></p>
+      <p>Regards Site Admin</p>";
 
       $header = "MIME-Version: 1.0\r\n";
       $header .= "Content-type: text/html\r\n";
 
-
       if(mail($to,$subject,$body,$header)){
+         header('Location: index.php?succ=activate');
          echo "Message sent successfully...";
       }
       else {
          echo "Message could not be sent...";
       }
-
-      return $stmt;
+      // $to = $email;
+      // $subject = "Registration Confirmation";
+      // $body = "<p>Thank you for registering for the site!</p>
+      // <p>To activate your account, please click on <a href='".DIR."activate.php?x=$userID&y=$activation'>this link</a></p>
+			// <p>Regards Site Admin</p>";
+      //
+      // $header = "MIME-Version: 1.0\r\n";
+      // $header .= "Content-type: text/html\r\n";
+      //
+      //
+      // if(mail($to,$subject,$body,$header)){
+      //    header('Location: index.php');
+      //    echo "Message sent successfully...";
+      // }
+      // else {
+      //    echo "Message could not be sent...";
+      // }
     }
     catch(PDOException $e)
     {
@@ -64,6 +80,24 @@ class user
     }
   }
 
+  public function sendEmail(){
+    $to = $email;
+    $subject = "Registration Confirmation";
+    $body = "<p>Thank you for registering for the site!</p>
+    <p>To activate your account, please click on <a href='".DIR."activate.php?x=$userID&y=$activation'>this link</a></p>
+    <p>Regards Site Admin</p>";
+
+    $header = "MIME-Version: 1.0\r\n";
+    $header .= "Content-type: text/html\r\n";
+
+    if(mail($to,$subject,$body,$header)){
+       header('Location: index.php?succ=activate');
+       echo "Message sent successfully...";
+    }
+    else {
+       echo "Message could not be sent...";
+    }
+  }
   public function login($uName, $pass)
    {
       try

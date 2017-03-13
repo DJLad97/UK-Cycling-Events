@@ -1,3 +1,4 @@
+
 <?php
 if(!isset($_SESSION['userSession'])){
 
@@ -27,7 +28,24 @@ if(!isset($_SESSION['userSession'])){
                ?>
             </div>
             <?php
-  			}?>
+  			}
+        if(!empty($_GET['succ'])){
+  				?>
+            <div class="alert alert-success">
+               <i class="glyphicon glyphicon-ok"></i> &nbsp;
+               <?php
+               switch($_GET['succ']){
+                 case 'activate':
+                   echo 'Please check your email to activate your account.<br />
+                         No Email? <i>Do this later</i>';
+                   break;
+
+               }
+               ?>
+            </div>
+            <?php
+  			}
+      ?>
       </div>
       <div class="page-header">
         <h2>SIGN IN</h2>

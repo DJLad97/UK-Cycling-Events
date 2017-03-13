@@ -28,7 +28,7 @@
     $sql = $_POST['sqlQuery'];
   }
   else {
-    $sql = "INSERT INTO RaceSignUp (RaceID, UserID, Name, Gender, AgeRange)
+    $sql = "INSERT INTO racesignup (RaceID, UserID, Name, Gender, AgeRange)
             VALUES (:raceID, :userID, :name, :gender, :ageRange)";
   }
 

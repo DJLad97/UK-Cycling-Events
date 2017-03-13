@@ -3,7 +3,7 @@
   require_once('classes/User.php');
   $login = new user($pdo);
 
-  $url = 'profile.php';
+  //$url = 'profile.php';
   if(isset($_POST['submit']))
   {
       $uName = strip_tags($_POST['uName']);
@@ -14,7 +14,7 @@
         if($_SESSION['userLevel'] == 'admin')
           $url = 'CMS/CMS.php';
 
-         $login->redirect($url);
+         $login->redirect($_SESSION['url']);
       }
       else
       {

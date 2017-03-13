@@ -1,7 +1,6 @@
 <?php
 require_once('includes/conn.inc.php');
 include ('Mobile-Detect/Mobile_Detect.php');
-$detect = new Mobile_Detect();
 if(isset($_SESSION['userSession']))
 {
     $userLoggedIn = "true";
@@ -40,7 +39,7 @@ if(isset($_SESSION['userSession']))
         <li><a class="a-with-pointer sign-in" onclick="document.getElementById('login-modal').style.display='block'; document.getElementById('signup-modal').style.display='none'">SIGN IN</a></li>
         <li><a class="a-with-pointer sign-up" onclick="document.getElementById('signup-modal').style.display='block'; document.getElementById('login-modal').style.display='none';">SIGN UP</a></li>
         <?php } ?>
-        <li><a class="a-with-pointer" id="cart" href="<?php if($detect->isMobile()) echo 'race-cart.php'; ?>">CART</a></li>
+        <li><a class="a-with-pointer" id="cart" >CART</a></li>
       </ul>
   </nav>
 </header>

@@ -12,7 +12,9 @@ $resultArr = array();
 while($row = $stmt->fetchObject()){
   array_push($resultArr, array("RaceID" => $row->RaceID, "RaceType" => $row->RaceType,
                                "RaceName" => $row->RaceName, "RaceDate" => $row->RaceDate,
-                               "ClosingEntryDate" => $row->ClosingEntryDate));
+                               "ClosingEntryDate" => $row->ClosingEntryDate,
+                               "RaceAddress" => $row->RaceAddress,
+                               "OrganiserName" => $row->OrganiserName));
 }
 
 echo json_encode($resultArr);

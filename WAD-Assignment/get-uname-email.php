@@ -2,7 +2,7 @@
 
   require ('includes/conn.inc.php');
 
-  $stmt = $pdo->prepare("SELECT Username, Email FROM User");
+  $stmt = $pdo->prepare("SELECT Username, Email FROM user");
   $stmt->execute();
 
   while($row = $stmt->fetch()){

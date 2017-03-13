@@ -12,8 +12,6 @@ $userStmt->bindParam(':userID', $userID, PDO::PARAM_INT);
 $userStmt->execute();
 $userResult = $userStmt->fetchObject();
 
-echo $userID;
-echo $userResult->Username;
 
 $sql = "INSERT INTO comment (CommentContent, UserID, RaceID, Username) VALUES (:commentContent, :userID, :raceID, :userName)";
 $stmt = $pdo->prepare($sql);
