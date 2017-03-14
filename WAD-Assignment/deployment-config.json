@@ -1,9 +1,0 @@
-{
-    "type": "sftp",
-    "host": "home670019476.1and1-data.host",
-    "username": "u88345616",
-    "password": "ProgrammingIsCool42",
-    "port": 22,
-    "remotePath": "Personal-website/UK-Cycling-Events/",
-    "uploadOnSave": true
-}
